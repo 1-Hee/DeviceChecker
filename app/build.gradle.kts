@@ -12,8 +12,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 33
-        versionCode = 201
-        versionName = "2.0.0"
+        versionCode = 1
+        versionName = "1.0.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -66,6 +66,8 @@ dependencies {
     val tibmer_version = "4.7.1"
     implementation("com.jakewharton.timber:timber:$tibmer_version")
 
+    // ted
+    implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
 
 
 }

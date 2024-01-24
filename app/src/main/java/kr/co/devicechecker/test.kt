@@ -1,31 +1,7 @@
 package kr.co.devicechecker
 
-import android.Manifest
-import android.app.ActivityManager
-import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Bundle
-import android.os.Environment
-import android.os.StatFs
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
-import kr.co.devicechecker.databinding.ActivityMainBinding
-import timber.log.Timber
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
-import java.io.OutputStreamWriter
-import java.lang.Math.ceil
-import java.nio.charset.StandardCharsets
-
-
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var mBinding: ActivityMainBinding
+/*
+  private lateinit var mBinding: ActivityMainBinding
     private lateinit var deviceInfo:DeviceInfo
     private var requestCode1 = 1001
     private var requestCode2 = 1002
@@ -33,11 +9,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val modelName = "모델 명 : ${Build.MODEL}"
-        val androidVersion = "안드로이드 버전 : Android ${Build.VERSION.RELEASE} ( ${Build.VERSION.SDK_INT} )"
-        val firmwareInfo = "펌웨어 버전 : "
-        val buildNumber = "빌드 번호 : ${Build.FINGERPRINT}"
-        val processorInfo = "칩셋 / 프로세서 정보 : ${Build.HARDWARE}"
+        val modelName = "모델 명 | ${Build.MODEL}"
+        val androidVersion = "안드로이드 버전 | Android ${Build.VERSION.RELEASE} ( ${Build.VERSION.SDK_INT} )"
+        val firmwareInfo = "펌웨어 버전 | "
+        val buildNumber = "빌드 번호 | ${Build.FINGERPRINT}"
+        val processorInfo = "칩셋 / 프로세서 정보 | ${Build.HARDWARE}"
 
         val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val memoryInfo = ActivityManager.MemoryInfo()
@@ -45,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         val totalRAM = memoryInfo.totalMem
         val totalRAMGB = totalRAM / (1024 * 1024).toFloat()
         val displayRAMGB = ceil(totalRAMGB.toDouble()).toInt()
-        val memoryInfoString = "RAM : $displayRAMGB MB"
-        val storageInfo = "저장 장치 (여유/전체) : "
+        val memoryInfoString = "RAM | $displayRAMGB MB"
+        val storageInfo = "저장 장치 (여유/전체) | "
 
 
         deviceInfo = DeviceInfo(
@@ -121,9 +97,9 @@ class MainActivity : AppCompatActivity() {
             val dpTotalStorage = ceil(totalStorageMB.toDouble()).toInt()
             val dpAvailStorage = ceil(availableStorageMB.toDouble()).toInt()
 
-            "저장 장치 (여유/전체) :  : $dpAvailStorage MB/ $dpTotalStorage MB "
+            "저장 장치 (여유/전체) | $dpAvailStorage MB/ $dpTotalStorage MB "
         }else {
-            "저장 장치 (여유/전체) : (표시할 수 없음)"
+            "저장 장치 (여유/전체) | (표시할 수 없음)"
         }
         deviceInfo.storageInfo = storageInfo
         mBinding.deviceInfo = deviceInfo
@@ -188,4 +164,58 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
+
+ */
+
+/*
+ private void requestPermission() {
+        String[] permissionList = {};
+
+        // 33 버전 이상 권한 목록
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissionList = READ_STORAGE_33;
+        } else {
+            // 33버전 미만 권한 목록
+            permissionList = READ_STORAGE;
+        }
+
+        // TedPermission 라이브러리를 이용해 권한 체크 함.
+        TedPermission.create()
+                .setPermissionListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+                        // 권한 허용되었을 경우,
+                        // 설정 값 초기화
+                        settingViewModel.initSetting(requireContext());
+
+                        int navigateId = R.id.homeFragment;
+
+                        // 자동 재생 OFF 가 아닌 경우,
+                        if(!settingViewModel.isAutoPlayOFF()) {
+                            String autoPlaySchedule = settingViewModel.getAutoPlaySchedule();
+                            // 자동 재생 목록이 존재하면 재생화면으로 이동,
+                            // 자동 재생 목록이 없으면 Home화면으로 이동
+                            navigateId = playListViewModel.isExistPlayList(settingViewModel, autoPlaySchedule) ? R.id.playViewFragment : R.id.homeFragment;
+                        }
+
+                        int finalNavigateId = navigateId;
+                        new Handler().postDelayed(() -> {
+                            // 2초 뒤에 Intro 화면 닫고,
+                            nav().popBackStack();
+                            // 재생화면 또는 홈화면으로 이동
+                            nav().navigate(finalNavigateId);
+                        }, 2000);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        // 권한 허용안했을 경우, 토스트 메시지 노출
+                        Toast.makeText(requireContext().getApplicationContext(), "권한을 허용해주세요. ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setDeniedMessage("권한을 허용해주세요. [설정] > [앱 및 알림] > [고급] > [앱 권한]")
+                .setPermissions(permissionList)// 얻으려는 권한(여러개 가능)
+                .check();
+    }
+
+ */
