@@ -26,7 +26,14 @@ class DeviceInfoFragment : BaseFragment<LayoutInfoFragmentBinding>() {
     }
 
     private fun getDeviceInfo(){
-
+        commandMap.forEach { infoName, data ->
+            infoList.add(Info(
+                infoName,
+                executeAdbCommand(data)
+            ))
+        }
+        mBinding.infoList = infoList
+        mBinding.notifyChange()
     }
 
     fun executeAdbCommand(command: String): String {
@@ -41,6 +48,25 @@ class DeviceInfoFragment : BaseFragment<LayoutInfoFragmentBinding>() {
         // process.waitFor()
         return output.toString()
     }
+
+    private val commandMap = mapOf<String, String>(
+        Pair("모델(Model)", "getprop ro.product.model"), // 모델명
+        Pair("제조사(Manufacturer)", "getprop ro.product.manufacturer"), // 제조사
+        Pair("모뎀(Baseband)", "getprop ro.baseband"), // 모뎀 명
+        Pair("모뎀 버전(Baseband Version)", "getprop gsm.version.baseband"), //  모뎀 버전
+        Pair("Build ID", "getprop ro.build.display.id"), // BUILD ID
+        Pair("펌웨어 버전(Boot Fingerprint)", "getprop ro.bootimage.build.fingerprint"), // 펌웨어 버전
+        Pair("부트 로더(Boot Loader)", "getprop ro.bootloader"), // 부트 로더
+        Pair("Build KEY", "getprop ro.build.id"), // BUILD KEY
+        Pair("Android Version", "getprop ro.build.version.release"), // Android Version
+        Pair("SDK INT", "getprop ro.build.version.sdk"), // SDK_INT
+        Pair("SUPPORT_MIN_SDK", "getprop ro.build.version.min_supported_target_sdk"), // SUPPORT_MIN_SDK
+        Pair("보안 패치 수준(Security Patch)", "getprop ro.build.version.security_patch"), // 보안 패치 수준 (security_patch)
+        Pair("하드웨어 플랫폼(Hardware Platform)", "getprop ro.hardware"), // 하드웨어 플랫폼
+        Pair("기본 통신 네트워크(CODE)", "getprop ro.telephony.default_network"), // 기본 통신 네트워크 (3G, 4G ? , Code 값으로 주어짐 )
+        Pair("KERNEL VERSION", "uname -a"), // KERNEL VERSION
+        Pair("디버깅 모드(Debuggable)", "getprop ro.debuggable") // DEBUG_MODE 0 or 1
+    )
 
     private val commandList = arrayOf<String>(
         "getprop ro.product.model", // 모델 명
