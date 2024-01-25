@@ -69,5 +69,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             .addBindingParam(BR.vpCallback, pagerCallback)
     }
 
-    override fun init(savedInstanceState: Bundle?) { }
+    override fun init(savedInstanceState: Bundle?) {
+        Timber.plant(Timber.DebugTree())
+    }
 }

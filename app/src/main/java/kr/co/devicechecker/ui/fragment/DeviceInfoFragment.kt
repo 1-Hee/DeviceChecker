@@ -1,55 +1,131 @@
 package kr.co.devicechecker.ui.fragment
 
+import android.content.Context
+import android.os.Build
+import android.view.Display
+import android.view.WindowManager
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.Info
-import kr.co.devicechecker.databinding.LayoutInfoFragmentBinding
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import kr.co.devicechecker.databinding.FragmentDeviceInfoBinding
+import kr.co.devicechecker.util.AppUtil
+import kotlin.math.floor
 
-class DeviceInfoFragment : BaseFragment<LayoutInfoFragmentBinding>() {
+class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
 
-    private val infoList = mutableListOf<Info>()
+    private val deviceInfoList = mutableListOf<Info>()
+    private val displayInfoList = mutableListOf<Info>()
+
     override fun initViewModel() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
 
-        return DataBindingConfig(R.layout.layout_info_fragment)
-            .addBindingParam(BR.infoList, listOf<String>())
+        return DataBindingConfig(R.layout.fragment_device_info)
+            .addBindingParam(BR.deviceInfoList, deviceInfoList)
+            .addBindingParam(BR.displayInfoList, displayInfoList)
     }
 
     override fun initView() {
         getDeviceInfo()
+        getDisplayInfo()
     }
 
     private fun getDeviceInfo(){
-        commandMap.forEach { infoName, data ->
-            infoList.add(Info(
+        val emptyValue = "알 수 없음"
+        deviceInfoCommand.forEach { (infoName, data) ->
+            val value = AppUtil.Command.executeAdbCommand(data).trim().ifBlank { emptyValue }
+            val info = Info(
                 infoName,
-                executeAdbCommand(data)
-            ))
+                if(value == "unknown") emptyValue else value
+            )
+            deviceInfoList.add(info)
         }
-        mBinding.infoList = infoList
+        // get java info
+        val javaVersion = System.getProperty("java.version")
+        val javaVmVersion = System.getProperty("java.vm.version")
+        val javaVmVendor = System.getProperty("java.vm.vendor")
+        val javaVmName = System.getProperty("java.vm.name")
+        val javaMap = mapOf<String, String>(
+            Pair(
+                "JAVA VERSION",
+                javaVersion.toString()
+            ),
+            Pair(
+                "JAVA VM VERSION",
+                javaVmVersion.toString()
+            ),
+            Pair(
+                "JAVA VM VENDOR",
+                javaVmVendor.toString()
+            ),
+            Pair(
+                "JAVA VM NAME",
+                javaVmName.toString()
+            )
+        )
+        // add java info
+        javaMap.forEach { infoName, data ->
+            val value = data.trim().ifBlank { emptyValue }
+            val info = Info(
+                infoName,
+                if(value == "unknown") emptyValue else value
+            )
+            deviceInfoList.add(info)
+        }
+
+        mBinding.deviceInfoList = deviceInfoList
+        mBinding.notifyChange()
+    }
+    private fun getDisplayInfo(){
+        val emptyValue = "알 수 없음"
+        displayInfoCommand.forEach { (infoName, data) ->
+            // println("$infoName : "+ executeAdbCommand(data))
+            val value = AppUtil.Command.executeAdbCommand(data).trim().ifBlank { emptyValue }
+            val info = Info(
+                infoName,
+                if(value == "unknown") emptyValue else value
+            )
+            displayInfoList.add(info)
+        }
+        // 화면 주사율 정보
+        val displayManager = context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val defaultDisplay: Display = displayManager.defaultDisplay
+
+        // 화면 해상도
+        val resolution:String
+        // 화면 주사율
+        val refreshRate:Int
+
+        // 화면 주사율
+        // Android 5.0 이상에서만 지원
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val mode = defaultDisplay.mode
+            refreshRate = floor(mode.refreshRate.toDouble()).toInt()
+            resolution = "${mode.physicalWidth} x ${mode.physicalHeight}"
+        } else {
+            // Android 5.0 미만의 버전에서는 지원하지 않음
+            refreshRate = 0
+            resolution = "알 수 없음"
+        }
+        displayInfoList.add(
+            Info(
+                "해상도(Resolution)",
+                resolution
+            )
+        )
+        displayInfoList.add(
+            Info(
+            "화면 주사율(Refresh Rate)",
+           "$refreshRate Hz"
+        ))
+        mBinding.displayInfoList = displayInfoList
         mBinding.notifyChange()
     }
 
-    fun executeAdbCommand(command: String): String {
-        val process = Runtime.getRuntime().exec(command)
-        val reader = BufferedReader(InputStreamReader(process.inputStream))
-        val output = StringBuilder()
-        var line: String?
-        while (reader.readLine().also { line = it } != null) {
-            output.append(line).append("\n")
-        }
-        val result = output.toString()
-        // process.waitFor()
-        return output.toString()
-    }
-
-    private val commandMap = mapOf<String, String>(
+    private val deviceInfoCommand = mapOf(
         Pair("모델(Model)", "getprop ro.product.model"), // 모델명
         Pair("제조사(Manufacturer)", "getprop ro.product.manufacturer"), // 제조사
         Pair("모뎀(Baseband)", "getprop ro.baseband"), // 모뎀 명
@@ -68,89 +144,7 @@ class DeviceInfoFragment : BaseFragment<LayoutInfoFragmentBinding>() {
         Pair("디버깅 모드(Debuggable)", "getprop ro.debuggable") // DEBUG_MODE 0 or 1
     )
 
-    private val commandList = arrayOf<String>(
-        "getprop ro.product.model", // 모델 명
-        "getprop ro.product.manufacturer", // 제조사
-        "getprop ro.baseband", // 모뎀 명
-        "getprop gsm.version.baseband", //  모뎀 버전
-        "getprop ro.build.display.id", // BUILD ID
-        "getprop ro.bootimage.build.fingerprint", // 펌웨어 버전
-        "getprop ro.bootloader", // 부트 로더
-        "getprop ro.build.id", // BUILD KEY
-        "getprop ro.build.version.min_supported_target_sdk", // SUPPORT_MIN_SDK
-        "getprop ro.build.version.release", // Android Version
-        "getprop ro.build.version.sdk", // SDK_INT
-        "getprop ro.build.version.security_patch", // 보안 패치 수준 (security_patch)
-        "getprop ro.hardware", // 하드웨어 플랫폼
-        "getprop ro.telephony.default_network", // 기본 통신 네트워크 (3G, 4G ? , Code 값으로 주어짐 )
-        "uname -a", // KERNEL VERSION
-        "getprop ro.debuggable" // DEBUG_MODE 0 or 1
+    private val displayInfoCommand = mapOf(
+        Pair("DPI(Dot Per Inch)", "getprop ro.sf.lcd_density"),
     )
-    fun test(){
-        // 모델명 // ro.product.model
-        // 제조사 // ro.product.manufacturer
-
-        "BaseBand" // ro.baseband , 모뎀 명
-        "band version" // gsm.version.baseband  모뎀 버전
-        /*
-        // 베이스 밴드 버전
-//        infoList.add(Info(
-//            "Baseband Version",
-//            Build.getRadioVersion()
-//        ))
-         */
-        "Build ID" // ro.build.display.id
-        "Build FingerFrint" // ro.bootimage.build.fingerprint, 펌웨어 버전
-        "Bootloader" // ro.bootloader
-        "BUILD KEY" // ro.build.id
-        "MIN SDK VERSION" // ro.build.version.min_supported_target_sdk
-        "VERSION CODE" // ro.build.version.release , 9, 10, 11 ~
-        "SDK INT"// ro.build.version.sdk 28, 34 etc.
-        "Security Patch" // ro.build.version.security_patch
-        "BOARD"     // ranchu     // ro.hardware 하드웨어 플렛폼
-        "DEFAULT NETWORK" // 기본 통신 네트워크, ro.telephony.default_network
-        "KERNEL VERSION"  // 커널 버전은 uname -a 명령어로!
-        // 디버깅 모드, ro.debuggable
-
-        // display...
-        // https://play.google.com/store/apps/details?id=com.inkwired.droidinfo&hl=en&pli=1
-        // https://play.google.com/store/apps/details?id=com.ytheekshana.deviceinfo&hl=ko-KR
-        // LCD 밀도 ro.sf.lcd_density, DPI (dots per inch) 값
-        // 해상도 , 명령어 wm size
-
-        /* 화면 주사율
-  val displayManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-    val defaultDisplay: Display = displayManager.defaultDisplay
-
-    // Android 5.0 이상에서만 지원
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        val mode = defaultDisplay.mode
-        mode.refreshRate
-    } else {
-        // Android 5.0 미만의 버전에서는 지원하지 않음
-        0.0f
-    }
-         */
-
-        /// about Java
-
-        /*
-Java 버전:
-String javaVersion = System.getProperty("java.version");
-System.out.println("Java Version: " + javaVersion);
-
-Java VM 버전:
-String vmVersion = System.getProperty("java.vm.version");
-System.out.println("Java VM Version: " + vmVersion);
-
-Java VM 공급자:
-String vmVendor = System.getProperty("java.vm.vendor");
-System.out.println("Java VM Vendor: " + vmVendor);
-
-Java VM 이름:
-String vmName = System.getProperty("java.vm.name");
-System.out.println("Java VM Name: " + vmName);
-         */
-
-    }
 }
