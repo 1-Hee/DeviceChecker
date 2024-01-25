@@ -43,39 +43,6 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
             )
             deviceInfoList.add(info)
         }
-        // get java info
-        val javaVersion = System.getProperty("java.version")
-        val javaVmVersion = System.getProperty("java.vm.version")
-        val javaVmVendor = System.getProperty("java.vm.vendor")
-        val javaVmName = System.getProperty("java.vm.name")
-        val javaMap = mapOf<String, String>(
-            Pair(
-                "JAVA VERSION",
-                javaVersion.toString()
-            ),
-            Pair(
-                "JAVA VM VERSION",
-                javaVmVersion.toString()
-            ),
-            Pair(
-                "JAVA VM VENDOR",
-                javaVmVendor.toString()
-            ),
-            Pair(
-                "JAVA VM NAME",
-                javaVmName.toString()
-            )
-        )
-        // add java info
-        javaMap.forEach { infoName, data ->
-            val value = data.trim().ifBlank { emptyValue }
-            val info = Info(
-                infoName,
-                if(value == "unknown") emptyValue else value
-            )
-            deviceInfoList.add(info)
-        }
-
         mBinding.deviceInfoList = deviceInfoList
         mBinding.notifyChange()
     }

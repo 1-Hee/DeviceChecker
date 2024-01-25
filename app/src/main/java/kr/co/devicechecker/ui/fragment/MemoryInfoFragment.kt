@@ -12,16 +12,19 @@ import kr.co.devicechecker.util.AppUtil
 class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
 
     private val memoryInfoList = mutableListOf<Info>()
+    private val javaInfoList = mutableListOf<Info>()
     override fun initViewModel() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_memory_info)
             .addBindingParam(BR.memoryInfoList, listOf<Info>())
+            .addBindingParam(BR.javaInfoList, listOf<Info>())
     }
 
     override fun initView() {
         getMemoryInfo()
+        getJavaInformation()
     }
 
     private val memoryFieldMap = hashMapOf(
@@ -72,8 +75,7 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
             val value = dataList[1].trim()
             memoryMap[field] = value
         }
-
-        // 조회작업 시작
+        // 조회 작업 시작
         memoryKeyList.forEach { key ->
             val field = memoryFieldMap[key]
             val value = memoryMap[key]
@@ -90,16 +92,58 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
                 }
             }
         }
-        // java memoery!
+        mBinding.memoryInfoList = memoryInfoList
+        mBinding.notifyChange()
+    }
+
+    fun getJavaInformation(){
+        // get java info
+        val javaVersion = System.getProperty("java.version")
+        val javaVmVersion = System.getProperty("java.vm.version")
+        val javaVmVendor = System.getProperty("java.vm.vendor")
+        val javaVmName = System.getProperty("java.vm.name")
+        val javaMap = mapOf<String, String>(
+            Pair(
+                "JAVA VERSION",
+                javaVersion.toString()
+            ),
+            Pair(
+                "JAVA VM VERSION",
+                javaVmVersion.toString()
+            ),
+            Pair(
+                "JAVA VM VENDOR",
+                javaVmVendor.toString()
+            ),
+            Pair(
+                "JAVA VM NAME",
+                javaVmName.toString()
+            )
+        )
+        val emptyValue = "알 수 없음"
+
+        // add java info
+        javaMap.forEach { (infoName, data) ->
+            val value = data.trim().ifBlank { emptyValue }
+            val info = Info(
+                infoName,
+                if(value == "unknown") emptyValue else value
+            )
+            javaInfoList.add(info)
+        }
+        // get java memory info
         javaCommandMap.forEach { (key, value) ->
             val resultValue = AppUtil.Command.executeAdbCommand(value).trim()
             val info = Info(key, resultValue.uppercase())
-            this.memoryInfoList.add(info)
+            this.javaInfoList.add(info)
         }
 
-
-        mBinding.memoryInfoList = memoryInfoList
+        mBinding.javaInfoList = javaInfoList
         mBinding.notifyChange()
+    }
+
+
+    fun test(){
     }
 
 
