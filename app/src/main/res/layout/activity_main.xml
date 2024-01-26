@@ -65,28 +65,9 @@
                 />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-<!--        <androidx.constraintlayout.widget.Guideline-->
-<!--            android:id="@+id/gl_start"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintGuide_percent="0.2"-->
-<!--            />-->
-<!--        <androidx.constraintlayout.widget.Guideline-->
-<!--            android:id="@+id/gl_end"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintGuide_percent="0.8"-->
-<!--            />-->
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_check_menu"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
@@ -107,7 +88,7 @@
                 android:id="@+id/tab_device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="기기 정보"
+                android:text="디바이스 정보"
                 android:textSize="16sp"
                 />
             <com.google.android.material.tabs.TabItem
@@ -128,6 +109,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="센서 정보"
+                />
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tab_device_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="기기 테스트"
                 />
         </com.google.android.material.tabs.TabLayout>
 

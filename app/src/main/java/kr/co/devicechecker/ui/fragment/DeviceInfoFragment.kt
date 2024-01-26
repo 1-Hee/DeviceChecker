@@ -39,7 +39,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
             val value = AppUtil.Command.executeAdbCommand(data).trim().ifBlank { emptyValue }
             val info = Info(
                 infoName,
-                if(value == "unknown") emptyValue else value
+                if(value == "unknown") emptyValue else value.trim()
             )
             deviceInfoList.add(info)
         }
@@ -107,7 +107,6 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
         Pair("보안 패치 수준(Security Patch)", "getprop ro.build.version.security_patch"), // 보안 패치 수준 (security_patch)
         Pair("하드웨어 플랫폼(Hardware Platform)", "getprop ro.hardware"), // 하드웨어 플랫폼
         Pair("기본 통신 네트워크(CODE)", "getprop ro.telephony.default_network"), // 기본 통신 네트워크 (3G, 4G ? , Code 값으로 주어짐 )
-        Pair("KERNEL VERSION", "uname -a"), // KERNEL VERSION
         Pair("디버깅 모드(Debuggable)", "getprop ro.debuggable") // DEBUG_MODE 0 or 1
     )
 

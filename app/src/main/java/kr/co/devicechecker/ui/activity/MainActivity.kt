@@ -10,6 +10,7 @@ import kr.co.devicechecker.base.ui.BaseActivity
 import kr.co.devicechecker.databinding.ActivityMainBinding
 import kr.co.devicechecker.ui.adapter.ViewPager2Adapter
 import kr.co.devicechecker.ui.fragment.DeviceInfoFragment
+import kr.co.devicechecker.ui.fragment.DeviceTestFragment
 import kr.co.devicechecker.ui.fragment.MemoryInfoFragment
 import kr.co.devicechecker.ui.fragment.ProcessorInfoFragment
 import kr.co.devicechecker.ui.fragment.SensorInfoFragment
@@ -48,7 +49,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             DeviceInfoFragment(),
             ProcessorInfoFragment(),
             MemoryInfoFragment(),
-            SensorInfoFragment()
+            SensorInfoFragment(),
+            DeviceTestFragment()
         )
         vpAdapter = ViewPager2Adapter(this)
         vpAdapter.setFragmentList(childFragments)

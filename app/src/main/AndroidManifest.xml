@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature android:name="android.hardware.usb.host" />
+    <uses-feature android:name="android.software.mtp" android:required="true" />
+    <uses-feature android:name="android.hardware.usb.accessory" android:required="true" />
+
+    <uses-permission android:name="android.permission.USB_PERMISSION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 

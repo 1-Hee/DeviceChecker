@@ -9,12 +9,14 @@ import kr.co.devicechecker.databinding.FragmentSensorInfoBinding
 
 
 class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
+
+    private val sensorInfoList = mutableListOf<Info>()
     override fun initViewModel() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_sensor_info)
-            .addBindingParam(BR.infoList, listOf<Info>())
+            .addBindingParam(BR.sensorInfoList, sensorInfoList)
     }
 
     override fun initView() {

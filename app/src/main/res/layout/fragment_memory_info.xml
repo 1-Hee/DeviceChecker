@@ -11,7 +11,10 @@
             name="memoryInfoList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
         <variable
-            name="javaInfoList"
+            name="internalStorageList"
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+        <variable
+            name="externalStorageList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
     </data>
     <ScrollView
@@ -64,14 +67,14 @@
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
                 app:layout_constraintTop_toBottomOf="@id/tv_ram_info_title"
-                app:layout_constraintBottom_toTopOf="@id/tv_java_information"
+                app:layout_constraintBottom_toTopOf="@id/tv_internal_storage_title"
                 />
-            <!-- Java 관련 정보 -->
+            <!-- 내부 저장소 -->
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_java_information"
+                android:id="@+id/tv_internal_storage_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Java Information"
+                android:text="내부 저장소(Internal Storage)"
                 android:textColor="@color/white"
                 android:textAlignment="center"
                 android:background="@color/wood_brown700"
@@ -79,24 +82,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_ram_info"
-                app:layout_constraintBottom_toTopOf="@id/rv_java_Info"
+                app:layout_constraintBottom_toTopOf="@id/rv_internal_storage"
                 />
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_java_Info"
+                android:id="@+id/rv_internal_storage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:infoList="@{javaInfoList}"
+                app:infoList="@{internalStorageList}"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
-                app:layout_constraintTop_toBottomOf="@id/tv_java_information"
-                app:layout_constraintBottom_toBottomOf="@id/sp_bottom"
+                app:layout_constraintTop_toBottomOf="@id/tv_internal_storage_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_external_storage_title"
+                />
+            <!-- 외부 저장소 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_external_storage_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="외부 저장소(External Storage)"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@color/wood_brown700"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_internal_storage"
+                app:layout_constraintBottom_toTopOf="@id/rv_external_storage"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_external_storage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:infoList="@{externalStorageList}"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toBottomOf="@id/tv_external_storage_title"
+                app:layout_constraintBottom_toTopOf="@id/sp_bottom"
                 />
             <Space
                 android:id="@+id/sp_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                app:layout_constraintTop_toBottomOf="@id/rv_java_Info"
+                app:layout_constraintTop_toBottomOf="@id/rv_external_storage"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>

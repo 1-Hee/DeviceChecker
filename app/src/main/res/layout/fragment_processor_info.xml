@@ -8,7 +8,13 @@
     >
     <data>
         <variable
-            name="infoList"
+            name="processorInfoList"
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+        <variable
+            name="cpuCoreInfoList"
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+        <variable
+            name="javaInfoList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
     </data>
     <ScrollView
@@ -19,16 +25,108 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_infoList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:infoList="@{infoList}"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_start"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.1"
+                />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_end"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.9"
+                />
+            <!-- 프로세서 정보 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_processor_info_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="프로세서 정보(Processor Information)"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@color/wood_brown700"
+                android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rv_processor_info"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_processor_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:infoList="@{processorInfoList}"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toBottomOf="@id/tv_processor_info_title"
+                app:layout_constraintBottom_toTopOf="@+id/tv_cpu_core_title"
+                />
+            <!-- CPU 코어 정보 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_cpu_core_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CPU 코어 정보(CPU Core Information)"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@color/wood_brown700"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_processor_info"
+                app:layout_constraintBottom_toTopOf="@id/rv_cpu_core"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cpu_core"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:infoList="@{cpuCoreInfoList}"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toBottomOf="@id/tv_cpu_core_title"
+                app:layout_constraintBottom_toTopOf="@id/tv_java_information"
+                />
+            <!-- Java 관련 정보 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_java_information"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Java Information"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@color/wood_brown700"
+                android:paddingVertical="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_cpu_core"
+                app:layout_constraintBottom_toTopOf="@id/rv_java_Info"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_java_Info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:infoList="@{javaInfoList}"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="@id/gl_end"
+                app:layout_constraintTop_toBottomOf="@id/tv_java_information"
+                app:layout_constraintBottom_toBottomOf="@id/sp_bottom"
+                />
+            <Space
+                android:id="@+id/sp_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_java_Info"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

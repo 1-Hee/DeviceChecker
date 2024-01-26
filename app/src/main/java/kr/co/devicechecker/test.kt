@@ -24,7 +24,6 @@ package kr.co.devicechecker
         val memoryInfoString = "RAM | $displayRAMGB MB"
         val storageInfo = "저장 장치 (여유/전체) | "
 
-
         deviceInfo = DeviceInfo(
             modelName,
             androidVersion,
@@ -42,7 +41,6 @@ package kr.co.devicechecker
         mBinding.notifyChange()
 
         mBinding.btnSaveDeviceInfo.setOnClickListener { saveData() }
-
         Timber.plant(Timber.DebugTree())
     }
 
@@ -217,5 +215,11 @@ package kr.co.devicechecker
                 .setPermissions(permissionList)// 얻으려는 권한(여러개 가능)
                 .check();
     }
+
+// 참고 사이트
+https://play.google.com/store/apps/details?id=com.toralabs.deviceinfo&hl=ko-KR
+https://play.google.com/store/apps/details?id=com.inkwired.droidinfo&hl=ko-KR
+https://play.google.com/store/apps/details?id=com.catchy.tools.myphoneinfo.rp&hl=ko-KR
+
 
  */
