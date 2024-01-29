@@ -1,19 +1,24 @@
 package kr.co.devicechecker.ui.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
+import kr.co.devicechecker.base.listener.ViewClickListener
 import kr.co.devicechecker.base.ui.BaseActivity
 import kr.co.devicechecker.databinding.ActivityMainBinding
 import kr.co.devicechecker.ui.adapter.ViewPager2Adapter
-import kr.co.devicechecker.ui.fragment.DeviceInfoFragment
-import kr.co.devicechecker.ui.fragment.DeviceTestFragment
-import kr.co.devicechecker.ui.fragment.MemoryInfoFragment
-import kr.co.devicechecker.ui.fragment.ProcessorInfoFragment
-import kr.co.devicechecker.ui.fragment.SensorInfoFragment
+import kr.co.devicechecker.ui.fragment.main.DeviceInfoFragment
+import kr.co.devicechecker.ui.fragment.main.DeviceTestFragment
+import kr.co.devicechecker.ui.fragment.main.MemoryInfoFragment
+import kr.co.devicechecker.ui.fragment.main.ProcessorInfoFragment
+import kr.co.devicechecker.ui.fragment.main.SensorInfoFragment
+import kr.co.devicechecker.util.AppUtil
+import kr.co.devicechecker.util.PreferenceUtil
 import timber.log.Timber
 
 
@@ -23,6 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var tabListener: TabLayout.OnTabSelectedListener
     private lateinit var vpAdapter : ViewPager2Adapter
     private lateinit var pagerCallback: ViewPager2.OnPageChangeCallback
+    private lateinit var prefs:PreferenceUtil
 
     override fun getDataBindingConfig(): DataBindingConfig {
 
@@ -64,14 +70,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
 
         return DataBindingConfig(R.layout.activity_main)
-            .addBindingParam(BR.deviceInfo, null)
-            .addBindingParam(BR.path, "")
             .addBindingParam(BR.tabListener, tabListener)
             .addBindingParam(BR.vpAdapter, vpAdapter)
             .addBindingParam(BR.vpCallback, pagerCallback)
+            .addBindingParam(BR.click, viewClickListener)
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        prefs = PreferenceUtil(this)
         Timber.plant(Timber.DebugTree())
+    }
+
+    private val viewClickListener = object : ViewClickListener {
+        override fun onViewClick(view: View) {
+            when(view.id){
+                R.id.iv_save_all_info -> {
+                    Toast.makeText(this@MainActivity, "파일 저장 시작...", Toast.LENGTH_SHORT).show()
+                    val deviceContent = prefs.getValue("Device")
+                    val memoryContent = prefs.getValue("Memory")
+                    val processorContent = prefs.getValue("Processor")
+                    val sensorContent = prefs.getValue("Sensor")
+                    val totalData = deviceContent+memoryContent+processorContent+sensorContent
+                    AppUtil.File.saveData(this@MainActivity, totalData)
+                }
+            }
+        }
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if(hasFocus){
+            super.hideSystemUI()
+        }
     }
 }

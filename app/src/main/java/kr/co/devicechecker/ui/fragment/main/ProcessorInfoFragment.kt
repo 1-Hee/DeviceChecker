@@ -1,4 +1,4 @@
-package kr.co.devicechecker.ui.fragment
+package kr.co.devicechecker.ui.fragment.main
 
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
@@ -7,6 +7,7 @@ import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.databinding.FragmentProcessorInfoBinding
 import kr.co.devicechecker.util.AppUtil
+import kr.co.devicechecker.util.PreferenceUtil
 
 
 class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
@@ -15,6 +16,8 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
     private val cpuCoreInfoList = mutableListOf<Info>()
     private val javaInfoList = mutableListOf<Info>()
     private var corNumber = 0
+    // 값 저장을 위한 prefs 변수
+    private lateinit var prefs: PreferenceUtil
     override fun initViewModel() {
     }
 
@@ -26,8 +29,26 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
     }
 
     override fun initView() {
+        prefs = PreferenceUtil(requireContext())
         getProcessorInfo()
         getJavaInformation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val tag = "Processor"
+        val builder = StringBuilder()
+        builder.append("[Processor Info]\n")
+        this.processorInfoList.forEach { info ->
+            builder.append("$info\n")
+        }
+        this.cpuCoreInfoList.forEach { info ->
+            builder.append("$info\n")
+        }
+        this.javaInfoList.forEach { info ->
+            builder.append("$info\n")
+        }
+        prefs.setValue(tag, builder.toString())
     }
 
     private val cpuCmdMap = mapOf(
@@ -37,6 +58,7 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
         Pair("칩셋(Chipset)", "getprop ro.hardware"), // 칩셋명
     )
     private fun getProcessorInfo(){
+        this.processorInfoList.clear()
         // 기본 cpu info setting
         val emptyValue = "알 수 없음"
         cpuCmdMap.forEach { (field, cmd) ->
@@ -77,6 +99,7 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
     }
 
     private fun getCpuCoreInfo(){
+        this.cpuCoreInfoList.clear()
         // corNumber
         for(idx in 0..<corNumber){
             val cpuMinFreq = AppUtil.Command
@@ -120,6 +143,7 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
         Pair("JAVA APPLICATION HEAP", "getprop dalvik.vm.heapsize") // 애플리케이션의 Dalvik 힙 크기
     )
     fun getJavaInformation(){
+        this.javaInfoList.clear()
         // get java info
         val javaVersion = System.getProperty("java.version")
         val javaVmVersion = System.getProperty("java.vm.version")

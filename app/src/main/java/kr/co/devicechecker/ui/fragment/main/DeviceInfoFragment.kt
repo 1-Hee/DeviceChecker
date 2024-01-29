@@ -1,4 +1,4 @@
-package kr.co.devicechecker.ui.fragment
+package kr.co.devicechecker.ui.fragment.main
 
 import android.content.Context
 import android.os.Build
@@ -11,30 +11,48 @@ import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.databinding.FragmentDeviceInfoBinding
 import kr.co.devicechecker.util.AppUtil
+import kr.co.devicechecker.util.PreferenceUtil
 import kotlin.math.floor
 
 class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
 
     private val deviceInfoList = mutableListOf<Info>()
     private val displayInfoList = mutableListOf<Info>()
+    // 값 저장을 위한 prefs 변수
+    private lateinit var prefs:PreferenceUtil
 
     override fun initViewModel() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
-
         return DataBindingConfig(R.layout.fragment_device_info)
             .addBindingParam(BR.deviceInfoList, deviceInfoList)
             .addBindingParam(BR.displayInfoList, displayInfoList)
     }
 
     override fun initView() {
+        prefs = PreferenceUtil(requireContext())
         getDeviceInfo()
         getDisplayInfo()
     }
 
+    override fun onPause() {
+        super.onPause()
+        val tag = "Device"
+        val builder = StringBuilder()
+        builder.append("[Device Info]\n")
+        this.displayInfoList.forEach { info ->
+            builder.append("$info\n")
+        }
+        this.deviceInfoList.forEach { info ->
+            builder.append("$info\n")
+        }
+        prefs.setValue(tag, builder.toString())
+    }
+
     private fun getDeviceInfo(){
         val emptyValue = "알 수 없음"
+        this.deviceInfoList.clear()
         deviceInfoCommand.forEach { (infoName, data) ->
             val value = AppUtil.Command.executeAdbCommand(data).trim().ifBlank { emptyValue }
             val info = Info(
@@ -48,6 +66,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     }
     private fun getDisplayInfo(){
         val emptyValue = "알 수 없음"
+        this.displayInfoList.clear()
         displayInfoCommand.forEach { (infoName, data) ->
             // println("$infoName : "+ executeAdbCommand(data))
             val value = AppUtil.Command.executeAdbCommand(data).trim().ifBlank { emptyValue }

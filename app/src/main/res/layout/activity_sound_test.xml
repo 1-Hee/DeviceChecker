@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activity.SoundTestActivity"
+    >
+
+    <data>
+        <variable
+            name="isPlay"
+            type="Boolean" />
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mono200"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_sound_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소리 테스트(Sound Test)"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:includeFontPadding="false"
+            android:drawableTint="@color/white"
+            android:drawableLeft="@android:drawable/ic_menu_report_image"
+            android:drawablePadding="4dp"
+            android:backgroundTint="@{!isPlay?@color/teal500:@color/mono600}"
+            android:paddingVertical="16dp"
+            android:paddingHorizontal="12dp"
+            android:onClick="@{(v)->click.onViewClick(v)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sound_test_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="기기의 소리가 정상적으로 재생 되는지 테스트 합니다."
+            android:textSize="14sp"
+            android:textColor="@color/mono600"
+            android:textAlignment="textStart"
+            android:includeFontPadding="false"
+            app:layout_constraintStart_toStartOf="@id/btn_sound_test"
+            app:layout_constraintEnd_toEndOf="@id/btn_sound_test"
+            app:layout_constraintTop_toBottomOf="@id/btn_sound_test"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_go_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="돌아가기"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:includeFontPadding="false"
+            android:textFontWeight="900"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            app:layout_constraintStart_toStartOf="@id/btn_sound_test"
+            app:layout_constraintEnd_toEndOf="@id/btn_sound_test"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sound_test_guide"
+            android:backgroundTint="@color/mono600"
+            android:onClick="@{(v)->click.onViewClick(v)}"
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,6 +5,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import kr.co.devicechecker.base.bind.DataBindingFragment
 
 abstract class BaseFragment<D:ViewDataBinding> : DataBindingFragment<D>() {
@@ -41,5 +43,10 @@ abstract class BaseFragment<D:ViewDataBinding> : DataBindingFragment<D>() {
         return mApplicationProvider!![modelClass]
     }
 
-
+    /**
+     * 화면 이동을 위한 NavController
+     */
+    protected fun nav(): NavController {
+        return NavHostFragment.findNavController(this)
+    }
 }

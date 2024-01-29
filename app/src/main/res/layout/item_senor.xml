@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="info"
+            type="kr.co.devicechecker.data.dto.SensorInfo" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/none"
+        android:layout_marginVertical="8dp"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sensor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(`센서 명(Sensor Name):\t`+info.sensorName)}"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textAlignment="textStart"
+            android:textFontWeight="900"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_sensor_type"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="정보 명 : "
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_sensor_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(`센서 타입(Sensor Type):\t`+info.sensorType)}"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            android:includeFontPadding="false"
+            android:textColor="@color/mono700"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_name"
+            app:layout_constraintBottom_toTopOf="@id/ty_sensor_vendor"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="4dp"
+            android:layout_marginLeft="4dp"
+            tools:text="내용"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/ty_sensor_vendor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(`공급자(Sensor Vendor):\t`+info.sensorVendor)}"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            android:includeFontPadding="false"
+            android:textColor="@color/mono700"
+            app:layout_constraintTop_toBottomOf="@id/tv_sensor_type"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="4dp"
+            android:layout_marginLeft="4dp"
+            tools:text="내용2"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

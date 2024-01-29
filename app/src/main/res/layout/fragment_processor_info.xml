@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools"
-    tools:context=".ui.fragment.ProcessorInfoFragment"
+    tools:context=".ui.fragment.main.ProcessorInfoFragment"
     >
     <data>
         <variable

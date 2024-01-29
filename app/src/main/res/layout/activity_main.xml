@@ -6,12 +6,6 @@
     tools:context=".ui.activity.MainActivity"
     >
     <data>
-        <variable
-            name="deviceInfo"
-            type="kr.co.devicechecker.data.dto.DeviceInfo" />
-        <variable
-            name="path"
-            type="String" />
         <!-- 탭 리스너 -->
         <variable
             name="tabListener"
@@ -23,6 +17,10 @@
         <variable
             name="vpCallback"
             type="androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback" />
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+
     </data>
 
     <!-- todo theme로 적용.. -->
@@ -33,7 +31,7 @@
         >
 
         <!-- header -->
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/l_app_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,16 +42,17 @@
             app:layout_constraintBottom_toTopOf="@id/tl_check_menu"
             android:paddingVertical="12dp"
             >
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_app_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_info"
                 android:scaleType="fitXY"
-                />
-            <Space
-                android:layout_width="16dp"
-                android:layout_height="match_parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_app_name"
+                app:layout_constraintTop_toTopOf="@id/tv_app_name"
+                app:layout_constraintBottom_toBottomOf="@id/tv_app_name"
+                android:layout_marginRight="16dp"
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_app_name"
@@ -62,8 +61,25 @@
                 android:text="@string/app_name"
                 android:textSize="20sp"
                 android:textColor="@color/light_gray100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!-- 파일 저장 버튼 -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_save_all_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_upload"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="16dp"
+                android:onClick="@{(v)->click.onViewClick(v)}"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_check_menu"
@@ -130,9 +146,5 @@
             app:vpAdapter="@{vpAdapter}"
             app:vpCallback="@{vpCallback}"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 </layout>
