@@ -29,7 +29,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintGuide_percent="0.05"
                 />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_end"
@@ -38,22 +38,21 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.9"
+                app:layout_constraintGuide_percent="0.95"
                 />
             <!-- 디스플레이 정보 -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_display_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="디스플레이 정보(Display Info)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_display_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rv_display_info_list"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_display_info_list"
@@ -71,15 +70,14 @@
                 android:id="@+id/tv_device_info_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="기기 정보(Device Info)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_device_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_device_info_List"
                 app:layout_constraintBottom_toTopOf="@id/rv_device_info_List"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_device_info_List"

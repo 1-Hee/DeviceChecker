@@ -28,21 +28,19 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_exit_color"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="색상 테스트 종료"
-            android:textColor="@color/white"
+            android:layout_height="64dp"
+            android:text="@string/txt_btn_exit_color_test"
             android:textSize="16sp"
             android:includeFontPadding="false"
             android:textFontWeight="900"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:backgroundTint="@color/mono600"
             android:onClick="@{(v)->click.onViewClick(v)}"
             android:visibility="@{isHide?View.GONE:View.VISIBLE}"
+            android:theme="@style/SimpleButton.DeviceChecker"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

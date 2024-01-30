@@ -1,5 +1,172 @@
 <resources>
     <string name="app_name">DeviceChecker</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- 탭메뉴 -->
+    <string name="txt_tab_device">디바이스</string>
+    <string name="txt_tab_processor">프로세서</string>
+    <string name="txt_tab_memory">메모리</string>
+    <string name="txt_tab_sensor">센서</string>
+    <string name="txt_tab_test">테스트</string>
+
+    <!-- 디바이스 & 디스플레이 -->
+    <string name="txt_header_display_info">디스플레이 정보</string>
+    <string name="txt_header_device_info">기기 정보</string>
+
+    <!-- 프로세서 -->
+    <string name="txt_header_processor_info">프로세서 정보</string>
+    <string name="txt_header_cpu_core_info">CPU 코어 세부 정보</string>
+    <string name="txt_header_java_info">자바 &amp; 자바 가상 머신</string>
+
+    <!-- 메모리 -->
+    <string name="txt_header_main_memory">주기억장치</string>
+    <string name="txt_header_internal_storage">내부 저장소</string>
+    <string name="txt_header_external_storage">외부 저장소</string>
+    <!-- 센서 -->
+    <string name="txt_header_sensor_info">센서 정보</string>
+
+    <!-- 디바이스 테스팅 -->
+    <string name="txt_guide_hardware_test">아래의 하드웨어 장치를 테스트합니다.</string>
+    <string name="txt_btn_display_test">디스플레이 테스트</string>
+    <string name="txt_btn_sound_device">음향 장치 테스트</string>
+
+    <string name="txt_go_back">돌아가기</string>
+    <string name="txt_btn_color_test">색상 테스트 (Color Test)</string>
+    <string name="txt_guide_color_test">디스플레이 화소를 테스트 합니다.</string>
+    <string name="txt_btn_exit_color_test">색상 테스트 종료</string>
+    <string name="txt_btn_sound_test">소리 테스트</string>
+    <string name="txt_guide_sound_test">기기의 음향 장치를 테스트 합니다.</string>
+
+    <string name="txt_unknown">알 수 없음</string>
+    <!-- cpu core -->
+    <string name="txt_h_core_min">최소 주파수 :</string>
+    <string name="txt_h_core_max">최대 주파수 :</string>
+    <string name="txt_h_core_latency">전환 지연 시간 :</string>
+
+    <!-- storage info -->
+    <string name="txt_internal_name">내부 저장 장치</string>
+    <string name="txt_h_storage_name">저장소 이름 :</string>
+    <string name="txt_h_storage_avail">사용 가능한 용량 :</string>
+    <string name="txt_h_storage_total">전체 용량 :</string>
+
+    <!-- senor info -->
+    <string name="txt_h_sensor_type">센서 타입 :</string>
+    <string name="txt_h_sensor_vendor">센서 공급자 :</string>
+
+    <!-- about save data -->
+    <string name="txt_h_save_device">####### 기기 정보 #######</string>
+    <string name="txt_h_save_processor">####### 프로세서 정보 #######</string>
+    <string name="txt_h_save_memory">####### 메모리 정보 #######</string>
+    <string name="txt_h_save_internal">####### 내부 저장소 #######</string>
+    <string name="txt_h_save_external">####### 외부 저장소 #######</string>
+    <string name="txt_h_save_sensor">####### 센서 정보 #######</string>
+
+    <!-- Device -->
+    <!-- Device Info -->
+    <string-array name="device_headers">
+        <item>모델명</item>
+        <item>제조사</item>
+        <item>모뎀</item>
+        <item>모뎀 버전</item>
+        <item>Build ID</item>
+        <item>펌웨어 버전</item>
+        <item>부트 로더</item>
+        <item>Build Key</item>
+        <item>안드로이드 버전</item>
+        <item>SDK INT</item>
+        <item>SUPPORT_MIN_SDK</item>
+        <item>보안 패치 수준</item>
+        <item>하드웨어 플랫폼</item>
+        <item>기본 통신 네트워크</item>
+        <item>디버깅 모드</item>
+    </string-array>
+    <string-array name="device_command">
+        <item>getprop ro.product.model</item>
+        <item>getprop ro.product.manufacturer</item>
+        <item>getprop ro.baseband</item>
+        <item>getprop gsm.version.baseband</item>
+        <item>getprop ro.build.display.id</item>
+        <item>getprop ro.bootimage.build.fingerprint</item>
+        <item>getprop ro.bootloader</item>
+        <item>getprop ro.build.id</item>
+        <item>getprop ro.build.version.release</item>
+        <item>getprop ro.build.version.sdk</item>
+        <item>getprop ro.build.version.min_supported_target_sdk</item>
+        <item>getprop ro.build.version.security_patch</item>
+        <item>getprop ro.hardware</item>
+        <item>getprop ro.telephony.default_network</item>
+        <item>getprop ro.debuggable</item>
+    </string-array>
+    <!-- Display Info -->
+    <string-array name="display_headers">
+        <item>DPI(Dot Per Inch)</item>
+        <item>해상도</item>
+        <item>화면 주사율</item>
+    </string-array>
+    <string-array name="display_command">
+        <item>getprop ro.sf.lcd_density</item>
+    </string-array>
+
+    <!-- Processor -->
+    <!-- 프로세서 정보 -->
+    <string-array name="processor_headers">
+        <item>기본 CPU 아키텍처</item>
+        <item>호환 가능한 CPU 아키텍처</item>
+        <item>보드</item>
+        <item>칩셋</item>
+        <item>코어 수</item>
+        <item>클럭 속도</item>
+        <item>커널</item>
+    </string-array>
+    <string-array name="processor_command">
+        <item>getprop ro.product.cpu.abi</item>
+        <item>getprop ro.product.cpu.abilist</item>
+        <item>getprop ro.product.board</item>
+        <item>getprop ro.hardware</item>
+    </string-array>
+
+    <!-- 자바 정보 -->
+    <string-array name="java_headers">
+        <item>자바 버전</item>
+        <item>자바 VM 버전</item>
+        <item>자바 VM 공급자</item>
+        <item>자바 VM 명</item>
+        <item>JAVA_MIN_HEAP</item>
+        <item>JAVA_MAX_HEAP</item>
+        <item>JAVA_APPLICATION_HEAP</item>
+    </string-array>
+    <string-array name="java_command">
+        <item>getprop dalvik.vm.dex2oat-Xms</item>
+        <item>getprop dalvik.vm.dex2oat-Xmx</item>
+        <item>getprop dalvik.vm.heapsize</item>
+    </string-array>
+
+    <!-- Memory -->
+    <string-array name="memory_headers">
+        <item>전체 메모리</item>
+        <item>가용 메모리</item>
+        <item>버퍼 크기</item>
+        <item>캐시 크기</item>
+        <item>활성 메모리</item>
+        <item>비활성 메모리</item>
+        <item>메모리 맵</item>
+        <item>Slab</item>
+        <item>전체 CMA</item>
+        <item>여유 CMA</item>
+        <item>페이징 크기</item>
+    </string-array>
+    <string-array name="memory_key_list">
+        <item>MemTotal</item>
+        <item>MemFree</item>
+        <item>Buffers</item>
+        <item>Cached</item>
+        <item>Active</item>
+        <item>Inactive</item>
+        <item>Mapped</item>
+        <item>Slab</item>
+        <item>CmaTotal</item>
+        <item>CmaFree</item>
+        <item>Hugepagesize</item>
+    </string-array>
+    <!-- Sensor -->
+
+
 </resources>

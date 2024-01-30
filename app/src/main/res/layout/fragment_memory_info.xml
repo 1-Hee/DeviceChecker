@@ -12,10 +12,10 @@
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
         <variable
             name="internalStorageList"
-            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.StorageInfo>" />
         <variable
             name="externalStorageList"
-            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.StorageInfo>" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintGuide_percent="0.05"
                 />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_end"
@@ -41,22 +41,21 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.9"
+                app:layout_constraintGuide_percent="0.95"
                 />
             <!-- 주기억 장치 정보 -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_ram_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="주 기억장치(RAM)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_main_memory"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rv_ram_info"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_ram_info"
@@ -74,21 +73,20 @@
                 android:id="@+id/tv_internal_storage_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="내부 저장소(Internal Storage)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_internal_storage"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_ram_info"
                 app:layout_constraintBottom_toTopOf="@id/rv_internal_storage"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_internal_storage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:infoList="@{internalStorageList}"
+                app:storageInfoList="@{internalStorageList}"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -100,21 +98,20 @@
                 android:id="@+id/tv_external_storage_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="외부 저장소(External Storage)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_external_storage"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_internal_storage"
                 app:layout_constraintBottom_toTopOf="@id/rv_external_storage"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_external_storage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:infoList="@{externalStorageList}"
+                app:storageInfoList="@{externalStorageList}"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"

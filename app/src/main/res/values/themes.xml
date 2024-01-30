@@ -2,8 +2,45 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.DeviceChecker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/mono300</item>
     </style>
 
-    <style name="Theme.DeviceChecker" parent="Base.Theme.DeviceChecker" />
+    <style name="Theme.DeviceChecker" parent="Base.Theme.DeviceChecker" >
+<!--        <item name="colorPrimaryDark">@color/mono400</item> &lt;!&ndash; 액션바 그림자 등에 사용 &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/orange400</item> &lt;!&ndash; 액센트 색상 &ndash;&gt;-->
+<!--        <item name="backgroundColor">@color/mono50</item> &lt;!&ndash; 배경 &ndash;&gt;-->
+<!--&lt;!&ndash;        <item name="colorControlNormal">@color/teal500</item>  &lt;!&ndash; 기본 레이아웃 색상? &ndash;&gt;&ndash;&gt;-->
+<!--        <item name="colorControlActivated">@color/teal300</item> &lt;!&ndash; 레이아옷 활성화 색상 &ndash;&gt;-->
+<!--        <item name="colorControlHighlight">@color/orange100</item> &lt;!&ndash; 레이아웃 강조 색상, 포커즈 등? &ndash;&gt;-->
+<!--        <item name="colorButtonNormal">@color/teal500</item> &lt;!&ndash; 버튼 기본 색상 &ndash;&gt;-->
+<!--        <item name="colorError">@color/red400</item> &lt;!&ndash; 에러 색상 &ndash;&gt;-->
+    </style>
+    <style  name="Background.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:background">@color/mono50</item>
+    </style>
+    <style  name="Header.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:background">@color/wood_brown700</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style  name="Button.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:backgroundTint">@color/teal500</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style  name="SimpleButton.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:backgroundTint">@color/mono600</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TabLayout.DeviceChecker" parent="Widget.Design.TabLayout">
+        <!-- Tab Indicator Color -->
+        <item name="tabIndicatorColor">@color/claret300</item>
+        <!-- Tab Text Color -->
+        <item name="tabTextColor">@color/mono300</item>
+        <!-- Tab Selected Text Color -->
+        <item name="tabSelectedTextColor">@color/claret400</item>
+        <!-- Tab Ripple Color -->
+        <item name="tabRippleColor">@color/mono100</item>
+        <item name="tabBackground">@color/mono50</item>
+    </style>
 </resources>

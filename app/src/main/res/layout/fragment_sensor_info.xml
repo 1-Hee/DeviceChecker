@@ -26,7 +26,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintGuide_percent="0.05"
                 />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_end"
@@ -35,22 +35,21 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.9"
+                app:layout_constraintGuide_percent="0.95"
                 />
             <!-- 센서 정보 -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_sensor_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="센서 정보(Sensor Information)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_sensor_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rv_sensor_info"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_sensor_info"

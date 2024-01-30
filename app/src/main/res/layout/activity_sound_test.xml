@@ -20,31 +20,61 @@
         android:layout_height="match_parent"
         android:background="@color/mono200"
         >
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_start"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.20"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_end"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.80"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_top"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.30"
+            />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_sound_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="소리 테스트(Sound Test)"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:text="@string/txt_btn_sound_test"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:includeFontPadding="false"
             android:drawableTint="@color/white"
-            android:drawableLeft="@android:drawable/ic_menu_report_image"
+            android:drawableLeft="@drawable/ic_bell"
             android:drawablePadding="4dp"
-            android:backgroundTint="@{!isPlay?@color/teal500:@color/mono600}"
+            android:backgroundTint="@{!isPlay?@color/navy700:@color/mono500}"
             android:paddingVertical="16dp"
             android:paddingHorizontal="12dp"
             android:onClick="@{(v)->click.onViewClick(v)}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_start"
+            app:layout_constraintEnd_toEndOf="@id/gl_end"
+            app:layout_constraintTop_toTopOf="@id/gl_top"
+
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_sound_test_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="기기의 소리가 정상적으로 재생 되는지 테스트 합니다."
+            android:text="@string/txt_guide_sound_test"
             android:textSize="14sp"
             android:textColor="@color/mono600"
             android:textAlignment="textStart"
@@ -57,9 +87,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_go_back"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="돌아가기"
-            android:textColor="@color/white"
+            android:layout_height="64dp"
+            android:text="@string/txt_go_back"
             android:textSize="16sp"
             android:includeFontPadding="false"
             android:textFontWeight="900"
@@ -69,9 +98,8 @@
             app:layout_constraintEnd_toEndOf="@id/btn_sound_test"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_sound_test_guide"
-            android:backgroundTint="@color/mono600"
             android:onClick="@{(v)->click.onViewClick(v)}"
-
+            android:theme="@style/SimpleButton.DeviceChecker"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,5 +3,44 @@
     <style name="Base.Theme.DeviceChecker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimary">@color/mono600</item>
+    </style>
+    <style name="Theme.DeviceChecker" parent="Base.Theme.DeviceChecker" >
+<!--        <item name="colorPrimaryDark">@color/mono700</item> &lt;!&ndash; 액션바 그림자 등에 사용 &ndash;&gt;-->
+<!--        <item name="colorAccent">@color/orange300</item> &lt;!&ndash; 액센트 색상 &ndash;&gt;-->
+<!--        <item name="backgroundColor">@color/black</item> &lt;!&ndash; 배경 &ndash;&gt;-->
+<!--        &lt;!&ndash;        <item name="colorControlNormal">@color/teal500</item>  &lt;!&ndash; 기본 레이아웃 색상? &ndash;&gt;&ndash;&gt;-->
+<!--        <item name="colorControlActivated">@color/navy900</item> &lt;!&ndash; 레이아옷 활성화 색상 &ndash;&gt;-->
+<!--        <item name="colorControlHighlight">@color/red700</item> &lt;!&ndash; 레이아웃 강조 색상, 포커즈 등? &ndash;&gt;-->
+<!--        <item name="colorButtonNormal">@color/navy900</item> &lt;!&ndash; 버튼 기본 색상 &ndash;&gt;-->
+<!--        <item name="colorError">@color/red400</item> &lt;!&ndash; 에러 색상 &ndash;&gt;-->
+    </style>
+    <style  name="Background.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:background">@color/black</item>
+    </style>
+    <style  name="Header.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:background">@color/green700</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style  name="Button.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:backgroundTint">@color/navy700</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style  name="SimpleButton.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:backgroundTint">@color/mono300</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="TabLayout.DeviceChecker" parent="Widget.Design.TabLayout">
+        <!-- Tab Indicator Color -->
+        <item name="tabIndicatorColor">@color/orange300</item>
+        <!-- Tab Text Color -->
+        <item name="tabTextColor">@color/mono50</item>
+        <!-- Tab Selected Text Color -->
+        <item name="tabSelectedTextColor">@color/orange300</item>
+        <!-- Tab Ripple Color -->
+        <item name="tabRippleColor">@color/light_gray100</item>
+        <item name="tabBackground">@color/black</item>
     </style>
 </resources>

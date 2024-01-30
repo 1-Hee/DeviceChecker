@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
+import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.SensorInfo
+import kr.co.devicechecker.data.dto.StorageInfo
+import kr.co.devicechecker.databinding.ItemCpuCoreBinding
 import kr.co.devicechecker.databinding.ItemInfoBinding
 import kr.co.devicechecker.databinding.ItemSenorBinding
+import kr.co.devicechecker.databinding.ItemStorageBinding
 import kr.co.devicechecker.ui.adapter.ViewPager2Adapter
 
 class StaticAdapter {
@@ -55,6 +59,53 @@ class StaticAdapter {
         }
 
         @JvmStatic
+        @BindingAdapter(value = ["coreInfoList"], requireAll = true)
+        fun setCoreAdapter(recyclerView: RecyclerView, infoList:List<CpuCoreInfo>){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+            val adapter = object : BaseDataBindingAdapter<CpuCoreInfo, ItemCpuCoreBinding>(recyclerView.context){
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_cpu_core)
+                }
+                override fun onBindItem(
+                    binding: ItemCpuCoreBinding,
+                    position: Int,
+                    item: CpuCoreInfo,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.coreInfo = item
+                    binding.notifyChange()
+                }
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+        @JvmStatic
+        @BindingAdapter(value = ["storageInfoList"], requireAll = true)
+        fun setStorageAdapter(recyclerView: RecyclerView, infoList:List<StorageInfo>){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+            val adapter = object : BaseDataBindingAdapter<StorageInfo, ItemStorageBinding>(recyclerView.context){
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_storage)
+                }
+                override fun onBindItem(
+                    binding: ItemStorageBinding,
+                    position: Int,
+                    item: StorageInfo,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.storageInfo = item
+                    binding.notifyChange()
+                }
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+
+        @JvmStatic
         @BindingAdapter(value = ["sensorInfoList"], requireAll = true)
         fun setSensorAdapter(recyclerView: RecyclerView, infoList:List<SensorInfo>){
             val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
@@ -63,7 +114,6 @@ class StaticAdapter {
                 override fun getDataBindingConfig(): DataBindingConfig {
                     return DataBindingConfig(R.layout.item_senor)
                 }
-
                 override fun onBindItem(
                     binding: ItemSenorBinding,
                     position: Int,

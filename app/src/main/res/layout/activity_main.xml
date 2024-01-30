@@ -20,14 +20,12 @@
         <variable
             name="click"
             type="kr.co.devicechecker.base.listener.ViewClickListener" />
-
     </data>
 
     <!-- todo theme로 적용.. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_gray100"
         >
 
         <!-- header -->
@@ -48,6 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_info"
+                android:tint="@color/white"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toStartOf="@id/tv_app_name"
                 app:layout_constraintTop_toTopOf="@id/tv_app_name"
@@ -72,7 +71,8 @@
                 android:id="@+id/iv_save_all_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_upload"
+                android:src="@drawable/ic_file"
+                android:tint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -87,50 +87,48 @@
             android:layout_height="wrap_content"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
-            app:tabIndicatorColor="@color/claret300"
-            app:tabTextColor="@color/mono300"
-            app:tabSelectedTextColor="@color/claret400"
-            app:tabRippleColor="@color/mono100"
+            style="@style/TabLayout.DeviceChecker"
             android:clipToPadding="false"
             app:tabInlineLabel="true"
             app:layout_constraintTop_toBottomOf="@id/l_app_header"
             app:layout_constraintBottom_toTopOf="@id/vp_check_menu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/none"
             android:onTabSelectedListener="@{tabListener}"
             >
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_device_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="디바이스 정보"
+                android:text="@string/txt_tab_device"
                 android:textSize="16sp"
                 />
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_system_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="프로세서 정보"
-                />
+                android:text="@string/txt_tab_processor"
+                android:textSize="16sp" />
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_memory_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="메모리 정보"
+                android:text="@string/txt_tab_memory"
                 android:textSize="16sp"
                 />
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_sensor_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="센서 정보"
+                android:text="@string/txt_tab_sensor"
+                android:textSize="16sp"
                 />
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/tab_device_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="기기 테스트"
+                android:text="@string/txt_tab_test"
+                android:textSize="16sp"
                 />
         </com.google.android.material.tabs.TabLayout>
 
@@ -142,9 +140,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@color/mono200"
             app:vpAdapter="@{vpAdapter}"
             app:vpCallback="@{vpCallback}"
+            android:theme="@style/Background.DeviceChecker"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

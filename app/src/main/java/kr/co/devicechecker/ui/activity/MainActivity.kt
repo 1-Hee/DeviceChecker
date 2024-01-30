@@ -85,12 +85,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         override fun onViewClick(view: View) {
             when(view.id){
                 R.id.iv_save_all_info -> {
-                    Toast.makeText(this@MainActivity, "파일 저장 시작...", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "하드웨어 정보를 저장합니다..", Toast.LENGTH_SHORT).show()
+                    AppUtil.File.saveAllHardwareInfo(this@MainActivity, this@MainActivity)
                     val deviceContent = prefs.getValue("Device")
-                    val memoryContent = prefs.getValue("Memory")
                     val processorContent = prefs.getValue("Processor")
+                    val memoryContent = prefs.getValue("Memory")
                     val sensorContent = prefs.getValue("Sensor")
-                    val totalData = deviceContent+memoryContent+processorContent+sensorContent
+                    val builder = StringBuilder()
+                    builder.append(deviceContent).append("\n")
+                        .append(processorContent).append("\n")
+                        .append(memoryContent).append("\n")
+                        .append(sensorContent).append("\n")
+                    val totalData = builder.toString()
                     AppUtil.File.saveData(this@MainActivity, totalData)
                 }
             }

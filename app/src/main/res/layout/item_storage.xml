@@ -6,8 +6,8 @@
     >
     <data>
         <variable
-            name="info"
-            type="kr.co.devicechecker.data.dto.SensorInfo" />
+            name="storageInfo"
+            type="kr.co.devicechecker.data.dto.StorageInfo" />
     </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -25,6 +25,15 @@
             android:layout_marginVertical="24dp"
             >
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_center"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.40"
+                />
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_start"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -33,72 +42,72 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintGuide_percent="0.3"
                 />
-
+            <!-- 저장소 아이콘 -->
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:src="@drawable/ic_sensor"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:scaleType="fitCenter"
-                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_disk"
+                android:tint="@color/mono600"
+                android:layout_marginRight="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/gl_start"
+                app:layout_constraintEnd_toStartOf="@id/gl_start"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
-
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sensor_name"
+                android:id="@+id/tv_storage_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{info.sensorName}"
+                android:text="@{@string/txt_h_storage_name+`\t`+storageInfo.name}"
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textAlignment="textStart"
                 android:textFontWeight="900"
                 android:includeFontPadding="false"
+                android:paddingHorizontal="4dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tv_sensor_type"
+                app:layout_constraintBottom_toTopOf="@id/gl_center"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="8dp"
-                tools:text="SensorName"
+                tools:text="저장소 명"
                 />
-
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_sensor_type"
+                android:id="@+id/tv_storage_avail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(@string/txt_h_sensor_type+`\t`+info.sensorType)}"
+                android:text="@{@string/txt_h_storage_avail+`\t`+storageInfo.available}"
                 android:textSize="14sp"
                 android:textAlignment="textStart"
                 android:includeFontPadding="false"
                 android:textColor="@color/mono700"
-                app:layout_constraintTop_toBottomOf="@id/tv_sensor_name"
-                app:layout_constraintBottom_toTopOf="@id/ty_sensor_vendor"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintTop_toBottomOf="@id/gl_center"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_storage_total"
                 android:layout_marginVertical="4dp"
                 android:layout_marginLeft="4dp"
-                tools:text="Type Code"
+                tools:text="사용 가능한 용량"
                 />
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/ty_sensor_vendor"
+                android:id="@+id/tv_storage_total"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(@string/txt_h_sensor_vendor+`\t`+info.sensorVendor)}"
+                android:text="@{@string/txt_h_storage_total+`\t`+storageInfo.total}"
                 android:textSize="14sp"
                 android:textAlignment="textStart"
                 android:includeFontPadding="false"
                 android:textColor="@color/mono700"
-                app:layout_constraintTop_toBottomOf="@id/tv_sensor_type"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_storage_avail"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/gl_start"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginVertical="4dp"
                 android:layout_marginLeft="4dp"
-                tools:text="Sensor Vendor"
+                tools:text="전체 용량"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 </layout>

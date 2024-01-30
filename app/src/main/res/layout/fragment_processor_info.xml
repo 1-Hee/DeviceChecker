@@ -12,7 +12,7 @@
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
         <variable
             name="cpuCoreInfoList"
-            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.CpuCoreInfo>" />
         <variable
             name="javaInfoList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
@@ -32,7 +32,7 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintGuide_percent="0.05"
                 />
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_end"
@@ -41,22 +41,21 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintGuide_percent="0.9"
+                app:layout_constraintGuide_percent="0.95"
                 />
             <!-- 프로세서 정보 -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_processor_info_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="프로세서 정보(Processor Information)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_processor_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rv_processor_info"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_processor_info"
@@ -74,21 +73,20 @@
                 android:id="@+id/tv_cpu_core_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="CPU 코어 정보(CPU Core Information)"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_cpu_core_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_processor_info"
                 app:layout_constraintBottom_toTopOf="@id/rv_cpu_core"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_cpu_core"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:infoList="@{cpuCoreInfoList}"
+                app:coreInfoList="@{cpuCoreInfoList}"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="@id/gl_start"
                 app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -100,15 +98,14 @@
                 android:id="@+id/tv_java_information"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Java Information"
-                android:textColor="@color/white"
+                android:text="@string/txt_header_java_info"
                 android:textAlignment="center"
-                android:background="@color/wood_brown700"
                 android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_cpu_core"
                 app:layout_constraintBottom_toTopOf="@id/rv_java_Info"
+                android:theme="@style/Header.DeviceChecker"
                 />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_java_Info"
