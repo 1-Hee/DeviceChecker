@@ -1,6 +1,7 @@
 package kr.co.devicechecker.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseActivity
@@ -18,7 +19,8 @@ class DisplayTestActivity : BaseActivity<ActivityDisplayTestBinding>() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus){
-            super.hideSystemUI()
+            super.hideAllSystemUI()
+            Toast.makeText(this, getString(R.string.ts_guide_full_screen), Toast.LENGTH_SHORT).show()
         }
     }
 }

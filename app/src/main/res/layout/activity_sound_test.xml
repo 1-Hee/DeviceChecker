@@ -18,7 +18,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mono200"
+        android:theme="@style/Background.DeviceChecker"
         >
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_start"
@@ -76,12 +76,12 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_guide_sound_test"
             android:textSize="14sp"
-            android:textColor="@color/mono600"
             android:textAlignment="textStart"
             android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="@id/btn_sound_test"
             app:layout_constraintEnd_toEndOf="@id/btn_sound_test"
             app:layout_constraintTop_toBottomOf="@id/btn_sound_test"
+            android:theme="@style/Value.DeviceChecker"
             />
 
         <androidx.appcompat.widget.AppCompatButton

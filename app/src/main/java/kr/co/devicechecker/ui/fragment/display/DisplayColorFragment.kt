@@ -15,22 +15,18 @@ import java.util.Timer
 import java.util.TimerTask
 
 class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
-
     private var timer: Timer? = null
     private val TIME_PERIOD = 3000L
     override fun initViewModel() {
     }
-
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_display_color)
             .addBindingParam(BR.isHide, false)
             .addBindingParam(BR.click, viewClickListener)
     }
-
     override fun initView() {
         autoHideButton()
     }
-
     override fun onResume() {
         super.onResume()
         var idx = 0
@@ -51,7 +47,6 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
         }
         timer?.schedule(timerTask, 0, 1500)// 1.5초
     }
-
     private val viewClickListener = object : ViewClickListener {
         override fun onViewClick(view: View) {
             when(view.id){
@@ -64,18 +59,19 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
             }
         }
     }
-
     private fun autoHideButton(){
-        mBinding.isHide = false
-        mBinding.notifyChange()
+        val flag = mBinding.isHide?:false
+        mBinding.isHide = !flag
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
             // 3초 후에 실행할 코드 작성
-            mBinding.isHide = true
-            mBinding.notifyChange()
+            if(mBinding.isHide != true){
+                mBinding.isHide = true
+                mBinding.notifyChange()
+            }
         }, TIME_PERIOD) // 3000 밀리초 = 3초
+        mBinding.notifyChange()
     }
-
     override fun onPause() {
         super.onPause()
         Timber.d("onPause...")

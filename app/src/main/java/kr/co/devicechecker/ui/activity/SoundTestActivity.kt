@@ -63,7 +63,7 @@ class SoundTestActivity : BaseActivity<ActivitySoundTestBinding>() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus){
-            super.hideSystemUI()
+            super.hideTopBar()
         }
     }
 

@@ -35,7 +35,7 @@ abstract class BaseActivity<D:ViewDataBinding> : DataBindingActivity<D>() {
 
     // 시스템 UI를 숨기는 함수
     @Suppress("DEPRECATION")
-    protected fun hideSystemUI(){
+    protected fun hideAllSystemUI(){
         Timber.w("at %s, System UI is hidden....", this.javaClass.simpleName)
         val window: Window = window;
 
@@ -61,6 +61,34 @@ abstract class BaseActivity<D:ViewDataBinding> : DataBindingActivity<D>() {
                     View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
                     View.SYSTEM_UI_FLAG_FULLSCREEN;
 
+            decorView.systemUiVisibility = uiOption
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    protected fun hideTopBar(){
+        Timber.w("at %s, Top bar Hidden...", this.javaClass.simpleName)
+        val window: Window = window;
+
+        // Android 11(R) 대응
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            window.setDecorFitsSystemWindows(false)
+            val controller = window.insetsController
+
+            if(controller != null){
+                controller.hide(WindowInsets.Type.statusBars())
+                controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            }
+        }else {
+            val decorView: View = window.decorView
+            // version Lollipop 대응
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                window.statusBarColor = Color.TRANSPARENT
+            }
+            val uiOption = View.SYSTEM_UI_FLAG_IMMERSIVE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                    View.SYSTEM_UI_FLAG_FULLSCREEN
             decorView.systemUiVisibility = uiOption
         }
     }

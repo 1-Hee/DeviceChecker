@@ -21,24 +21,21 @@
             name="click"
             type="kr.co.devicechecker.base.listener.ViewClickListener" />
     </data>
-
-    <!-- todo theme로 적용.. -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
         <!-- header -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/l_app_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/teal500"
             android:orientation="horizontal"
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tl_check_menu"
             android:paddingVertical="12dp"
+            android:theme="@style/MainHeader.DeviceChecker"
             >
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -46,7 +43,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_info"
-                android:tint="@color/white"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toStartOf="@id/tv_app_name"
                 app:layout_constraintTop_toTopOf="@id/tv_app_name"
@@ -59,28 +55,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
                 android:textSize="20sp"
-                android:textColor="@color/light_gray100"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
-
-            <!-- 파일 저장 버튼 -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_save_all_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_file"
-                android:tint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginRight="16dp"
-                android:onClick="@{(v)->click.onViewClick(v)}"
-                />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_check_menu"
             android:layout_width="match_parent"
@@ -131,7 +111,6 @@
                 android:textSize="16sp"
                 />
         </com.google.android.material.tabs.TabLayout>
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_check_menu"
             android:layout_width="match_parent"
@@ -144,5 +123,41 @@
             app:vpCallback="@{vpCallback}"
             android:theme="@style/Background.DeviceChecker"
             />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent=".75"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent=".8"
+            />
+
+        <!-- 플로팅 버튼 -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_save_all_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="@{(v)->click.onViewClick(v)}"
+            android:shadowColor="@color/white"
+            app:backgroundTint="@color/mono900"
+            android:elevation="4dp"
+            app:borderWidth="2dp"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="@id/gl_horizontal"
+            android:layout_margin="16dp"
+            app:rippleColor="@color/mono100"
+            app:srcCompat="@drawable/ic_file"
+            app:tint="@color/white" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

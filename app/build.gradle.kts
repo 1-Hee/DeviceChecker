@@ -18,6 +18,22 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("debugSignedKey") {
+            storeFile = file("../app/keystore/deviceChecker.jks")
+            storePassword = "device240131jwh@#!"
+            keyAlias = "deviceKey"
+            keyPassword = "keydevice240131jwh@#!"
+        }
+
+        create("releaseSignedKey") {
+            storeFile = file("../app/keystore/deviceChecker.jks")
+            storePassword = "device240131jwh@#!"
+            keyAlias = "deviceKey"
+            keyPassword = "keydevice240131jwh@#!"
+        }
+    }
+
     buildTypes {
         debug {
             buildConfigField("boolean", "IS_DEBUG", "false")
@@ -32,10 +48,34 @@ android {
             )
         }
     }
+
+//    // Specifies one flavor dimension.
+//    flavorDimensions += "version"
+//    productFlavors {
+//        create("demo") {
+//            // Assigns this product flavor to the "version" flavor dimension.
+//            // If you are using only one dimension, this property is optional,
+//            // and the plugin automatically assigns all the module's flavors to
+//            // that dimension.
+//            dimension = "version"
+//            applicationIdSuffix = ".demo"
+//            versionNameSuffix = "-demo"
+//        }
+//        create("full") {
+//            dimension = "version"
+//            applicationIdSuffix = ".full"
+//            versionNameSuffix = "-full"
+//            versionName = android.compileSdkVersion
+//        }
+//    }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+
 
     kotlinOptions {
         jvmTarget = "1.8"
@@ -48,7 +88,6 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -68,6 +107,5 @@ dependencies {
 
     // ted
     implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
-
 
 }

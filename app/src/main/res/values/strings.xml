@@ -29,7 +29,7 @@
     <string name="txt_btn_sound_device">음향 장치 테스트</string>
 
     <string name="txt_go_back">돌아가기</string>
-    <string name="txt_btn_color_test">색상 테스트 (Color Test)</string>
+    <string name="txt_btn_color_test">색상 테스트</string>
     <string name="txt_guide_color_test">디스플레이 화소를 테스트 합니다.</string>
     <string name="txt_btn_exit_color_test">색상 테스트 종료</string>
     <string name="txt_btn_sound_test">소리 테스트</string>
@@ -57,7 +57,17 @@
     <string name="txt_h_save_memory">####### 메모리 정보 #######</string>
     <string name="txt_h_save_internal">####### 내부 저장소 #######</string>
     <string name="txt_h_save_external">####### 외부 저장소 #######</string>
+    <string name="txt_h_save_storage">####### 저장소 #######</string>
     <string name="txt_h_save_sensor">####### 센서 정보 #######</string>
+
+    <string name="ts_guide_full_screen">디스플레이 테스트를 위하여 전체화면으로 전환합니다.</string>
+    <string name="txt_d_save_title">기기 정보 저장</string>
+    <string name="txt_d_save_content">[확인]을 누르시면 기기 정보를 저장합니다.\n저장 경로 : %1$s</string>
+    <string name="txt_cancel">취소</string>
+    <string name="txt_save">저장</string>
+    <string name="ts_guide_save_info">하드웨어 정보를 저장합니다..</string>
+    <string name="txt_h_save_file">파일 저장 완료 :</string>
+    <string name="txt_h_fail_save">파일 저장에 실패하였습니다...</string>
 
     <!-- Device -->
     <!-- Device Info -->

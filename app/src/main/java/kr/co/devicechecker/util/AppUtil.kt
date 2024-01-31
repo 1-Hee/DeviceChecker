@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.round
+import kotlin.math.roundToInt
 
 class AppUtil {
     object Device { // about Device Info
@@ -80,10 +81,10 @@ class AppUtil {
             val builder = StringBuilder()
             builder.append(context.getString(R.string.txt_h_save_device)).append("\n")
             displayInfoList.forEach { info ->
-                builder.append("\t${info.name} : ${info.value}\n")
+                builder.append("${info.name} : ${info.value}\n")
             }
             deviceInfoList.forEach { info ->
-                builder.append("\t${info.name} : ${info.value}\n")
+                builder.append("${info.name} : ${info.value}\n")
             }
             prefs.setValue(tag, builder.toString())
         }
@@ -180,7 +181,7 @@ class AppUtil {
                 val info = Info(name, value)
                 javaInfoList.add(info)
             }
-            val gap = javaValueList.size - 1
+            val gap = javaValueList.size
             javaCmdList.forEachIndexed { index, cmd ->
                 val name = javaHeaderList[index+gap]
                 val value = Command.executeAdbCommand(cmd).trim()
@@ -201,8 +202,11 @@ class AppUtil {
                 builder.append("${info.name} : ${info.value}\n")
             }
             builder.append("\n")
+            val minHzHeader = context.getString(R.string.txt_h_core_min)
+            val maxHzHeader = context.getString(R.string.txt_h_core_max)
+            val latencyHeader = context.getString(R.string.txt_h_core_latency)
             cpuCoreList.forEach { sInfo ->
-                builder.append("\t${sInfo.name}\n\t${sInfo.minHz}\n\t${sInfo.maxHz}\n\t${sInfo.transitionLatency}\n")
+                builder.append("${sInfo.name}\n$minHzHeader${sInfo.minHz}\n$maxHzHeader${sInfo.maxHz}\n$latencyHeader${sInfo.transitionLatency}\n")
             }
             builder.append("\n")
             javaInfoList.forEach { info ->
@@ -325,13 +329,12 @@ class AppUtil {
             val nameHeader = context.getString(R.string.txt_h_storage_name)
             val availHeader = context.getString(R.string.txt_h_storage_avail)
             val totalHeader = context.getString(R.string.txt_h_storage_total)
-            builder.append(context.getString(R.string.txt_h_save_internal)).append("\n")
+            builder.append(context.getString(R.string.txt_h_save_storage)).append("\n")
             internalStorageList.forEach { info ->
-                builder.append("$nameHeader:\t${info.name}\n\t$availHeader:\t${info.available}\n\t$totalHeader:\t${info.total}")
+                builder.append("$nameHeader\n${info.name}\n$availHeader\t${info.available}\n$totalHeader\t${info.total}\n")
             }
-            builder.append(context.getString(R.string.txt_h_save_external)).append("\n")
             externalStorageList.forEach { info ->
-                builder.append("$nameHeader:\t${info.name}\n\t$availHeader:\t${info.available}\n\t$totalHeader:\t${info.total}")
+                builder.append("$nameHeader\n${info.name}\n$availHeader\t${info.available}\n$totalHeader\t${info.total}\n")
             }
             prefs.setValue(tag, builder.toString())
         }
@@ -361,7 +364,7 @@ class AppUtil {
             val typeHeader = context.getString(R.string.txt_h_sensor_type)
             val vendorHeader = context.getString(R.string.txt_h_sensor_vendor)
             sensorInfoList.forEach { info ->
-                builder.append("\t${info.sensorName} $typeHeader (${info.sensorType}}\n\t$vendorHeader : ${info.sensorVendor}\n")
+                builder.append("${info.sensorName} $typeHeader (${info.sensorType}}\n$vendorHeader : ${info.sensorVendor}\n")
             }
             prefs.setValue(tag, builder.toString())
         }
@@ -398,8 +401,17 @@ class AppUtil {
             }
         }
         fun parseByteUnit(data:Long):String{
-            val parsedValue = round(data / (1024.0 * 1024.0)).toInt()
-            return "$parsedValue MB"
+            val mbUnit = (1024.0 * 1024.0)
+            val gbUnit = (1024.0 * 1024.0 * 1024.0)
+            return if(data  < mbUnit) { // KB
+                "$data KB"
+            }else if (data < gbUnit){ // MB
+                val parsedValue = round(data / mbUnit).toInt()
+                "$parsedValue MB"
+            }else { // GB
+                val parsedValue = ((data / gbUnit) * 100).roundToInt() / 100.0
+                "$parsedValue GB"
+            }
         }
     }
     object File {
@@ -462,7 +474,7 @@ class AppUtil {
         }
         fun saveData(context: Context, content:String) {
             val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
-            val fileName = "device_info.txt"
+            val fileName = "device_info_${Build.MODEL.replace(" ", "").lowercase()}.txt"
             // val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
             val file = File(path, fileName)
             try {
@@ -472,10 +484,12 @@ class AppUtil {
                         outputStreamWriter.write(content)
                     }
                 }
-                Toast.makeText(context, "파일 저장 완료 ( ${file.absolutePath} )", Toast.LENGTH_SHORT).show()
+                val saveHeader = context.getString(R.string.txt_h_save_file)
+                Toast.makeText(context, "$saveHeader ${fileName}", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 e.printStackTrace()
-                Toast.makeText(context, "파일 저장 실패", Toast.LENGTH_SHORT).show()
+                val failHeader = context.getString(R.string.txt_h_fail_save)
+                Toast.makeText(context, failHeader, Toast.LENGTH_SHORT).show()
             }
         }
     }

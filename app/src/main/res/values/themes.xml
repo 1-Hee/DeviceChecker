@@ -15,6 +15,11 @@
 <!--        <item name="colorButtonNormal">@color/teal500</item> &lt;!&ndash; 버튼 기본 색상 &ndash;&gt;-->
 <!--        <item name="colorError">@color/red400</item> &lt;!&ndash; 에러 색상 &ndash;&gt;-->
     </style>
+    <style  name="MainHeader.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:background">@color/teal500</item>
+        <item name="android:tint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
     <style  name="Background.DeviceChecker" parent="Theme.DeviceChecker">
         <item name="android:background">@color/mono50</item>
     </style>
@@ -35,12 +40,27 @@
     <style name="TabLayout.DeviceChecker" parent="Widget.Design.TabLayout">
         <!-- Tab Indicator Color -->
         <item name="tabIndicatorColor">@color/claret300</item>
+        <item name="tabSelectedTextColor">@color/claret400</item>
         <!-- Tab Text Color -->
         <item name="tabTextColor">@color/mono300</item>
-        <!-- Tab Selected Text Color -->
-        <item name="tabSelectedTextColor">@color/claret400</item>
-        <!-- Tab Ripple Color -->
         <item name="tabRippleColor">@color/mono100</item>
         <item name="tabBackground">@color/mono50</item>
+    </style>
+    <style name="CardView.DeviceChecker" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/light_gray100</item>
+        <item name="android:shadowColor">@color/mono900</item>
+        <!-- Add other CardView attributes or customize as needed -->
+    </style>
+    <style name="Field.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="Value.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:textColor">@color/mono700</item>
+    </style>
+    <style name="Icon.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:tint">@color/mono600</item>
+    </style>
+    <style name="Sensor.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:tint">@color/none</item>
     </style>
 </resources>

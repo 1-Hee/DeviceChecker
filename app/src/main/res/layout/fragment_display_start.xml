@@ -65,12 +65,12 @@
             android:layout_height="wrap_content"
             android:text="@string/txt_guide_color_test"
             android:textSize="14sp"
-            android:textColor="@color/mono600"
             android:textAlignment="textStart"
             android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="@id/btn_color_test"
             app:layout_constraintEnd_toEndOf="@id/btn_color_test"
             app:layout_constraintTop_toBottomOf="@id/btn_color_test"
+            android:theme="@style/Value.DeviceChecker"
             />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_go_back"
