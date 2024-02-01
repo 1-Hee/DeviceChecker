@@ -130,7 +130,7 @@
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_percent=".75"
+            app:layout_constraintGuide_percent=".875"
             />
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/gl_horizontal"
@@ -139,7 +139,7 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintGuide_percent=".8"
+            app:layout_constraintGuide_percent=".875"
             />
 
         <!-- 플로팅 버튼 -->
@@ -154,7 +154,9 @@
             android:elevation="4dp"
             app:borderWidth="2dp"
             app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
             app:layout_constraintTop_toTopOf="@id/gl_horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/gl_horizontal"
             android:layout_margin="16dp"
             app:rippleColor="@color/mono100"
             app:srcCompat="@drawable/ic_file"
