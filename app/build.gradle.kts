@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -12,8 +15,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 2
+        versionName = "1.0.1"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,10 +40,10 @@ android {
     buildTypes {
         debug {
             buildConfigField("boolean", "IS_DEBUG", "false")
-
+            // signingConfig = signingConfigs
         }
-
         release {
+            buildConfigField("boolean", "IS_DEBUG", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -49,36 +52,34 @@ android {
         }
     }
 
-//    // Specifies one flavor dimension.
-//    flavorDimensions += "version"
-//    productFlavors {
-//        create("demo") {
-//            // Assigns this product flavor to the "version" flavor dimension.
-//            // If you are using only one dimension, this property is optional,
-//            // and the plugin automatically assigns all the module's flavors to
-//            // that dimension.
-//            dimension = "version"
-//            applicationIdSuffix = ".demo"
-//            versionNameSuffix = "-demo"
-//        }
-//        create("full") {
-//            dimension = "version"
-//            applicationIdSuffix = ".full"
-//            versionNameSuffix = "-full"
-//            versionName = android.compileSdkVersion
-//        }
-//    }
-
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
-
+    applicationVariants.all {
+        val variant = this
+        val currentDate = Date();
+        val formattedDate = SimpleDateFormat("yyyy_MM_dd").format(currentDate)
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                if(output.outputFile != null){
+                    if(output.outputFile.name.endsWith(".apk")){
+                        val appPrefix = "test_it"
+                        val versionName = variant.versionName
+                        val buildType = variant.buildType.name
+                        val outputName = "${appPrefix}_${buildType}_${formattedDate}_${versionName}.apk"
+                        output.outputFileName = outputName
+                    }
+                }
+            }
+    }
+    // https://developer88.tistory.com/338
+    // https://support.bluestacks.com/hc/ko/articles/13353147110541-%EB%B8%94%EB%A3%A8%EC%8A%A4%ED%83%9D-5%EC%97%90%EC%84%9C-%EC%9D%B4-%EC%9E%A5%EC%B9%98%EB%8A%94-%ED%94%8C%EB%A0%88%EC%9D%B4-%ED%94%84%EB%A1%9C%ED%85%8D%ED%8A%B8-%EC%9D%B8%EC%A6%9D%EC%9D%84-%EB%B0%9B%EC%A7%80-%EB%AA%BB%ED%96%88%EC%8A%B5%EB%8B%88%EB%8B%A4-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0-%EB%B0%A9%EB%B2%95
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         dataBinding = true
@@ -106,6 +107,11 @@ dependencies {
     implementation("com.jakewharton.timber:timber:$tibmer_version")
 
     // ted
-    implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
+    val ted_version = "3.3.0"
+    implementation("io.github.ParkSangGwon:tedpermission-normal:$ted_version")
+
+    // gson
+    val gson_version = "2.9.1"
+    implementation("com.google.code.gson:gson:$gson_version")
 
 }

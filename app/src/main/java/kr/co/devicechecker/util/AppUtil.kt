@@ -9,6 +9,11 @@ import android.os.StatFs
 import android.view.Display
 import android.view.WindowManager
 import android.widget.Toast
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.data.dto.Info
@@ -29,6 +34,16 @@ import kotlin.math.roundToInt
 
 class AppUtil {
     object Device { // about Device Info
+        // 모든 기기 정보 불러오는 메서드
+        fun getAllDeviceInfo(context:Context):List<Info>{
+            val allDeviceInfoList = mutableListOf<Info>()
+            val deviceList = getDeviceInfo(context)
+            val displayList = getDisplayInfo(context)
+            allDeviceInfoList.addAll(deviceList)
+            allDeviceInfoList.addAll(displayList)
+            return allDeviceInfoList
+        }
+
         fun getDeviceInfo(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val deviceInfoList = mutableListOf<Info>()
@@ -415,7 +430,7 @@ class AppUtil {
         }
     }
     object File {
-        fun saveAllHardwareInfo(context: Context, activity:Activity){
+        fun saveAllHardwareInfoForText(context: Context, activity:Activity){
             // display info
             val displayInfo = Device.getDisplayInfo(context)
             // device info
@@ -472,10 +487,9 @@ class AppUtil {
              */
             Sensor.saveSensorInfo(context, sensorInfo)
         }
-        fun saveData(context: Context, content:String) {
+        fun saveData(context: Context, content:String, type:String=".txt") {
             val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
-            val fileName = "device_info_${Build.MODEL.replace(" ", "").lowercase()}.txt"
-            // val downloadsDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+            val fileName = "device_info_${Build.MODEL.replace(" ", "").lowercase()}$type"
             val file = File(path, fileName)
             try {
                 // 파일 쓰기
@@ -485,12 +499,63 @@ class AppUtil {
                     }
                 }
                 val saveHeader = context.getString(R.string.txt_h_save_file)
-                Toast.makeText(context, "$saveHeader ${fileName}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "$saveHeader $fileName", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
                 e.printStackTrace()
                 val failHeader = context.getString(R.string.txt_h_fail_save)
                 Toast.makeText(context, failHeader, Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    object Json {
+        private fun gsonWithoutHtmlEscaping(): Gson {
+            return GsonBuilder()
+                .disableHtmlEscaping()
+                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                .create()
+        }
+
+        fun toInfoJsonArray(infoList:List<Info>):JsonArray{
+            val jsonArray = JsonArray()
+            infoList.forEach { info ->
+                val jsonObj = JsonObject()
+                jsonObj.addProperty("name", info.name)
+                jsonObj.addProperty("value", info.value)
+                jsonArray.add(jsonObj)
+            }
+            return jsonArray
+        }
+
+        fun toJsonArray(jsonObjList:List<JsonObject>):JsonArray{
+            val jsonArray = JsonArray()
+            jsonObjList.forEach { jsonObj ->
+                jsonArray.add(jsonObj)
+            }
+            return jsonArray
+        }
+        /*
+          public static JsonArray toJsonArray(List<Media> mediaList){
+        JsonArray jsonArray = new JsonArray();
+        for (Media media : mediaList) {
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("fileName", media.getTitle());
+            jsonObject.addProperty("mimeType", media.getMimeType());
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+         */
+        fun toJsonObject(key:String, value:String): JsonObject {
+            val backupJson = JsonObject()
+            backupJson.add(
+                key,
+                gsonWithoutHtmlEscaping().fromJson(
+                    value,
+                    JsonObject::class.java
+                )
+            )
+            return backupJson
         }
     }
 }

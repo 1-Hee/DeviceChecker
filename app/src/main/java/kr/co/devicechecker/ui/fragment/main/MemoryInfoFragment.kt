@@ -1,12 +1,5 @@
 package kr.co.devicechecker.ui.fragment.main
 
-import android.Manifest
-import android.os.Build
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.normal.TedPermission
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
@@ -20,7 +13,6 @@ import timber.log.Timber
 
 
 class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
-    private var scope: CoroutineScope? = null; // 권한 요청 시 사용할 코루틴
     private val memoryInfoList = mutableListOf<Info>()
     private val internalStorageList = mutableListOf<StorageInfo>()
     private val externalStorageList = mutableListOf<StorageInfo>()
@@ -37,9 +29,9 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     override fun initView() {
         Timber.i("initView ${this.javaClass.simpleName}")
         prefs = PreferenceUtil(requireContext())
-        requestStoragePermission()
         getMemoryInfo()
         saveMemoryInfo()
+        getStorageInfo()
     }
     private fun saveMemoryInfo(){
        AppUtil.Memory.saveMemoryInfo(
@@ -52,31 +44,6 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         this.memoryInfoList.addAll(AppUtil.Memory.getMemoryInfo(requireContext()))
         mBinding.memoryInfoList = memoryInfoList
         mBinding.notifyChange()
-    }
-
-    private fun requestStoragePermission(){
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
-            // 읽고 쓰기 권한 요청
-            val permissions = arrayOf(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-            )
-            //        // CoroutineScope
-            scope = CoroutineScope(Dispatchers.Main)
-            scope?.launch {
-                TedPermission.create()
-                    .setPermissionListener(object :PermissionListener {
-                        override fun onPermissionGranted() {
-                        }
-                        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                        }
-                    })
-                    .setDeniedMessage("권한을 허용해주세요. [설정] > [앱 및 알림] > [고급] > [앱 권한]")
-                    .setPermissions(*permissions)
-                    .check()
-            }
-        }
-        getStorageInfo()
     }
     // data 2. storage info (internel, externel)
     private fun getStorageInfo(){
