@@ -430,34 +430,34 @@ class AppUtil {
         }
     }
     object File {
-        fun saveAllHardwareInfoForText(context: Context, activity:Activity){
+        fun saveAllHardwareInfoForText(activity:Activity){
             // display info
-            val displayInfo = Device.getDisplayInfo(context)
+            val displayInfo = Device.getDisplayInfo(activity)
             // device info
-            val deviceInfo = Device.getDeviceInfo(context)
+            val deviceInfo = Device.getDeviceInfo(activity)
             /**
              *  디바이스 정보 저장
              */
-            Device.saveDeviceData(context, displayInfo, deviceInfo)
+            Device.saveDeviceData(activity, displayInfo, deviceInfo)
             // processor info
-            val processorInfo = Processor.getProcessorInfo(context)
+            val processorInfo = Processor.getProcessorInfo(activity)
             // cpu core Info
             val corNumber = try {
                 processorInfo[4].value.toInt()
             }catch (e:Exception){
                 0
             }
-            val cpuCoreInfo = Processor.getCpuCoreInfo(corNumber, context)
+            val cpuCoreInfo = Processor.getCpuCoreInfo(corNumber, activity)
             // java info
-            val javaInfo = Processor.getJavaInformation(context)
+            val javaInfo = Processor.getJavaInformation(activity)
             /**
              *  프로세서 정보 저장
              */
             Processor.saveProcessorInfo(
-                context, processorInfo, cpuCoreInfo, javaInfo
+                activity, processorInfo, cpuCoreInfo, javaInfo
             )
             // memory Info
-            val memoryInfo = Memory.getMemoryInfo(context)
+            val memoryInfo = Memory.getMemoryInfo(activity)
             // all path
             val pathList = Memory.getStoragePathList(activity)
             val internalPathList = mutableListOf<Info>()
@@ -477,7 +477,7 @@ class AppUtil {
              * 메모리 정보 저장
              */
             Memory.saveMemoryInfo(
-                context,
+                activity,
                 memoryInfo, internalInfo, externalInfo
             )
             // sensor
@@ -485,7 +485,7 @@ class AppUtil {
             /**
              * 센서 정보 저장
              */
-            Sensor.saveSensorInfo(context, sensorInfo)
+            Sensor.saveSensorInfo(activity, sensorInfo)
         }
         fun saveData(context: Context, content:String, type:String=".txt") {
             val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
@@ -501,7 +501,27 @@ class AppUtil {
                 val saveHeader = context.getString(R.string.txt_h_save_file)
                 Toast.makeText(context, "$saveHeader $fileName", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
-                e.printStackTrace()
+                // e.printStackTrace()
+                // 오류가 발생했을 때 오류 로그를 test_err_log.txt에 저장
+                val errorLogFileName = "test_it_error_log.txt"
+                val errorLogFile = File(path, errorLogFileName)
+                try {
+                    FileOutputStream(errorLogFile).use { fileOutputStream ->
+                        OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8).use { outputStreamWriter ->
+                            outputStreamWriter.write("Error Log:\n${e.message}\n\n")
+                            // Stack Trace:${Log.getStackTraceString(e)}
+                        }
+                    }
+                    val failHeader = context.getString(R.string.txt_h_fail_save)
+                    Toast.makeText(context,
+                        context.getString(R.string.txt_error_log_result, failHeader, errorLogFileName), Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    // 오류 로그를 저장하는 도중에 또 다른 오류가 발생한 경우
+                    // e.printStackTrace()
+                    val failHeader = context.getString(R.string.txt_h_fail_save)
+                    Toast.makeText(context,
+                        context.getString(R.string.txt_error_log_create, failHeader), Toast.LENGTH_SHORT).show()
+                }
                 val failHeader = context.getString(R.string.txt_h_fail_save)
                 Toast.makeText(context, failHeader, Toast.LENGTH_SHORT).show()
             }
@@ -534,18 +554,7 @@ class AppUtil {
             }
             return jsonArray
         }
-        /*
-          public static JsonArray toJsonArray(List<Media> mediaList){
-        JsonArray jsonArray = new JsonArray();
-        for (Media media : mediaList) {
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("fileName", media.getTitle());
-            jsonObject.addProperty("mimeType", media.getMimeType());
-            jsonArray.add(jsonObject);
-        }
-        return jsonArray;
-    }
-         */
+
         fun toJsonObject(key:String, value:String): JsonObject {
             val backupJson = JsonObject()
             backupJson.add(

@@ -48,6 +48,7 @@
     <string name="txt_h_storage_total">전체 용량 :</string>
 
     <!-- senor info -->
+    <string name="txt_h_sensor_name">센서 이름 :</string>
     <string name="txt_h_sensor_type">센서 타입 :</string>
     <string name="txt_h_sensor_vendor">센서 공급자 :</string>
 
@@ -67,7 +68,7 @@
     <string name="txt_save">저장</string>
     <string name="ts_guide_save_info">하드웨어 정보를 저장합니다..</string>
     <string name="txt_h_save_file">파일 저장 완료 :</string>
-    <string name="txt_h_fail_save">파일 저장에 실패하였습니다...</string>
+    <string name="txt_h_fail_save">텍스트 파일 생성 중 오류가 발생하였습니다.</string>
     <string name="txt_save_info_type1">텍스트 파일(.txt)</string>
     <string name="txt_save_info_type2">HTML</string>
     <string name="txt_save_info_type3">JSON</string>
@@ -180,6 +181,57 @@
         <item>Hugepagesize</item>
     </string-array>
     <!-- Sensor -->
+
+    <!-- html -->
+    <string name="html_start">
+        <![CDATA[
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Device Inspection Report</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
+                h2 {
+                    color: #333;
+                    border-bottom: 2px solid #333;
+                    padding-bottom: 5px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 15px;
+                }
+                th, td {
+                    padding: 10px;
+                    text-align: left;
+                    border-bottom: 1px solid #ddd;
+                }
+                th {
+                    background-color: #f2f2f2;
+                }
+            </style>
+        </head>
+        <body>
+        ]]>
+    </string>
+    <string name="html_end">
+         <![CDATA[
+            </body>
+            </html>
+         ]]>
+    </string>
+    <string name="app_setting">환경 설정</string>
+    <string name="txt_guide_permission">앱 사용에 필요한 권한을 관리합니다.</string>
+    <string name="txt_opensource">오픈 소스 라이선스</string>
+    <string name="txt_app_version_header">버전 정보</string>
+    <string name="txt_guide_modify_permission"><![CDATA[애플리케이션 정보 > 권한 에서 설정을 변경해주세요]]></string>
+    <string name="txt_error_log_result">%1$s\nError details saved in %2$s</string>
+    <string name="txt_error_log_create">%1$s\nFailed to save error details</string>
 
 
 </resources>

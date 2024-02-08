@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="permission"
+            type="kr.co.devicechecker.data.dto.Permission" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:scaleType="fitCenter"
+            android:src="@{permission.iconDrawable}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_guide_permission"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_permission_name"
+            android:layout_marginRight="16dp"
+            tools:src="@drawable/ic_disk"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_permission_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{permission.name}"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="@id/iv_icon"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintEnd_toStartOf="@id/sw_permission"
+            tools:text="앱 권한"
+            />
+        <Switch
+            android:id="@+id/sw_permission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_permission_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_icon"
+            app:layout_constraintBottom_toBottomOf="@id/iv_icon"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track_selector"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_guide_permission"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{permission.guideText}"
+            android:textSize="12sp"
+            android:textColor="@color/mono600"
+            app:layout_constraintTop_toBottomOf="@id/iv_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_icon"
+            app:layout_constraintEnd_toEndOf="@id/sw_permission"
+            android:layout_marginTop="12dp"
+            tools:text="앱 권한 설명"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
