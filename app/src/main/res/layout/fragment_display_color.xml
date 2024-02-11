@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:onClick="@{(v)->click.onViewClick(v)}"
+            android:contentDescription="imageViewForColorTest"
             />
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_exit_color"

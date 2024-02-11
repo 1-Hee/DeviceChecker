@@ -4,6 +4,10 @@ import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
@@ -29,6 +33,8 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
     }
     override fun onResume() {
         super.onResume()
+
+
         var idx = 0
         val colorArray = arrayOf(
             Color.RED,
@@ -39,10 +45,14 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
         )
         timer?.cancel()
         timer = Timer()
+
+        val handler = Handler(Looper.getMainLooper())
         val timerTask = object : TimerTask(){
             override fun run() {
-                mBinding.ivColor.setBackgroundColor(colorArray[idx])
-                idx = (idx + 1) % 5
+                handler.post {
+                    mBinding.ivColor.setBackgroundColor(colorArray[idx])
+                    idx = (idx + 1) % 5
+                }
             }
         }
         timer?.schedule(timerTask, 0, 1500)// 1.5초

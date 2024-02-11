@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
@@ -33,12 +34,14 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
             .addBindingParam(BR.pStroage, null)
             .addBindingParam(BR.version, version)
             .addBindingParam(BR.click, viewClickListener)
+            .addBindingParam(BR.isHideStorage, false)
     }
 
     override fun init(savedInstanceState: Bundle?) {
         launcher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
         ) { // 액티비티 종료시 결과릴 리턴받기 위한 콜백 함수
+            val cancelFlag = it.resultCode == Activity.RESULT_CANCELED;
             if (it.resultCode == Activity.RESULT_OK) {
                 // 데이터 찍어볼경우!
                 /*
@@ -48,48 +51,19 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
                  */
             }
         }
-
         val iconDrawable: Drawable? = ContextCompat.getDrawable(this, R.drawable.ic_folder)
         val pStroage = Permission(
-            name = "사진 및 동영상",
-            guideText = "앱에서 사용할 사진 및 동영상 데이터의 접근을 허용합니다.",
+            name = "저장소 권한",
+            guideText = "앱에서 외부 저장소의 접근을 허용합니다.",
             iconDrawable = iconDrawable
         )
         mBinding.pStroage = pStroage
         mBinding.notifyChange()
 
-        // 사진 및 동영상 권한이 불러와졌는지 체크
-        // 저장소 권한
-        val storagePermission = arrayOf(
-            Manifest.permission.READ_MEDIA_VIDEO,
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-        var flag = false;
-        storagePermission.forEach { it ->
-            flag = ContextCompat.checkSelfPermission(
-                this, it
-            ) == PackageManager.PERMISSION_GRANTED || flag
-        }
-        // 스위치 값 세팅
-        mBinding.stroagePermisson.swPermission.isChecked = flag
-        Timber.i("토글 상태 : %s", flag)
-
-        // 스위치 클릭 시 권한 설정 창으로 팝업
-
-        mBinding.stroagePermisson.swPermission.setOnCheckedChangeListener { button, state ->
-            mBinding.stroagePermisson.swPermission.isChecked = flag
-            // 권한 변경 페이지로 이동
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-            val uri = Uri.fromParts("package", this.packageName, null)
-            intent.data = uri
-            Toast.makeText(this, getString(R.string.txt_guide_modify_permission), Toast.LENGTH_SHORT).show()
-            launcher.launch(intent)
-        }
+        setPermissionResult()
     }
 
-        val viewClickListener = object : ViewClickListener{
+    val viewClickListener = object : ViewClickListener{
         override fun onViewClick(view: View) {
             when(view.id){
                 R.id.iv_back -> { // 뒤로가기
@@ -101,6 +75,39 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
                     launcher.launch(intent)
                 }
             }
+        }
+    }
+
+    private fun setPermissionResult(){
+        // 저장소 권한 체크
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+            mBinding.setVariable(BR.isHideStorage, false);
+            val storagePermission = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            var flag = false;
+            storagePermission.forEach { it ->
+                flag = ContextCompat.checkSelfPermission(
+                    this, it
+                ) == PackageManager.PERMISSION_GRANTED || flag
+            }
+            // 스위치 값 세팅
+            mBinding.stroagePermisson.swPermission.isChecked = flag
+            Timber.i("토글 상태 : %s", flag)
+
+            // 스위치 클릭 시 권한 설정 창으로 팝업
+            mBinding.stroagePermisson.swPermission.setOnCheckedChangeListener { button, state ->
+                mBinding.stroagePermisson.swPermission.isChecked = flag
+                // 권한 변경 페이지로 이동
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", this.packageName, null)
+                intent.data = uri
+                Toast.makeText(this, getString(R.string.txt_guide_modify_permission), Toast.LENGTH_SHORT).show()
+                launcher.launch(intent)
+            }
+        }else {
+            mBinding.setVariable(BR.isHideStorage, true)
         }
     }
 

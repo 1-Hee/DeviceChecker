@@ -30,52 +30,52 @@
             android:id="@+id/l_app_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tl_check_menu"
-            android:paddingVertical="12dp"
+            android:orientation="horizontal"
             android:theme="@style/MainHeader.DeviceChecker"
-            >
+            app:layout_constraintBottom_toTopOf="@id/tl_check_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/l_title_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:gravity="center_vertical"
-                >
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_app_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_info"
-                    android:scaleType="fitXY"
-                    android:layout_marginRight="8dp"
-                    />
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginRight="12dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_tools" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textSize="20sp"
-                    />
+                    android:textSize="20sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="buttonSetting"
+                android:onClick="@{(v)->click.onViewClick(v)}"
+                android:padding="12dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_setting"
-                android:scaleType="fitXY"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginHorizontal="16dp"
-                android:onClick="@{(v)->click.onViewClick(v)}"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_check_menu"
@@ -176,6 +176,8 @@
             android:layout_margin="16dp"
             app:rippleColor="@color/mono100"
             app:srcCompat="@drawable/ic_file"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="buttonSaveData"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

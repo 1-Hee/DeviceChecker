@@ -63,4 +63,8 @@
     <style name="Sensor.DeviceChecker" parent="Theme.DeviceChecker">
         <item name="android:tint">@color/none</item>
     </style>
+    <style name="RadioGroup.DeviceChecker" parent="Theme.DeviceChecker">
+        <item name="android:textColor">@color/black</item>
+        <item name="colorPrimary">@color/teal500</item>
+    </style>
 </resources>

@@ -23,14 +23,14 @@ class SelectTypeDialog(
     override fun initView() {
 
 
-        mBinding.tvSelect.setOnClickListener {
+        mBinding.btnSelect.setOnClickListener {
             val checkedId = mBinding.rgTypeGroup.checkedRadioButtonId;
             val view = mBinding.rgTypeGroup.findViewById<RadioButton>(checkedId)
             val index = mBinding.rgTypeGroup.indexOfChild(view)
             dialogListener.onSelect(index)
             dismiss()
         }
-        mBinding.tvCancel.setOnClickListener {
+        mBinding.btnCancel.setOnClickListener {
             dialogListener.onCancel()
             dismiss()
         }
