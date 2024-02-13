@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="info"
+            type="kr.co.devicechecker.data.dto.SensorInfo" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginVertical="4dp"
+        style="@style/CardView.DeviceChecker"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/none"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="24dp"
+            >
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_start"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.3"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/ic_sensor"
+                android:scaleType="fitCenter"
+                android:layout_marginRight="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/gl_start"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:theme="@style/Sensor.DeviceChecker"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sensor_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{info.sensorName}"
+                android:textSize="16sp"
+                android:textAlignment="textStart"
+                android:textFontWeight="900"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_sensor_type"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="8dp"
+                android:theme="@style/Field.DeviceChecker"
+                tools:text="SensorName"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sensor_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(@string/txt_h_sensor_type+`\t`+info.sensorType)}"
+                android:textSize="14sp"
+                android:textAlignment="textStart"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_sensor_name"
+                app:layout_constraintBottom_toTopOf="@id/ty_sensor_vendor"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="4dp"
+                android:layout_marginLeft="4dp"
+                android:theme="@style/Value.DeviceChecker"
+                tools:text="Type Code"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ty_sensor_vendor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(@string/txt_h_sensor_vendor+`\t`+info.sensorVendor)}"
+                android:textSize="14sp"
+                android:textAlignment="textStart"
+                android:includeFontPadding="false"
+                app:layout_constraintTop_toBottomOf="@id/tv_sensor_type"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/gl_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="4dp"
+                android:layout_marginLeft="4dp"
+                android:theme="@style/Value.DeviceChecker"
+                tools:text="Sensor Vendor"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

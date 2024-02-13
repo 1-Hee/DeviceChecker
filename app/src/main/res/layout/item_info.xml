@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="info"
+            type="kr.co.devicechecker.data.dto.Info" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:layout_marginVertical="4dp"
+        style="@style/CardView.DeviceChecker"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="24dp"
+            android:background="@color/none"
+            >
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_center"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.50"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_info_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{info.name}"
+                android:textSize="16sp"
+                android:textAlignment="textStart"
+                android:textFontWeight="900"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/gl_center"
+                android:theme="@style/Field.DeviceChecker"
+                tools:text="정보 명 : "
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_info_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{info.value}"
+                android:textSize="14sp"
+                android:textAlignment="textStart"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/gl_center"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="4dp"
+                android:layout_marginLeft="4dp"
+                android:theme="@style/Value.DeviceChecker"
+                tools:text="내용"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
