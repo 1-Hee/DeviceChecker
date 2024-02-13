@@ -47,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:theme="@style/RadioGroup.DeviceChecker"
                 >
                 <RadioButton
                     android:id="@+id/rb_type_text"
@@ -74,22 +75,26 @@
                 android:gravity="right"
                 android:paddingVertical="8dp"
                 >
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_cancel"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
                     android:text="@{checkDto.cancel}"
+                    android:textSize="14sp"
                     android:textColor="@color/mono600"
+                    android:backgroundTint="@color/none"
+                    android:background="@color/none"
                     tools:text="취소"
                     />
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_select"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
                     android:text="@{checkDto.check}"
                     android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/none"
+                    android:background="@color/none"
                     tools:text="확인"
                     />
             </androidx.appcompat.widget.LinearLayoutCompat>

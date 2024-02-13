@@ -178,35 +178,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     .check()
             }
         }else {
-            // API Version < 33
             val ALL_PERMISSION:Array<String> = arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.POST_NOTIFICATIONS,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.CAMERA
             )
-            // API Version >= 33
-            val ALL_PERMISSION_33:Array<String> = arrayOf(
-                Manifest.permission.READ_MEDIA_VIDEO,
-                Manifest.permission.READ_MEDIA_IMAGES,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.POST_NOTIFICATIONS,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.CAMERA
-            )
-            val permissionList = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                ALL_PERMISSION_33
-            }else {
-                ALL_PERMISSION
-            }
-
             // 권한 요청 함수
             val permissionsToRequest = mutableListOf<String>()
 
             // 필요한 권한 중에서 아직 허용되지 않은 권한을 확인
-            for (permission in permissionList) {
+            for (permission in ALL_PERMISSION) {
                 if (ContextCompat.checkSelfPermission(context, permission)
                     != PackageManager.PERMISSION_GRANTED
                 ) {

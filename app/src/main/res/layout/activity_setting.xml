@@ -7,12 +7,16 @@
     tools:context=".ui.activity.SettingActivity"
     >
     <data>
+        <import type="android.view.View"/>
         <variable
             name="pStroage"
             type="kr.co.devicechecker.data.dto.Permission" />
         <variable
             name="version"
             type="String" />
+        <variable
+            name="isHideStorage"
+            type="Boolean" />
         <variable
             name="click"
             type="kr.co.devicechecker.base.listener.ViewClickListener" />
@@ -30,25 +34,26 @@
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/l_setting_info"
-            android:paddingVertical="12dp"
             android:theme="@style/MainHeader.DeviceChecker"
             >
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="16dp"
                 android:src="@drawable/ic_back"
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginHorizontal="16dp"
                 android:onClick="@{(v)->click.onViewClick(v)}"
+                android:contentDescription="buttonBack"
                 />
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_app_setting"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
+                android:padding="8dp"
                 android:text="@string/app_setting"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,6 +81,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/mono600"
                 android:text="@string/txt_guide_permission"
+                android:visibility="@{isHideStorage?View.GONE:View.VISIBLE}"
                 />
             <include
                 android:id="@+id/stroage_permisson"
@@ -84,6 +90,7 @@
                 bind:permission="@{pStroage}"
                 layout="@layout/layout_app_permission"
                 android:layout_marginVertical="8dp"
+                android:visibility="@{isHideStorage?View.GONE:View.VISIBLE}"
                 />
             <!-- 버전 정보 -->
             <androidx.constraintlayout.widget.ConstraintLayout
