@@ -1,5 +1,10 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import java.text.SimpleDateFormat
 import java.util.Date
+
+fun getPropertiesValue(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+}
 
 plugins {
     id("com.android.application")
@@ -23,18 +28,19 @@ android {
     }
 
     signingConfigs {
+        val keyPath = getPropertiesValue("keyPath")
         create("debugSignedKey") {
-            storeFile = file("../app/keystore/deviceChecker.jks")
-            storePassword = "device240131jwh@#!"
-            keyAlias = "deviceKey"
-            keyPassword = "keydevice240131jwh@#!"
+            storeFile = file(keyPath)
+            storePassword = getPropertiesValue("storePassword")
+            keyAlias = getPropertiesValue("keyAlias")
+            keyPassword = getPropertiesValue("keyPassword")
         }
 
         create("releaseSignedKey") {
-            storeFile = file("../app/keystore/deviceChecker.jks")
-            storePassword = "device240131jwh@#!"
-            keyAlias = "deviceKey"
-            keyPassword = "keydevice240131jwh@#!"
+            storeFile = file(keyPath)
+            storePassword = getPropertiesValue("storePassword")
+            keyAlias = getPropertiesValue("keyAlias")
+            keyPassword = getPropertiesValue("keyPassword")
         }
     }
 
