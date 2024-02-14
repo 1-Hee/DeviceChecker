@@ -232,6 +232,7 @@
     <string name="txt_guide_modify_permission"><![CDATA[애플리케이션 정보 > 권한 에서 설정을 변경해주세요]]></string>
     <string name="txt_error_log_result">%1$s\nError details saved in %2$s</string>
     <string name="txt_error_log_create">%1$s\nFailed to save error details</string>
+    <string name="admob_banner_sdk_key"></string>
 
 
 </resources>

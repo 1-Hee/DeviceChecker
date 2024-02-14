@@ -14,6 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -104,6 +105,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             if (result.resultCode == Activity.RESULT_OK) {
             }
         }
+        //admob init
+        MobileAds.initialize(this) {}
     }
 
     private val viewClickListener = object : ViewClickListener {

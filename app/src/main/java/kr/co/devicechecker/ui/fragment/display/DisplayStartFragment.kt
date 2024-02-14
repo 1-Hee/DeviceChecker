@@ -2,6 +2,7 @@ package kr.co.devicechecker.ui.fragment.display
 
 import android.app.Activity
 import android.view.View
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig

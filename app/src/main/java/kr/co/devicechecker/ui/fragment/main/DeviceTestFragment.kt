@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.ads.AdRequest
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
@@ -20,8 +21,7 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
 
     // 다른 액티비티 이동후 결과 값을 받아 핸들링할 런쳐
     private lateinit var launcher: ActivityResultLauncher<Intent>;
-    override fun initViewModel() {
-    }
+    override fun initViewModel() {}
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_device_test)
@@ -36,6 +36,10 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
             if (result.resultCode == Activity.RESULT_OK) {
             }
         }
+        // 배너 광고 로드
+        val adRequest = AdRequest.Builder().build()
+        mBinding.avDeviceTest.loadAd(adRequest)
+        mBinding.notifyChange()
     }
 
     private val clickListener = object : ViewClickListener {
@@ -44,15 +48,12 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
                 R.id.btn_display_test -> {
                     val intent = Intent(mActivity, DisplayTestActivity::class.java)
                     launcher.launch(intent)
-
                 }
                 R.id.btn_sound_test -> {
                     val intent = Intent(mActivity, SoundTestActivity::class.java)
                     launcher.launch(intent)
                 }
             }
-
         }
     }
-
 }

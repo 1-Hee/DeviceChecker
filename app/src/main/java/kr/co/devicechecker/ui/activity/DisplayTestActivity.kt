@@ -2,6 +2,7 @@ package kr.co.devicechecker.ui.activity
 
 import android.os.Bundle
 import android.widget.Toast
+import com.google.android.gms.ads.MobileAds
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseActivity
@@ -13,6 +14,7 @@ class DisplayTestActivity : BaseActivity<ActivityDisplayTestBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        MobileAds.initialize(this) {}
     }
 
     // Full Screen Setting
