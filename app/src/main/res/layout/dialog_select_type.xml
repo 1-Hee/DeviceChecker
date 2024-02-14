@@ -54,17 +54,20 @@
                     android:text="@string/txt_save_info_type1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:checked="true"
                     />
                 <RadioButton
                     android:id="@+id/rb_type_html"
                     android:text="@string/txt_save_info_type2"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
                 <RadioButton
                     android:id="@+id/rb_type_json"
                     android:text="@string/txt_save_info_type3"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     />
