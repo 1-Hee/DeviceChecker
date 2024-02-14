@@ -35,6 +35,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintGuide_percent="0.80"
             />
+
+        <!-- 광고 배너 -->
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/av_device_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/admob_banner_sdk_key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_testing_guide"
+            android:layout_marginBottom="16dp"
+            />
+
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_testing_guide"
             android:layout_width="wrap_content"
@@ -98,23 +117,6 @@
             app:layout_constraintTop_toBottomOf="@id/btn_sound_test"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-
-        <!-- 광고 배너 -->
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/av_device_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/admob_banner_sdk_key"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
