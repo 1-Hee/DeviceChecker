@@ -18,6 +18,12 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     private val externalStorageList = mutableListOf<StorageInfo>()
     // 값 저장을 위한 prefs 변수
     private lateinit var prefs: PreferenceUtil
+
+    companion object {
+        fun newInstance(): MemoryInfoFragment {
+            return MemoryInfoFragment()
+        }
+    }
     override fun initViewModel() {
     }
     override fun getDataBindingConfig(): DataBindingConfig {
@@ -34,10 +40,10 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         getStorageInfo()
     }
     private fun saveMemoryInfo(){
-       AppUtil.Memory.saveMemoryInfo(
-           requireContext(),
-           memoryInfoList, internalStorageList, externalStorageList
-       )
+        AppUtil.Memory.saveMemoryInfo(
+            requireContext(),
+            memoryInfoList, internalStorageList, externalStorageList
+        )
     }
     private fun getMemoryInfo(){
         this.memoryInfoList.clear()

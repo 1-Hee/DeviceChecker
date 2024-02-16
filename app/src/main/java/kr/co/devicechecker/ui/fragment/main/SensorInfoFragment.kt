@@ -15,6 +15,12 @@ class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
     // 값 저장을 위한 prefs 변수
     private lateinit var prefs: PreferenceUtil
     override fun initViewModel() {}
+    companion object {
+        fun newInstance(): SensorInfoFragment {
+            return SensorInfoFragment()
+        }
+    }
+
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_sensor_info)
             .addBindingParam(BR.sensorInfoList, sensorInfoList)

@@ -12,6 +12,12 @@ import timber.log.Timber
 class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     private val deviceInfoList = mutableListOf<Info>()
     private val displayInfoList = mutableListOf<Info>()
+
+    companion object {
+        fun newInstance(): DeviceInfoFragment {
+            return DeviceInfoFragment()
+        }
+    }
     override fun initViewModel() {}
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_device_info)
@@ -31,9 +37,9 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
         mBinding.notifyChange()
     }
     private fun saveDisplayInfo(){
-       AppUtil.Device.saveDeviceData(
-           requireContext(), this.displayInfoList, this.deviceInfoList
-       )
+        AppUtil.Device.saveDeviceData(
+            requireContext(), this.displayInfoList, this.deviceInfoList
+        )
     }
     private fun getDisplayInfo(){
         this.displayInfoList.clear()

@@ -21,6 +21,11 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
 
     // 다른 액티비티 이동후 결과 값을 받아 핸들링할 런쳐
     private lateinit var launcher: ActivityResultLauncher<Intent>;
+    companion object {
+        fun newInstance(): DeviceTestFragment {
+            return DeviceTestFragment()
+        }
+    }
     override fun initViewModel() {}
 
     override fun getDataBindingConfig(): DataBindingConfig {

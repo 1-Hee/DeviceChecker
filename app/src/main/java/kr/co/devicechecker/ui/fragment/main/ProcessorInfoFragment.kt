@@ -20,6 +20,12 @@ class ProcessorInfoFragment : BaseFragment<FragmentProcessorInfoBinding>() {
     private var corNumber = 0
     // 값 저장을 위한 prefs 변수
     private lateinit var prefs: PreferenceUtil
+
+    companion object {
+        fun newInstance(): ProcessorInfoFragment {
+            return ProcessorInfoFragment()
+        }
+    }
     override fun initViewModel() {}
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_processor_info)

@@ -9,13 +9,19 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.gun0912.tedpermission.PermissionListener
@@ -59,7 +65,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 // 선택된 탭에 대한 처리
                 Timber.d("selected tab is... %s",tab?.position)
                 val position = tab?.position?:0
-                 mBinding.vpCheckMenu.currentItem = position
+                mBinding.vpCheckMenu.currentItem = position
             }
             // 탭이 선택 해제되었을 때 호출
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -70,17 +76,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 // 이미 선택된 탭이 다시 선택되었을 때의 처리
             }
         }
-        // 뷰페이저2 어댑터
-        // create child fragments
-        val childFragments = listOf(
-            DeviceInfoFragment(),
-            ProcessorInfoFragment(),
-            MemoryInfoFragment(),
-            SensorInfoFragment(),
-            DeviceTestFragment()
-        )
         vpAdapter = ViewPager2Adapter(this)
-        vpAdapter.setFragmentList(childFragments)
+        val fragmentList = listOf<Fragment>(
+            DeviceInfoFragment.newInstance(),
+            ProcessorInfoFragment.newInstance(),
+            MemoryInfoFragment.newInstance(),
+            SensorInfoFragment.newInstance(),
+            DeviceTestFragment.newInstance()
+        )
+        vpAdapter.setFragmentList(fragmentList)
         pagerCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
@@ -95,9 +99,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             .addBindingParam(BR.click, viewClickListener)
     }
     override fun init(savedInstanceState: Bundle?) {
+        checkAppUpdate()
         prefs = PreferenceUtil(this)
         Timber.plant(Timber.DebugTree())
-        requestStoragePermission(this)
+        requestStoragePermission(this) // 권한 요청
         launcher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { // 액티비티 종료시 결과릴 리턴받기 위한 콜백 함수
@@ -117,7 +122,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     val fileName = "device_info_${Build.MODEL.replace(" ", "").lowercase()}.txt"
                     val totalPath = "$path/$fileName"
                     val dialogCheck = DialogCheck(
-                            title = getString(R.string.txt_d_save_title),
+                        title = getString(R.string.txt_d_save_title),
                         content = getString(R.string.txt_d_save_content, totalPath),
                         cancel = getString(R.string.txt_cancel), check = getString(R.string.txt_save))
                     val dialog = SelectTypeDialog(
@@ -133,6 +138,42 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
     }
+
+    // 업데이트 감지
+    private fun checkAppUpdate(){
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        // Returns an intent object that you use to check for an update.
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        // Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                // This example applies an immediate update. To apply a flexible update
+                // instead, pass in AppUpdateType.FLEXIBLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                // Request the update.
+                appUpdateManager.startUpdateFlowForResult(
+                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
+                    appUpdateInfo,
+                    // an activity result launcher registered via registerForActivityResult
+                    activityResultLauncher,
+                    // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
+                    // flexible updates.
+                    AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build())
+            }
+        }
+    }
+
+    private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+            result: ActivityResult ->
+        // handle callback
+        if (result.resultCode != RESULT_OK) {
+            Timber.e("Update flow failed! Result code: " + result.resultCode);
+            // If the update is canceled or fails,
+            // you can request to start the update again.
+        }
+    }
+
     // 다이얼로그 리스너
     private val dialogListener = object : SelectTypeDialog.OnCheckDialogListener {
         override fun onSelect(index: Int) {

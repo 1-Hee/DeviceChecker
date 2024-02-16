@@ -21,8 +21,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 10
-        versionName = "1.1.8"
+        versionCode = 12
+        versionName = "1.1.10"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["ADMOB_APP_KEY"] = getPropertiesValue("ADMOB_APP_KEY")
@@ -128,4 +128,8 @@ dependencies {
     // admobs
     val admob_version = "22.6.0"
     implementation("com.google.android.gms:play-services-ads:$admob_version")
+
+    val app_update_version = "2.1.0"
+    implementation("com.google.android.play:app-update:$app_update_version")
+    implementation("com.google.android.play:app-update-ktx:$app_update_version") // for kotlin
 }
