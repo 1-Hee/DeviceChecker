@@ -18,9 +18,12 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.tabs.TabLayout
+import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
@@ -113,7 +116,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         //admob init
         MobileAds.initialize(this) {}
     }
-
     private val viewClickListener = object : ViewClickListener {
         override fun onViewClick(view: View) {
             when(view.id){
@@ -138,32 +140,41 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
     }
-
     // 업데이트 감지
     private fun checkAppUpdate(){
         val appUpdateManager = AppUpdateManagerFactory.create(this)
-        // Returns an intent object that you use to check for an update.
         val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-        // Checks that the platform will allow the specified type of update.
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                // This example applies an immediate update. To apply a flexible update
-                // instead, pass in AppUpdateType.FLEXIBLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-            ) {
-                // Request the update.
+            // This example applies an immediate update. To apply a flexible update
+            // instead, pass in AppUpdateType.FLEXIBLE
+            val updateFlag = appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+            if (updateFlag && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)){ // 즉시 업데이트
                 appUpdateManager.startUpdateFlowForResult(
-                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
                     appUpdateInfo,
-                    // an activity result launcher registered via registerForActivityResult
                     activityResultLauncher,
-                    // Or pass 'AppUpdateType.FLEXIBLE' to newBuilder() for
-                    // flexible updates.
                     AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build())
+            }else if(updateFlag
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)){ // 유연한 업데이트
+                appUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    activityResultLauncher,
+                    AppUpdateOptions.newBuilder(AppUpdateType.FLEXIBLE).build())
             }
         }
+//        // Create a listener to track request state updates.
+//        val listener = InstallStateUpdatedListener { state ->
+//            // (Optional) Provide a download progress bar.
+//            if (state.installStatus() == InstallStatus.DOWNLOADING) {
+//                val bytesDownloaded = state.bytesDownloaded()
+//                val totalBytesToDownload = state.totalBytesToDownload()
+//                // Show update progress bar.
+//            }
+//            // Log state or install the update.
+//        }
+//
+//        // Before starting an update, register a listener for updates.
+//        appUpdateManager.registerListener(listener)
     }
-
     private val activityResultLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
             result: ActivityResult ->
         // handle callback
@@ -199,7 +210,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             super.hideTopBar()
         }
     }
-
     private fun requestStoragePermission(context:Context){
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
             // 읽고 쓰기 권한 요청
@@ -228,7 +238,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             )
             // 권한 요청 함수
             val permissionsToRequest = mutableListOf<String>()
-
             // 필요한 권한 중에서 아직 허용되지 않은 권한을 확인
             for (permission in ALL_PERMISSION) {
                 if (ContextCompat.checkSelfPermission(context, permission)
@@ -237,7 +246,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     permissionsToRequest.add(permission)
                 }
             }
-
             // 권한 요청이 필요한 경우 요청
             if (permissionsToRequest.isNotEmpty()) {
                 ActivityCompat.requestPermissions(
@@ -246,11 +254,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     1001
                 )
             }
-
         }
     }
-
-
     private fun getHTMLString(
         headerString:String,
         infoList:List<Info>
@@ -379,7 +384,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val htmlString = header + cBuilder.toString() + end
         AppUtil.File.saveData(context, htmlString, ".html")
     }
-
     // json으로 저장하는 메서드
     private fun saveJsonString(context:Activity){
         val allInfoObj = JsonObject()

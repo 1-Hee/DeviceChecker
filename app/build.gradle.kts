@@ -21,12 +21,11 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 12
-        versionName = "1.1.10"
+        versionCode = 13
+        versionName = "1.1.11"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["ADMOB_APP_KEY"] = getPropertiesValue("ADMOB_APP_KEY")
-        buildConfigField("String", "ADMOB_BANNER_SDK_KEY", getPropertiesValue("ADMOB_BANNER_SDK_KEY"))
     }
 
     signingConfigs {
@@ -51,13 +50,14 @@ android {
             buildConfigField("boolean", "IS_DEBUG", "false")
             resValue("string", "admob_banner_sdk_key", getPropertiesValue("ADMOB_TEST_BANNER_SDK_KEY"))
             buildConfigField("String", "ADMOB_SCREEN_SDK_KEY", getPropertiesValue("ADMOB_TEST_SCREEN_SDK_KEY"))
+            buildConfigField("String", "ADMOB_BANNER_SDK_KEY", getPropertiesValue("ADMOB_TEST_BANNER_SDK_KEY"))
             // signingConfig = signingConfigs
         }
         release {
             buildConfigField("boolean", "IS_DEBUG", "false")
             resValue("string", "admob_banner_sdk_key", getPropertiesValue("ADMOB_BANNER_SDK_KEY"))
             buildConfigField("String", "ADMOB_SCREEN_SDK_KEY", getPropertiesValue("ADMOB_SCREEN_SDK_KEY"))
-
+            buildConfigField("String", "ADMOB_BANNER_SDK_KEY", getPropertiesValue("ADMOB_BANNER_SDK_KEY"))
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

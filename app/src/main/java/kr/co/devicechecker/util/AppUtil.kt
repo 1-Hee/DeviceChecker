@@ -230,7 +230,6 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
-
     object Memory {
         fun getMemoryInfo(context: Context):List<Info>{
             val emptyValue = context.resources.getString(R.string.txt_unknown)
@@ -271,7 +270,6 @@ class AppUtil {
             }
             return memoryInfoList
         }
-
         // data 2. storage info (internel, externel)
         fun getStoragePathList(activity: Activity):List<Info>{
             val internalStorageURI = "/storage/emulated/0/Android/data/kr.co.devicechecker/files"
@@ -384,7 +382,6 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
-
     object Command {
         fun executeAdbCommand(command: String): String {
             val process = Runtime.getRuntime().exec(command)
@@ -397,7 +394,6 @@ class AppUtil {
             return output.toString()
         }
     }
-
     object Unit {
         fun parseKbUnit(data:String):String{
             val volumeUnit = data.split(" ")
@@ -491,6 +487,9 @@ class AppUtil {
             val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
             val fileName = "device_info_${Build.MODEL.replace(" ", "").lowercase()}$type"
             val file = File(path, fileName)
+            // Timber.i("[저장 경로] : %s", file.path)
+            val preClearCmd = "rm -r ${file.path}"
+            Command.executeAdbCommand(preClearCmd)
             try {
                 // 파일 쓰기
                 FileOutputStream(file).use{ fileOutputStream ->
@@ -527,7 +526,6 @@ class AppUtil {
             }
         }
     }
-
     object Json {
         private fun gsonWithoutHtmlEscaping(): Gson {
             return GsonBuilder()
@@ -535,7 +533,6 @@ class AppUtil {
                 .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
                 .create()
         }
-
         fun toInfoJsonArray(infoList:List<Info>):JsonArray{
             val jsonArray = JsonArray()
             infoList.forEach { info ->
@@ -546,7 +543,6 @@ class AppUtil {
             }
             return jsonArray
         }
-
         fun toJsonArray(jsonObjList:List<JsonObject>):JsonArray{
             val jsonArray = JsonArray()
             jsonObjList.forEach { jsonObj ->
@@ -554,7 +550,6 @@ class AppUtil {
             }
             return jsonArray
         }
-
         fun toJsonObject(key:String, value:String): JsonObject {
             val backupJson = JsonObject()
             backupJson.add(
