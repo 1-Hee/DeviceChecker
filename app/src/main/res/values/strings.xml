@@ -234,5 +234,15 @@
     <string name="txt_error_log_create">%1$s\nFailed to save error details</string>
     <string name="admob_banner_sdk_key"></string>
 
-
+    <string name="nav_device_information">기기 정보</string>
+    <string name="nav_system_performance">시스템 성능</string>
+    <string name="nav_memory_information">메모리 정보</string>
+    <string name="nav_sensor_information">센서 정보</string>
+    <string name="nav_device_testing">장치 테스트</string>
+    <string name="nav_header_description">Check Device Solution.</string>
+    <string name="title_sensor_info">센서 정보</string>
+    <string name="title_sensor_info_s">Sensor Information</string>
+    <string name="sensor_info_guide">현재 기기에서 사용 가능한 센서 정보를 표시합니다.</string>
+    <string name="sensor_cnt_prefix">전체 센서 개수 :</string>
+    <string name="sensor_unit">개</string>
 </resources>

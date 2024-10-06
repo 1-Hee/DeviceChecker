@@ -2,8 +2,22 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.DeviceChecker" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/mono300</item>
+
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/navy500</item>
+        <item name="colorSecondaryVariant">@color/navy700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/mono900</item>
     </style>
+
+    <style name="Theme.DeviceChecker.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
+    <style name="Theme.DeviceChecker.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
 
     <style name="Theme.DeviceChecker" parent="Base.Theme.DeviceChecker" >
 <!--        <item name="colorPrimaryDark">@color/mono400</item> &lt;!&ndash; 액션바 그림자 등에 사용 &ndash;&gt;-->

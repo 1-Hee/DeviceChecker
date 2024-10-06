@@ -42,6 +42,7 @@ class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
             AppUtil.Sensor.getSensorInfo(requireActivity())
         )
         mBinding.sensorInfoList = sensorInfoList
+        mBinding.tvSensorCnt.text = "${sensorInfoList.size}"
         mBinding.notifyChange()
     }
 
