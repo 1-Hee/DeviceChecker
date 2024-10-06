@@ -21,8 +21,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 14
-        versionName = "1.1.12"
+        versionCode = 15
+        versionName = "1.2.0"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["ADMOB_APP_KEY"] = getPropertiesValue("ADMOB_APP_KEY")
@@ -111,6 +111,12 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    // nav
+    val nav_version = "2.7.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
     // multi dex
     implementation("androidx.multidex:multidex:2.0.1")
     // timber implements
@@ -125,11 +131,65 @@ dependencies {
     // https://developers.google.com/android/guides/opensource?hl=ko#kotlin-dsl
     val oss_version = "17.0.1"
     implementation("com.google.android.gms:play-services-oss-licenses:$oss_version")
-    // admobs
-    val admob_version = "22.6.0"
-    implementation("com.google.android.gms:play-services-ads:$admob_version")
 
     val app_update_version = "2.1.0"
     implementation("com.google.android.play:app-update:$app_update_version")
     implementation("com.google.android.play:app-update-ktx:$app_update_version") // for kotlin
+
+
+    /** firebase, 나중에 기능구현할 때 풀기 !
+     *    // Import the Firebase BoM
+     *     implementation(platform("com.google.firebase:firebase-bom:32.4.0"))
+     *
+     *     // TODO: Add the dependencies for Firebase products you want to use
+     *     // When using the BoM, don't specify versions in Firebase dependencies
+     *     implementation("com.google.firebase:firebase-analytics")
+     */
+
+    // room implements
+    val room_version = "2.5.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version") // Room의 Kotlin 확장 (선택 사항)
+    kapt("androidx.room:room-compiler:$room_version") // Room 애노테이션 프로세서 (kapt 구성)
+    implementation("androidx.room:room-paging:$room_version") // 페이징 의존성
+
+    // for paging
+    val paging_version ="3.3.0"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+
+    // rxjava, rxkotlin implements
+    val rx_java_version = "3.1.8"
+    val rx_kotlin_version = "3.0.1"
+    implementation("io.reactivex.rxjava3:rxjava:$rx_java_version")
+    implementation("io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version") // rx kotlin
+    val rx_android_version = "3.0.2";
+    implementation("io.reactivex.rxjava3:rxandroid:$rx_android_version")
+
+    // ViewModel implements
+    val lifeCycleVersion = "2.5.1"
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycleVersion")
+
+
+    // admobs
+    val admob_version = "22.6.0"
+    implementation("com.google.android.gms:play-services-ads:$admob_version")
+
+    /**
+     * TODO.. ViewPager2 사용시 해제
+     *  implementation 'androidx.viewpager2:viewpager2:1.0.0-beta03'
+     */
+    //flex box
+    val flexVersion = "3.0.0"
+    implementation("com.google.android.flexbox:flexbox:$flexVersion")
+
+    // swiper
+    val swiperefresh_version = "0.24.7-alpha"
+    implementation("com.google.accompanist:accompanist-swiperefresh:$swiperefresh_version")
+
+
+
 }
