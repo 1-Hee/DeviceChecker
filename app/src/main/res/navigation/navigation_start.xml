@@ -7,17 +7,37 @@
     app:startDestination="@+id/nav_device_info"
     >
 
+    <!-- Device Info -->
     <fragment
         android:id="@+id/nav_device_info"
         android:name="kr.co.devicechecker.ui.fragment.main.DeviceInfoFragment"
         android:label=""
         tools:layout="@layout/fragment_device_info" />
 
+    <!-- System Performance -->
+    <!-- TODO 시스템 성능 프래그먼트 ... -->
+
+    <!-- Memory Information -->
+    <fragment
+        android:id="@+id/nav_memory_info"
+        android:name="kr.co.devicechecker.ui.fragment.main.MemoryInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_memory_info"
+        />
+
+    <!-- Sensor Information -->
     <fragment
         android:id="@+id/nav_sensor_info"
         android:name="kr.co.devicechecker.ui.fragment.main.SensorInfoFragment"
         android:label=""
         tools:layout="@layout/fragment_sensor_info" />
 
+    <!-- Device Testing -->
+
+    <fragment
+        android:id="@+id/nav_device_test"
+        android:name="kr.co.devicechecker.ui.fragment.main.DeviceTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_device_test" />
 
 </navigation>

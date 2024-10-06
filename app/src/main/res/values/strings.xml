@@ -245,4 +245,6 @@
     <string name="sensor_info_guide">현재 기기에서 사용 가능한 센서 정보를 표시합니다.</string>
     <string name="sensor_cnt_prefix">전체 센서 개수 :</string>
     <string name="sensor_unit">개</string>
+    <string name="device_info_title">기기 정보</string>
+    <string name="device_info_title_s">Device Information</string>
 </resources>
