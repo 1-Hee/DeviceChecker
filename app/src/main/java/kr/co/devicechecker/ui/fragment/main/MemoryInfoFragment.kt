@@ -16,6 +16,8 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     private val memoryInfoList = mutableListOf<Info>()
     private val internalStorageList = mutableListOf<StorageInfo>()
     private val externalStorageList = mutableListOf<StorageInfo>()
+
+    private val storageList = mutableListOf<StorageInfo>()
     // 값 저장을 위한 prefs 변수
     private lateinit var prefs: PreferenceUtil
 
@@ -38,6 +40,11 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         getMemoryInfo()
         saveMemoryInfo()
         getStorageInfo()
+
+        // temp
+        mBinding.pbRamStatus.progress = 70
+        mBinding.notifyChange()
+
     }
     private fun saveMemoryInfo(){
         AppUtil.Memory.saveMemoryInfo(
@@ -53,6 +60,7 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     }
     // data 2. storage info (internel, externel)
     private fun getStorageInfo(){
+        /*
         val pathList = AppUtil.Memory.getStoragePathList(requireActivity())
         val internalPathList = mutableListOf<Info>()
         val externalPathList = mutableListOf<Info>()
@@ -66,7 +74,21 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         }
         setInternalStorageInfo(internalPathList)
         setExternalStorageInfo(externalPathList)
+         */
+
+        val pathList = AppUtil.Memory.getStoragePathList(requireActivity())
+        setStorageInfo(pathList)
     }
+
+
+    private fun setStorageInfo(pathList:List<Info>){
+        this.storageList.clear()
+        val storageInfo = AppUtil.Memory.getInternalStorageInfo(pathList.toTypedArray())
+        this.storageList.addAll(storageInfo)
+        mBinding.storageList = storageList
+        mBinding.notifyChange()
+    }
+
     private fun setInternalStorageInfo(pathList:List<Info>){
         this.internalStorageList.clear()
         val storageInfo = AppUtil.Memory.getInternalStorageInfo(pathList.toTypedArray())

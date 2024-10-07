@@ -16,7 +16,180 @@
         <variable
             name="externalStorageList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.StorageInfo>" />
+
+        <variable
+            name="storageList"
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.StorageInfo>" />
     </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            >
+
+            <!-- Title -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_memory_info_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/memory_info_title"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_memory_info_title_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/memory_info_title_s"
+                    app:layout_constraintStart_toEndOf="@id/tv_memory_info_title"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_memory_info_title"
+                    android:layout_marginStart="14dp"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="12dp"
+                app:dividerColor="@color/mono400"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_ram_status_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ram_status_title"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <ProgressBar
+                    android:id="@+id/pb_ram_status"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp"
+                    android:progressDrawable="@drawable/bg_progressbar"
+                    app:layout_constraintTop_toBottomOf="@id/tv_ram_status_title"
+                    app:layout_constraintBottom_toTopOf="@id/tv_avail_ram_suffix"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_avail_ram_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/orange400"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/tv_avail_ram_suffix"
+                    app:layout_constraintTop_toTopOf="@id/tv_avail_ram_suffix"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_avail_ram_suffix"
+                    android:layout_marginEnd="12dp"
+                    tools:text="123"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_avail_ram_suffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GB 사용 가능"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/pb_ram_status"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginVertical="14dp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!-- Memory info List ... -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_ram_info_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ram_info_title"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:background="@color/mono300"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:layout_marginTop="12dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_ram_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:infoList="@{memoryInfoList}"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_storage_info_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/storage_info_title"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:background="@color/mono300"
+                android:textAlignment="textStart"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:layout_marginTop="12dp"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_storage_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:storageInfoList="@{storageList}"
+                android:orientation="vertical"
+                android:layout_marginVertical="8dp"
+                />
+
+            <!-- 하단 여백 -->
+            <Space
+                android:id="@+id/sp_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintTop_toBottomOf="@id/rv_sensor_info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+
+    <!--
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,7 +216,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintGuide_percent="0.95"
                 />
-            <!-- 주기억 장치 정보 -->
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_ram_info_title"
                 android:layout_width="0dp"
@@ -68,7 +241,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_ram_info_title"
                 app:layout_constraintBottom_toTopOf="@id/tv_internal_storage_title"
                 />
-            <!-- 내부 저장소 -->
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_internal_storage_title"
                 android:layout_width="0dp"
@@ -93,7 +266,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_internal_storage_title"
                 app:layout_constraintBottom_toTopOf="@id/tv_external_storage_title"
                 />
-            <!-- 외부 저장소 -->
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_external_storage_title"
                 android:layout_width="0dp"
@@ -127,4 +300,5 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    -->
 </layout>
