@@ -25,8 +25,6 @@
 
     <!-- 디바이스 테스팅 -->
     <string name="txt_guide_hardware_test">아래의 하드웨어 장치를 테스트합니다.</string>
-    <string name="txt_btn_display_test">디스플레이 테스트</string>
-    <string name="txt_btn_sound_device">음향 장치 테스트</string>
 
     <string name="txt_go_back">돌아가기</string>
     <string name="txt_btn_color_test">색상 테스트</string>
@@ -234,6 +232,8 @@
     <string name="txt_error_log_create">%1$s\nFailed to save error details</string>
     <string name="admob_banner_sdk_key"></string>
 
+    <!-- new -->
+
     <string name="nav_device_information">기기 정보</string>
     <string name="nav_system_performance">시스템 성능</string>
     <string name="nav_memory_information">메모리 정보</string>
@@ -247,4 +247,22 @@
     <string name="sensor_unit">개</string>
     <string name="device_info_title">기기 정보</string>
     <string name="device_info_title_s">Device Information</string>
+    <string name="device_test_title">장치 테스트</string>
+    <string name="device_test_title_s">Device Testing</string>
+    <string name="guide_device_test">현재 기기에 아래와 같은 테스트를 수행합니다.</string>
+    <string name="display_specific_title">기기 사양 보고서</string>
+    <string name="display_specific_title_eng">Device Specification Report</string>
+
+    <string name="device_display_test">디스플레이 테스트</string>
+    <string name="device_display_test_desc">현재 장치의 화면을 테스트합니다.</string>
+    <string name="sound_device_test">음향 장치 테스트</string>
+    <string name="sound_device_test_desc">현재 장치의 음향장치를 테스트합니다.</string>
+
+
+    <string-array name="device_report_list">
+        <item>HTML 문서로 내보내기</item>
+        <item>JSON 문서로 내보내기</item>
+        <item>텍스트 파일(.txt)로 내보내기</item>
+    </string-array>
+
 </resources>

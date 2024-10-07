@@ -6,28 +6,34 @@
     >
     <data>
         <variable
-            name="info"
-            type="kr.co.devicechecker.data.dto.SensorInfo" />
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+        <variable
+            name="iconInfo"
+            type="kr.co.devicechecker.data.dto.IconInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_test_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/base_item_info"
+        android:background="@drawable/full_item_info"
         android:paddingHorizontal="16dp"
         android:paddingVertical="12dp"
         android:layout_marginVertical="12dp"
+        android:onClick="@{(v)->click.onViewClick(v)}"
+        android:tag="@{iconInfo.name}"
         >
 
         <!-- Icon -->
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_sensor"
+            android:id="@+id/iv_test"
             android:layout_width="48dp"
             android:layout_height="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_sensor"
+            tools:src="@drawable/ic_headset_mic"
             android:tint="@color/mono800"
             android:scaleType="fitCenter"
             android:padding="8dp"
@@ -53,47 +59,35 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-        <!-- Sensor Name -->
+        <!-- Test Name -->
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sensor_name"
+            android:id="@+id/tv_test_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_test_description"
             app:layout_constraintStart_toStartOf="@id/gl_vertical"
             android:layout_marginStart="24dp"
+            android:text="@{iconInfo.name}"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:textColor="@color/deep_blue800"
-            android:text="@{info.sensorName}"
-            tools:text="Sensor Name"
+            android:textColor="@color/black"
+            tools:text="Test Name"
             />
 
-        <!-- Sensor Type -->
+        <!-- Test Description -->
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sensor_type"
+            android:id="@+id/tv_test_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_sensor_name"
-            app:layout_constraintStart_toStartOf="@id/tv_sensor_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_test_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_test_name"
+            android:text="@{iconInfo.value}"
             android:textColor="@color/mono900"
             android:textSize="14sp"
-            android:text="@{String.valueOf(@string/txt_h_sensor_type+`\t`+info.sensorType)}"
             android:layout_marginTop="2dp"
-            tools:text="Sensor Type : ...."
-            />
-
-        <!-- Sensor Vendor -->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sensor_vendor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_sensor_type"
-            app:layout_constraintStart_toStartOf="@id/tv_sensor_name"
-            android:textColor="@color/mono900"
-            android:textSize="14sp"
-            android:text="@{String.valueOf(@string/txt_h_sensor_vendor+`\t`+info.sensorVendor)}"
-            android:layout_marginTop="2dp"
-            tools:text="Sensor Vendor : ...."
+            tools:text="Test Description...."
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

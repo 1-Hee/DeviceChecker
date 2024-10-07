@@ -6,14 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
+import kr.co.devicechecker.base.listener.ViewClickListener
+import kr.co.devicechecker.data.dto.ColorInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
+import kr.co.devicechecker.data.dto.IconInfo
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.databinding.ItemCpuCoreBinding
 import kr.co.devicechecker.databinding.ItemInfoBinding
 import kr.co.devicechecker.databinding.ItemSenorBinding
+import kr.co.devicechecker.databinding.ItemSpecificationReportBinding
 import kr.co.devicechecker.databinding.ItemStorageBinding
+import kr.co.devicechecker.databinding.ItemTestBtnBinding
 import kr.co.devicechecker.ui.adapter.ViewPager2Adapter
 
 class StaticAdapter {
@@ -127,5 +132,61 @@ class StaticAdapter {
             adapter.setItemList(infoList)
             recyclerView.adapter = adapter
         }
+
+        @JvmStatic
+        @BindingAdapter(value = ["testInfoList", "vClick"], requireAll = true)
+        fun setTestAdapter(recyclerView: RecyclerView, infoList:List<IconInfo>, viewClick:ViewClickListener){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+            val adapter = object : BaseDataBindingAdapter<IconInfo, ItemTestBtnBinding>(recyclerView.context) {
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_test_btn)
+                }
+
+                override fun onBindItem(
+                    binding: ItemTestBtnBinding,
+                    position: Int,
+                    item: IconInfo,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.iconInfo = item
+                    binding.click = viewClick
+                    binding.ivTest.setImageDrawable(item.icon)
+                    binding.notifyChange()
+                }
+
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+
+        @JvmStatic
+        @BindingAdapter(value = ["reportList", "vClick"], requireAll = true)
+        fun setReportAdapter(recyclerView: RecyclerView, infoList:List<ColorInfo>, viewClick:ViewClickListener){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+            val adapter = object : BaseDataBindingAdapter<
+                    ColorInfo, ItemSpecificationReportBinding>(recyclerView.context){
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_specification_report)
+                }
+
+                override fun onBindItem(
+                    binding: ItemSpecificationReportBinding,
+                    position: Int,
+                    item: ColorInfo,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.click = viewClick
+                    binding.colorInfo = item
+                    binding.notifyChange()
+                }
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+
     }
 }

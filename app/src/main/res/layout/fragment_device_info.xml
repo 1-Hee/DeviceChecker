@@ -152,5 +152,5 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.appcompat.widget.LinearLayoutCompat>
-    </ScrollView>ß
+    </ScrollView>
 </layout>
