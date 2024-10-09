@@ -275,6 +275,7 @@
     <string name="label_electric_capacity">Electric capacity : </string>
     <string name="label_temperature">Temp :</string>
     <string name="battery_status">배터리 상태</string>
+    <string name="h_android_version">Android</string>
 
 
     <string-array name="device_report_list">

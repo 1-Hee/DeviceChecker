@@ -12,6 +12,7 @@ import timber.log.Timber
 class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     private val deviceInfoList = mutableListOf<Info>()
     private val displayInfoList = mutableListOf<Info>()
+    private val snapShotList = mutableListOf<Info>()
 
     companion object {
         fun newInstance(): DeviceInfoFragment {
@@ -20,9 +21,16 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     }
     override fun initViewModel() {}
     override fun getDataBindingConfig(): DataBindingConfig {
+
+        snapShotList.add(Info("고유번호", "1234-1234"))
+        snapShotList.add(Info("고유번호", "1234-1234"))
+        snapShotList.add(Info("고유번호", "1234-1234"))
+
+
         return DataBindingConfig(R.layout.fragment_device_info)
             .addBindingParam(BR.deviceInfoList, deviceInfoList)
             .addBindingParam(BR.displayInfoList, displayInfoList)
+            .addBindingParam(BR.snapShotList, snapShotList)
     }
     override fun initView() {
         Timber.i("initView ${this.javaClass.simpleName}")

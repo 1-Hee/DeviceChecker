@@ -14,6 +14,7 @@ import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.databinding.ItemCpuCoreBinding
+import kr.co.devicechecker.databinding.ItemDeviceSnapshotBinding
 import kr.co.devicechecker.databinding.ItemInfoBinding
 import kr.co.devicechecker.databinding.ItemSenorBinding
 import kr.co.devicechecker.databinding.ItemSpecificationReportBinding
@@ -180,6 +181,32 @@ class StaticAdapter {
                 ) {
                     binding.click = viewClick
                     binding.colorInfo = item
+                    binding.notifyChange()
+                }
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+        @JvmStatic
+        @BindingAdapter(value = ["snapShotList"], requireAll = true)
+        fun setSnapshotAdapter(recyclerView: RecyclerView, infoList:List<Info>){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+
+            val adapter = object : BaseDataBindingAdapter<
+                    Info, ItemDeviceSnapshotBinding>(recyclerView.context){
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_device_snapshot)
+                }
+
+                override fun onBindItem(
+                    binding: ItemDeviceSnapshotBinding,
+                    position: Int,
+                    item: Info,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.info = item
                     binding.notifyChange()
                 }
             }

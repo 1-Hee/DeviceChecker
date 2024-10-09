@@ -13,6 +13,11 @@
         <variable
             name="displayInfoList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
+
+
+        <variable
+            name="snapShotList"
+            type="java.util.List&lt;kr.co.devicechecker.data.dto.Info>" />
     </data>
 
     <ScrollView
@@ -62,6 +67,99 @@
                 android:layout_height="1dp"
                 android:layout_marginVertical="12dp"
                 app:dividerColor="@color/mono400"
+                />
+
+            <!-- Device Info Tag -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_device_info_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                >
+
+                <!-- Device Model Name -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcv_device_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/none"
+                    app:cardBackgroundColor="@color/deep_blue600"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_device_model"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="14sp"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="8dp"
+                        tools:text="SM-S916N"
+                        />
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Android Version -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/mcv_android_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="2dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/none"
+                    app:cardBackgroundColor="@color/prime_android"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="8dp"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_android_version"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_android"
+                            android:scaleType="fitCenter"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tv_android_version"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginEnd="8dp"
+                            />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_android_version"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/h_android_version"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            tools:text="Android 14"
+                            app:layout_constraintStart_toEndOf="@id/iv_android_version"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Device Snapshot -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/base_item_info"
+                app:snapShotList="@{snapShotList}"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
                 />
 
             <!-- Display Info -->
