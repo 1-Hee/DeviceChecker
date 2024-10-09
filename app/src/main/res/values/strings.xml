@@ -262,6 +262,19 @@
     <string name="ram_info_title">메모리 상세 정보</string>
     <string name="storage_info_title">기기 저장 장치</string>
     <string name="ram_status_title">메모리 사용량</string>
+    <string name="system_perform_title">시스템 성능</string>
+    <string name="system_perform_title_s">System Performance</string>
+    <string name="tv_system_perform_guide">현재 기기의 시스템 성능을 모니터링합니다.</string>
+    <string name="cpu_core_status">CPU 상태</string>
+    <string name="label_core_cnt">CPU 전체 코어 수</string>
+    <string name="core_unit">core</string>
+    <string name="tag_cpu">CPU</string>
+    <string name="memory_status">메모리 상태</string>
+    <string name="label_memory_usage">메모리 사용량</string>
+    <string name="tv_label_battery">배터리 사용량</string>
+    <string name="label_electric_capacity">Electric capacity : </string>
+    <string name="label_temperature">Temp :</string>
+    <string name="battery_status">배터리 상태</string>
 
 
     <string-array name="device_report_list">

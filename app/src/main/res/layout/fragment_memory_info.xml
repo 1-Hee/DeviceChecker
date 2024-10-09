@@ -96,6 +96,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_ram_status_title"
                     app:layout_constraintBottom_toTopOf="@id/tv_avail_ram_suffix"
                     app:layout_constraintStart_toStartOf="parent"
+                    tools:progress="70"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView
