@@ -107,15 +107,6 @@
         <item>getprop ro.telephony.default_network</item>
         <item>getprop ro.debuggable</item>
     </string-array>
-    <!-- Display Info -->
-    <string-array name="display_headers">
-        <item>DPI(Dot Per Inch)</item>
-        <item>해상도</item>
-        <item>화면 주사율</item>
-    </string-array>
-    <string-array name="display_command">
-        <item>getprop ro.sf.lcd_density</item>
-    </string-array>
 
     <!-- Processor -->
     <!-- 프로세서 정보 -->
@@ -133,22 +124,6 @@
         <item>getprop ro.product.cpu.abilist</item>
         <item>getprop ro.product.board</item>
         <item>getprop ro.hardware</item>
-    </string-array>
-
-    <!-- 자바 정보 -->
-    <string-array name="java_headers">
-        <item>자바 버전</item>
-        <item>자바 VM 버전</item>
-        <item>자바 VM 공급자</item>
-        <item>자바 VM 명</item>
-        <item>JAVA_MIN_HEAP</item>
-        <item>JAVA_MAX_HEAP</item>
-        <item>JAVA_APPLICATION_HEAP</item>
-    </string-array>
-    <string-array name="java_command">
-        <item>getprop dalvik.vm.dex2oat-Xms</item>
-        <item>getprop dalvik.vm.dex2oat-Xmx</item>
-        <item>getprop dalvik.vm.heapsize</item>
     </string-array>
 
     <!-- Memory -->
@@ -233,7 +208,6 @@
     <string name="admob_banner_sdk_key"></string>
 
     <!-- new -->
-
     <string name="nav_device_information">기기 정보</string>
     <string name="nav_system_performance">시스템 성능</string>
     <string name="nav_memory_information">메모리 정보</string>
@@ -275,13 +249,81 @@
     <string name="label_electric_capacity">Electric capacity : </string>
     <string name="label_temperature">Temp :</string>
     <string name="battery_status">배터리 상태</string>
-    <string name="h_android_version">Android</string>
-
+    <string name="h_android_version">Android&#160;</string>
+    <string name="other_info_title">기타 정보</string>
 
     <string-array name="device_report_list">
         <item>HTML 문서로 내보내기</item>
         <item>JSON 문서로 내보내기</item>
         <item>텍스트 파일(.txt)로 내보내기</item>
     </string-array>
+
+    <!-- new commands -->
+    <string-array name="snapshot_header_list">
+        <item>제조사</item>
+        <item>모뎀</item>
+        <item>모뎀 버전</item>
+        <item>보안 패치 수준</item>
+    </string-array>
+
+    <string-array name="snapshot_cmd_list">
+        <item>getprop ro.product.manufacturer</item>
+        <item>getprop ro.baseband</item>
+        <item>getprop gsm.version.baseband</item>
+        <item>getprop ro.build.version.security_patch</item>
+    </string-array>
+
+    <!-- Display Info -->
+    <string-array name="display_headers">
+        <item>DPI(Dot Per Inch)</item>
+        <item>해상도</item>
+        <item>화면 주사율</item>
+    </string-array>
+    <string-array name="display_command">
+        <item>getprop ro.sf.lcd_density</item>
+    </string-array>
+
+    <!-- 자바 정보 -->
+    <string-array name="java_headers">
+        <item>자바 버전</item>
+        <item>자바 VM 버전</item>
+        <item>자바 VM 공급자</item>
+        <item>자바 VM 명</item>
+        <item>JAVA_MIN_HEAP</item>
+        <item>JAVA_MAX_HEAP</item>
+        <item>JAVA_APPLICATION_HEAP</item>
+    </string-array>
+    <string-array name="java_command">
+        <item>getprop dalvik.vm.dex2oat-Xms</item>
+        <item>getprop dalvik.vm.dex2oat-Xmx</item>
+        <item>getprop dalvik.vm.heapsize</item>
+    </string-array>
+
+    <!-- Device Info -->
+    <string-array name="other_info_headers">
+        <item>Build ID</item>
+        <item>펌웨어 버전</item>
+        <item>부트 로더</item>
+        <item>Build Key</item>
+        <item>SDK INT</item>
+        <item>SUPPORT_MIN_SDK</item>
+        <item>하드웨어 플랫폼</item>
+        <item>기본 통신 네트워크</item>
+        <item>디버깅 모드</item>
+    </string-array>
+    <string-array name="other_info_command">
+        <item>getprop ro.build.display.id</item>
+        <item>getprop ro.bootimage.build.fingerprint</item>
+        <item>getprop ro.bootloader</item>
+        <item>getprop ro.build.id</item>
+        <item>getprop ro.build.version.sdk</item>
+        <item>getprop ro.build.version.min_supported_target_sdk</item>
+        <item>getprop ro.hardware</item>
+        <item>getprop ro.telephony.default_network</item>
+        <item>getprop ro.debuggable</item>
+    </string-array>
+
+    <string name="h_kernel_info">커널</string>
+    <string name="h_serial_no">Serial No.</string>
 
 </resources>

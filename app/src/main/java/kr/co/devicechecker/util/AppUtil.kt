@@ -33,6 +33,11 @@ import kotlin.math.round
 import kotlin.math.roundToInt
 
 class AppUtil {
+
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Device { // about Device Info
         // 모든 기기 정보 불러오는 메서드
         fun getAllDeviceInfo(context:Context):List<Info>{
@@ -44,6 +49,9 @@ class AppUtil {
             return allDeviceInfoList
         }
 
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getDeviceInfo(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val deviceInfoList = mutableListOf<Info>()
@@ -57,7 +65,7 @@ class AppUtil {
             }
             return deviceInfoList
         }
-        fun getDisplayInfo(context:Context):List<Info>{
+        fun getDisplayInfo(context:Context):List<Info> {
             val emptyValue = context.getString(R.string.txt_unknown)
             val displayInfoList = mutableListOf<Info>()
             val displayHeaderList = context.resources.getStringArray(R.array.display_headers)
@@ -90,6 +98,8 @@ class AppUtil {
             displayInfoList.add(Info(displayHeaderList[2], "$refreshRate Hz"))
             return displayInfoList
         }
+
+
         fun saveDeviceData(context: Context, displayInfoList:List<Info>, deviceInfoList:List<Info>){
             val prefs = PreferenceUtil(context)
             val tag = "Device"
@@ -105,6 +115,10 @@ class AppUtil {
         }
     }
     object Processor {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getProcessorInfo(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val processorInfoList = mutableListOf<Info>()
@@ -136,10 +150,13 @@ class AppUtil {
                 "$clockMinMHz MHz ~ $clockMaxMHz MHz"
             }
             processorInfoList.add(Info(processorHeaderList[5], clockSpeed))
+
+            /*
             // 커널
             val kernelInfoAll = Command
                 .executeAdbCommand("uname -a")
             processorInfoList.add(Info(processorHeaderList[6], kernelInfoAll.trim()))
+             */
             return processorInfoList
         }
         fun getCpuCoreInfo(corNumber:Int, context: Context):List<CpuCoreInfo>{
@@ -175,6 +192,10 @@ class AppUtil {
             }
             return cpuCoreInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getJavaInformation(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val javaInfoList = mutableListOf<Info>()
