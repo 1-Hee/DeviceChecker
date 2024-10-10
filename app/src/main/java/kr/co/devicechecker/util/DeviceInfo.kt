@@ -25,8 +25,7 @@ object DeviceInfo {
         // 모델명 추출
         val emptyValue = context.getString(R.string.txt_unknown)
         val modelNameCmd = "getprop ro.product.model"
-        val mModelName = AppUtil.Command
-            .executeAdbCommand(modelNameCmd).trim().ifBlank { emptyValue }
+        val mModelName =  Command.execute(modelNameCmd).trim().ifBlank { emptyValue }
 
         // Android OS Version 추출
         val mAndroidHeader = context.getString(R.string.h_android_version)
@@ -53,7 +52,7 @@ object DeviceInfo {
         val snapCmdList = context.resources.getStringArray(R.array.snapshot_cmd_list)
         snapHeaderList.forEachIndexed { index, name ->
             val cmd = snapCmdList[index]
-            val value = AppUtil.Command.executeAdbCommand(cmd).trim().ifBlank { emptyValue }
+            val value = Command.execute(cmd).trim().ifBlank { emptyValue }
             val info = Info(name, if (value == "unknown") emptyValue else value.trim())
             snapInfoList.add(info)
         }
@@ -69,7 +68,7 @@ object DeviceInfo {
         val displayCmdList = context.resources.getStringArray(R.array.display_command)
         displayCmdList.forEachIndexed { index, cmd ->
             val name = displayHeaderList[index]
-            val value = AppUtil.Command.executeAdbCommand(cmd).trim().ifBlank { emptyValue }
+            val value = Command.execute(cmd).trim().ifBlank { emptyValue }
             val info = Info(name, if(value == "unknown") emptyValue else value.trim())
             displayInfoList.add(info)
         }
@@ -104,22 +103,19 @@ object DeviceInfo {
         val processorCmdList = context.resources.getStringArray(R.array.processor_command)
         processorCmdList.forEachIndexed { index, cmd ->
             val name = processorHeaderList[index]
-            val value = AppUtil.Command.executeAdbCommand(cmd).trim().ifBlank { emptyValue }
+            val value = Command.execute(cmd).trim().ifBlank { emptyValue }
             val info = Info(name, value.trim())
             processorInfoList.add(info)
         }
         // 코어수
-        val coreInfo = AppUtil.Command
-            .executeAdbCommand("cat sys/devices/system/cpu/present").split("-")
+        val coreInfo = Command.execute("cat sys/devices/system/cpu/present").split("-")
         val corNumber = coreInfo[0].trim().toInt() + coreInfo[1].trim().toInt() + 1 // number
         val corNumInfo = Info(processorHeaderList[4], corNumber.toString())
         processorInfoList.add(corNumInfo)
         val cpuMinCMD = "cat sys/devices/system/cpu/cpufreq/policy0/cpuinfo_min_freq"
         val cpuMaxCMD = "cat sys/devices/system/cpu/cpufreq/policy0/cpuinfo_max_freq"
-        val clockMin = AppUtil.Command
-            .executeAdbCommand(cpuMinCMD) // KHz
-        val clockMax = AppUtil.Command
-            .executeAdbCommand(cpuMaxCMD) // KHz
+        val clockMin = Command.execute(cpuMinCMD) // KHz
+        val clockMax = Command.execute(cpuMaxCMD) // KHz
         val clockSpeed = if(clockMax.isBlank() || clockMin.isBlank()){
             emptyValue
         }else{
@@ -156,7 +152,7 @@ object DeviceInfo {
         val gap = javaValueList.size
         javaCmdList.forEachIndexed { index, cmd ->
             val name = javaHeaderList[index+gap]
-            val value = AppUtil.Command.executeAdbCommand(cmd).trim()
+            val value = Command.execute(cmd).trim()
             val info = Info(name, value.uppercase())
             javaInfoList.add(info)
         }
@@ -172,15 +168,14 @@ object DeviceInfo {
         val deviceCmdList = context.resources.getStringArray(R.array.other_info_command)
         deviceHeaderList.forEachIndexed { index, name ->
             val cmd = deviceCmdList[index]
-            val value = AppUtil.Command.executeAdbCommand(cmd).trim().ifBlank { emptyValue }
+            val value = Command.execute(cmd).trim().ifBlank { emptyValue }
             val info = Info(name, if(value == "unknown") emptyValue else value.trim())
             deviceInfoList.add(info)
         }
 
         // 커널
         val hKernel = context.getString(R.string.h_kernel_info)
-        val kernelInfoAll = AppUtil.Command
-            .executeAdbCommand("uname -a")
+        val kernelInfoAll = Command.execute("uname -a")
         deviceInfoList.add(Info(hKernel, kernelInfoAll.trim()))
         return deviceInfoList
     }

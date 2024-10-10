@@ -8,6 +8,7 @@ import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.databinding.FragmentSensorInfoBinding
 import kr.co.devicechecker.util.AppUtil
 import kr.co.devicechecker.util.PreferenceUtil
+import kr.co.devicechecker.util.Sensor
 import timber.log.Timber
 
 class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
@@ -39,7 +40,7 @@ class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
     private fun getSensorInfo(){
         this.sensorInfoList.clear()
         this.sensorInfoList.addAll(
-            AppUtil.Sensor.getSensorInfo(requireActivity())
+            Sensor.getSensorInfo(requireActivity())
         )
         mBinding.sensorInfoList = sensorInfoList
         mBinding.tvSensorCnt.text = "${sensorInfoList.size}"

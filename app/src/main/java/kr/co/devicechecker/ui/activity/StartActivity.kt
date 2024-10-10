@@ -20,6 +20,7 @@ import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseActivity
 import kr.co.devicechecker.databinding.ActivtyStartBinding
+import timber.log.Timber
 
 class StartActivity : BaseActivity<ActivtyStartBinding>() {
 
@@ -29,6 +30,8 @@ class StartActivity : BaseActivity<ActivtyStartBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        Timber.plant(Timber.DebugTree())
+
         setSupportActionBar(mBinding.appBarMain.toolbar)
 
         val drawerLayout: DrawerLayout = mBinding.drawerLayout

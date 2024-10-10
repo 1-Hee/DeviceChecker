@@ -159,6 +159,10 @@ class AppUtil {
              */
             return processorInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getCpuCoreInfo(corNumber:Int, context: Context):List<CpuCoreInfo>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val cpuCoreInfoList = mutableListOf<CpuCoreInfo>()
@@ -374,6 +378,10 @@ class AppUtil {
         }
     }
     object Sensor {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getSensorInfo(activity: Activity):List<SensorInfo>{
             val sensorInfoList = mutableListOf<SensorInfo>()
             // 센서 매니저 가져오기
@@ -387,6 +395,10 @@ class AppUtil {
             }
             return sensorInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun saveSensorInfo(
             context: Context,
             sensorInfoList:List<SensorInfo>
@@ -403,7 +415,15 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Command {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun executeAdbCommand(command: String): String {
             val process = Runtime.getRuntime().exec(command)
             val reader = BufferedReader(InputStreamReader(process.inputStream))

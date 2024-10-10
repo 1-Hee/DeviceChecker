@@ -246,8 +246,12 @@
     <string name="memory_status">메모리 상태</string>
     <string name="label_memory_usage">메모리 사용량</string>
     <string name="tv_label_battery">배터리 사용량</string>
-    <string name="label_electric_capacity">Electric capacity : </string>
+    <string name="label_electric_capacity">Capacity : </string>
+    <string name="unit_electric_capacity">mAh</string>
+
     <string name="label_temperature">Temp :</string>
+    <string name="h_charge_type">Charging Type : </string>
+
     <string name="battery_status">배터리 상태</string>
     <string name="h_android_version">Android&#160;</string>
     <string name="other_info_title">기타 정보</string>
@@ -323,7 +327,10 @@
         <item>getprop ro.debuggable</item>
     </string-array>
 
+
     <string name="h_kernel_info">커널</string>
     <string name="h_serial_no">Serial No.</string>
+    <string name="charging">충전중</string>
+    <string name="not_charging">충전 안함</string>
 
 </resources>
