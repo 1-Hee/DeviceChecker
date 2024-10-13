@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 fun getPropertiesValue(propertyKey: String): String {
-    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+    return gradleLocalProperties(rootDir, providers).getProperty(propertyKey)
 }
 
 plugins {
