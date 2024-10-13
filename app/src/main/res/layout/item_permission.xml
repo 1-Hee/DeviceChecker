@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="permissionInfo"
+            type="kr.co.devicechecker.data.dto.Permission" />
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_setting_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/none"
+        app:cardBackgroundColor="@color/white"
+        android:tag="@{permissionInfo.name}"
+        android:onClick="@{(v)->click.onViewClick(v)}"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            >
+
+            <!-- Permission Incon -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_permission_icon"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:tint="@color/mono900"
+                android:src="@{permissionInfo.iconDrawable}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_android"
+                />
+
+            <!-- Permission Name -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_permission_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{permissionInfo.name}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/mono900"
+                app:layout_constraintStart_toEndOf="@id/iv_permission_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_permission_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_permission_icon"
+                android:layout_marginStart="12dp"
+                tools:text="Permission Name"
+                />
+
+            <!-- Is Allowed -> 권한 허용 여부 -->
+            <Switch
+                android:id="@+id/sw_is_allowed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{permissionInfo.allowed}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_permission_icon"
+                app:layout_constraintBottom_toBottomOf="@id/iv_permission_icon"
+                android:thumb="@drawable/switch_thumb"
+                android:track="@drawable/switch_track_selector"
+                />
+
+            <!-- Permission Description -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_permission_guide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{permissionInfo.guideText}"
+                android:textSize="12sp"
+                android:textColor="@color/mono600"
+                app:layout_constraintStart_toStartOf="@id/iv_permission_icon"
+                app:layout_constraintTop_toBottomOf="@id/iv_permission_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="8dp"
+                tools:text="Permission Description...."
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

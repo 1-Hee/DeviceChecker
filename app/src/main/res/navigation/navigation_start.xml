@@ -12,7 +12,8 @@
         android:id="@+id/nav_device_info"
         android:name="kr.co.devicechecker.ui.fragment.main.DeviceInfoFragment"
         android:label=""
-        tools:layout="@layout/fragment_device_info" />
+        tools:layout="@layout/fragment_device_info"
+        />
 
     <!-- System Performance -->
     <fragment
@@ -35,14 +36,23 @@
         android:id="@+id/nav_sensor_info"
         android:name="kr.co.devicechecker.ui.fragment.main.SensorInfoFragment"
         android:label=""
-        tools:layout="@layout/fragment_sensor_info" />
+        tools:layout="@layout/fragment_sensor_info"
+        />
 
     <!-- Device Testing -->
-
     <fragment
         android:id="@+id/nav_device_test"
         android:name="kr.co.devicechecker.ui.fragment.main.DeviceTestFragment"
         android:label=""
-        tools:layout="@layout/fragment_device_test" />
+        tools:layout="@layout/fragment_device_test"
+        />
+
+    <!-- Setting Fragment -->
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="kr.co.devicechecker.ui.fragment.main.SettingFragment"
+        android:label=""
+        tools:layout="@layout/fragment_setting"
+        />
 
 </navigation>

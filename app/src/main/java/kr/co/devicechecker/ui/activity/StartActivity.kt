@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -54,7 +55,7 @@ class StartActivity : BaseActivity<ActivtyStartBinding>() {
     // 액션 바 메뉴
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        // menuInflater.inflate(R.menu., menu)
+        menuInflater.inflate(R.menu.menu_app_bar, menu)
         return true
     }
 
@@ -64,18 +65,15 @@ class StartActivity : BaseActivity<ActivtyStartBinding>() {
         // Handle action bar item clicks here.
         val id = item.itemId
         return when(id) {
-
-            /*
             R.id.action_settings -> {
                 // 세팅 페이지 호출
                 // NavController에 접근
                 val navHostFragment = supportFragmentManager
-                    .findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+                    .findFragmentById(R.id.nav_host_fragment_start) as NavHostFragment
                 val navController = navHostFragment.navController
                 navController.navigate(R.id.nav_setting) // Setting 이동
                 true
             }
-             */
             else -> {
                 super.onOptionsItemSelected(item)
             }

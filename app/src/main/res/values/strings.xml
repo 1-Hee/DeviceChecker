@@ -327,10 +327,21 @@
         <item>getprop ro.debuggable</item>
     </string-array>
 
-
     <string name="h_kernel_info">커널</string>
     <string name="h_serial_no">Serial No.</string>
     <string name="charging">충전중</string>
     <string name="not_charging">충전 안함</string>
+    <string name="permission_guide">앱 사용에 필요한 권한을 허용합니다.</string>
+
+    <string-array name="arr_setting_option">
+        <item>언어 설정</item>
+        <item>앱 업데이트</item>
+        <item>오픈 소스 라이선스</item>
+    </string-array>
+
+    <string-array name="arr_lang_type">
+        <item>한국어</item>
+        <item>영어</item>
+    </string-array>
 
 </resources>

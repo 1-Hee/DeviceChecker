@@ -11,12 +11,15 @@ import kr.co.devicechecker.data.dto.ColorInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.data.dto.IconInfo
 import kr.co.devicechecker.data.dto.Info
+import kr.co.devicechecker.data.dto.Permission
 import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.databinding.ItemCpuCoreBinding
 import kr.co.devicechecker.databinding.ItemDeviceSnapshotBinding
 import kr.co.devicechecker.databinding.ItemInfoBinding
+import kr.co.devicechecker.databinding.ItemPermissionBinding
 import kr.co.devicechecker.databinding.ItemSenorBinding
+import kr.co.devicechecker.databinding.ItemSettingBinding
 import kr.co.devicechecker.databinding.ItemSpecificationReportBinding
 import kr.co.devicechecker.databinding.ItemStorageBinding
 import kr.co.devicechecker.databinding.ItemTestBtnBinding
@@ -209,6 +212,63 @@ class StaticAdapter {
                     binding.info = item
                     binding.notifyChange()
                 }
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+        // User Permissions ....
+        @JvmStatic
+        @BindingAdapter(value = ["permissionInfoList", "vClick"], requireAll = true)
+        fun setPermissionAdapter(recyclerView: RecyclerView, infoList:List<Permission>, viewClick:ViewClickListener){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+            val adapter = object : BaseDataBindingAdapter<
+                    Permission, ItemPermissionBinding>(recyclerView.context) {
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_permission)
+                }
+
+                override fun onBindItem(
+                    binding: ItemPermissionBinding,
+                    position: Int,
+                    item: Permission,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.permissionInfo = item
+                    binding.click = viewClick
+                    binding.notifyChange()
+                }
+            }
+
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+        // Setting Options...
+        @JvmStatic
+        @BindingAdapter(value = ["settingOptionList", "vClick"], requireAll = true)
+        fun setSettingAdapter(recyclerView: RecyclerView, infoList:List<Info>, viewClick:ViewClickListener){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+
+            val adapter = object : BaseDataBindingAdapter<
+                    Info, ItemSettingBinding>(recyclerView.context) {
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_setting)
+                }
+
+                override fun onBindItem(
+                    binding: ItemSettingBinding,
+                    position: Int,
+                    item: Info,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.settingInfo = item
+                    binding.click = viewClick
+                    binding.notifyChange()
+                }
+
             }
             adapter.setItemList(infoList)
             recyclerView.adapter = adapter
