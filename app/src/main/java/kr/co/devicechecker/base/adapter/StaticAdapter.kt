@@ -22,6 +22,7 @@ import kr.co.devicechecker.databinding.ItemSenorBinding
 import kr.co.devicechecker.databinding.ItemSettingBinding
 import kr.co.devicechecker.databinding.ItemSpecificationReportBinding
 import kr.co.devicechecker.databinding.ItemStorageBinding
+import kr.co.devicechecker.databinding.ItemTestBinding
 import kr.co.devicechecker.databinding.ItemTestBtnBinding
 import kr.co.devicechecker.ui.adapter.ViewPager2Adapter
 
@@ -265,6 +266,35 @@ class StaticAdapter {
                     holder: RecyclerView.ViewHolder
                 ) {
                     binding.settingInfo = item
+                    binding.click = viewClick
+                    binding.notifyChange()
+                }
+
+            }
+            adapter.setItemList(infoList)
+            recyclerView.adapter = adapter
+        }
+
+        // Display Test & Audio Test
+        @JvmStatic
+        @BindingAdapter(value = ["testList", "vClick"], requireAll = true)
+        fun setTestingAdapter(recyclerView: RecyclerView, infoList:List<IconInfo>, viewClick:ViewClickListener){
+            val llm = LinearLayoutManager(recyclerView.context, RecyclerView.VERTICAL, false);
+            recyclerView.layoutManager = llm
+
+            val adapter = object : BaseDataBindingAdapter<
+                    IconInfo, ItemTestBinding>(recyclerView.context){
+                override fun getDataBindingConfig(): DataBindingConfig {
+                    return DataBindingConfig(R.layout.item_test)
+                }
+
+                override fun onBindItem(
+                    binding: ItemTestBinding,
+                    position: Int,
+                    item: IconInfo,
+                    holder: RecyclerView.ViewHolder
+                ) {
+                    binding.iconInfo = item
                     binding.click = viewClick
                     binding.notifyChange()
                 }

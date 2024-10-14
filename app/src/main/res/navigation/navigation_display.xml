@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/displayColorFragment"
-        android:name="kr.co.devicechecker.ui.fragment.display.DisplayColorFragment"
+        android:name="kr.co.devicechecker.ui.fragment.check.DisplayColorFragment"
         android:label="displayColorFragment"/>
 
 

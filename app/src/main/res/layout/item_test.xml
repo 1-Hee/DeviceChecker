@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="iconInfo"
+            type="kr.co.devicechecker.data.dto.IconInfo" />
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_spec_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/mono900"
+        app:cardBackgroundColor="@color/none"
+        android:layout_marginVertical="12dp"
+        android:tag="@{iconInfo.name}"
+        android:onClick="@{(v)->click.onViewClick(v)}"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            >
+
+            <!-- Icon -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_report"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@{iconInfo.icon}"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                tools:src="@drawable/ic_rgb"
+                />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_vertical"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.20"
+                />
+
+            <!-- Sensor Name -->
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/md_vertical"
+                android:layout_width="1.5dp"
+                android:layout_height="32dp"
+                app:dividerColor="@color/mono900"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_test_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tv_test_description"
+                app:layout_constraintStart_toStartOf="@id/gl_vertical"
+                android:layout_marginStart="24dp"
+                android:text="@{iconInfo.name}"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/mono900"
+                tools:text="Test Type..."
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_test_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/tv_test_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_test_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
+                android:text="@{iconInfo.value}"
+                android:textSize="14sp"
+                android:textColor="@color/mono600"
+                tools:text="Test Description..."
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

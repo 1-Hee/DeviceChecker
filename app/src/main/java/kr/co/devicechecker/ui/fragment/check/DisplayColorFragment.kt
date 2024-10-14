@@ -1,4 +1,4 @@
-package kr.co.devicechecker.ui.fragment.display
+package kr.co.devicechecker.ui.fragment.check
 
 import android.graphics.Color
 import android.os.Handler

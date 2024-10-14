@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools"
-    tools:context=".ui.fragment.display.DisplayColorFragment"
+    tools:context=".ui.fragment.check.DisplayColorFragment"
     >
     <data>
         <import type="android.view.View"/>

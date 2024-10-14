@@ -332,6 +332,14 @@
     <string name="charging">충전중</string>
     <string name="not_charging">충전 안함</string>
     <string name="permission_guide">앱 사용에 필요한 권한을 허용합니다.</string>
+    <string name="tv_display_test">디스플레이 테스트</string>
+    <string name="display_test_s">Display Testing</string>
+    <string name="device_pixel_test">화소 테스트</string>
+    <string name="display_test_guide">현재 기기에 아래와 같은 디스플레이 테스트를 진행합니다.</string>
+    <string name="audio_test">음향 장치 테스트</string>
+    <string name="audio_test_s">Audio Testing</string>
+    <string name="audio_test_guide">현재 기기에 아래와 같은 음향 장치 테스트를 수행합니다.</string>
+    <string name="media_test">미디어 테스트</string>
 
     <string-array name="arr_setting_option">
         <item>언어 설정</item>
@@ -343,5 +351,37 @@
         <item>한국어</item>
         <item>영어</item>
     </string-array>
+
+    <!-- 디스플레이 테스트 -->
+    <string-array name="test_display_name">
+        <item>색상 테스트</item>
+    </string-array>
+
+    <string-array name="test_display_guide">
+        <item>디스플레이 화소를 테스트 합니다.</item>
+    </string-array>
+
+    <array name="icon_test_display">
+        <item>@drawable/ic_rgb</item>
+    </array>
+
+    <!-- 오디오 테스트 -->
+    <string-array name="test_audio_name">
+        <item>소리 테스트</item>
+    </string-array>
+
+    <string-array name="test_audio_guide">
+        <item>기기의 음향 장치를 테스트 합니다.</item>
+    </string-array>
+
+    <array name="icon_test_audio">
+        <item>@drawable/ic_bell</item>
+    </array>
+
+    <array name="arr_test_ringtone_msg">
+        <item>벨소리를 재생을 시작합니다...</item>
+        <item>벨소리 재생을 종료합니다...</item>
+        <item>현재 벨소리를 재생할 수 없습니다. 기기를 [소리 모드]로 변경해주세요. </item>
+    </array>
 
 </resources>

@@ -45,7 +45,14 @@
         android:name="kr.co.devicechecker.ui.fragment.main.DeviceTestFragment"
         android:label=""
         tools:layout="@layout/fragment_device_test"
-        />
+        >
+        <action
+            android:id="@+id/move_display_test"
+            app:destination="@id/nav_screen_test" />
+        <action
+            android:id="@+id/move_audio_test"
+            app:destination="@id/nav_audio_test" />
+    </fragment>
 
     <!-- Setting Fragment -->
     <fragment
@@ -53,6 +60,34 @@
         android:name="kr.co.devicechecker.ui.fragment.main.SettingFragment"
         android:label=""
         tools:layout="@layout/fragment_setting"
+        />
+
+    <!-- Display Test Fragment -->
+    <fragment
+        android:id="@+id/nav_screen_test"
+        android:name="kr.co.devicechecker.ui.fragment.check.ScreenTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_screen_test"
+        >
+        <action
+            android:id="@+id/move_color_test"
+            app:destination="@id/nav_color_test" />
+    </fragment>
+
+    <!-- Display Color Test -->
+    <fragment
+        android:id="@+id/nav_color_test"
+        android:name="kr.co.devicechecker.ui.fragment.check.DisplayColorFragment"
+        android:label=""
+        tools:layout="@layout/fragment_display_color"
+        />
+
+    <!-- Display Audio Fragment -->
+    <fragment
+        android:id="@+id/nav_audio_test"
+        android:name="kr.co.devicechecker.ui.fragment.check.AudioTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_audio_test"
         />
 
 </navigation>

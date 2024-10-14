@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 
 data class IconInfo(
-    val icon:Drawable?,
+    var icon:Drawable? = null,
     val name:String,
     val value:String
 ){

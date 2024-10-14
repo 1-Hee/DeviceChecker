@@ -9,7 +9,7 @@
                 android:width="24dp"
                 android:height="24dp" />
             <solid
-                android:color="@color/white" />
+                android:color="@color/mono100" />
         </shape>
     </item>
 </ripple>
