@@ -95,10 +95,10 @@ object FileManager {
 
         if(mBatteryInfo != null){
             builder.append("\n\n<Battery Status>\n")
-                .append("\tstatus :\t${mBatteryInfo.isCharging}\n")
-                .append("\tchargeType :\t${mBatteryInfo.chargeType}\n")
-                .append("\tlevel :\t${mBatteryInfo.level}\n")
-                .append("\tcapacity :\t${mBatteryInfo.capacity} mAh\n")
+                .append("- charging status :\t${mBatteryInfo.isCharging}\n")
+                .append("- chargeType :\t${mBatteryInfo.chargeType}\n")
+                .append("- level :\t${mBatteryInfo.level}\n")
+                .append("- capacity :\t${mBatteryInfo.capacity} mAh\n")
         }
 
         // Save device data via Object 'MemoryInfo'
@@ -114,10 +114,11 @@ object FileManager {
             builder.append("${it.name} :\t${it.value}\n")
         }
 
+        builder.append("\n")
         mStorageList.forEach { it ->
             builder.append("<Storage ${it.name}>\n")
-                .append("\tavailable :\t${it.available}\n")
-                .append("\ttotal :\t${it.total}\n")
+                .append("- available :\t${it.available}\n")
+                .append("- total :\t${it.total}\n")
         }
 
         // Save device data via Object 'Sensor'
@@ -127,9 +128,9 @@ object FileManager {
         // Add All Sensor List
         val mSensorList = Sensor.getSensorInfo(mActivity)
         mSensorList.forEach { it ->
-            builder.append("<${it.sensorName}>\n")
-                .append("\ttype :\t${it.sensorType}\n")
-                .append("\tvendor :\t${it.sensorVendor}\n")
+            builder.append("#${it.sensorName}\n")
+                .append("- type :\t${it.sensorType}\n")
+                .append("- vendor :\t${it.sensorVendor}\n\n")
         }
 
         // 현재 날짜 형식 설정
