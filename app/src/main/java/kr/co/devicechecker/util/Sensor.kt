@@ -3,6 +3,7 @@ package kr.co.devicechecker.util
 import android.app.Activity
 import android.content.Context
 import android.hardware.SensorManager
+import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.SensorInfo
 
 /**
@@ -28,5 +29,21 @@ object Sensor {
             sensorInfoList.add(sensorInfo)
         }
         return sensorInfoList
+    }
+
+    fun saveSensorInfo(
+        context: Context,
+        sensorInfoList:List<SensorInfo>
+    ){
+        val prefs = PreferenceUtil(context)
+        val tag = "Sensor"
+        val builder = StringBuilder()
+        builder.append(context.getString(R.string.txt_h_save_sensor)).append("\n")
+        val typeHeader = context.getString(R.string.txt_h_sensor_type)
+        val vendorHeader = context.getString(R.string.txt_h_sensor_vendor)
+        sensorInfoList.forEach { info ->
+            builder.append("${info.sensorName} $typeHeader (${info.sensorType}}\n$vendorHeader : ${info.sensorVendor}\n")
+        }
+        prefs.setValue(tag, builder.toString())
     }
 }

@@ -33,8 +33,6 @@ import kotlin.math.round
 import kotlin.math.roundToInt
 
 class AppUtil {
-
-
     @Deprecated("This object is scheduled to end support " +
             "as its functionality has been transferred " +
             "with app updates and is no longer used.")
@@ -65,6 +63,10 @@ class AppUtil {
             }
             return deviceInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getDisplayInfo(context:Context):List<Info> {
             val emptyValue = context.getString(R.string.txt_unknown)
             val displayInfoList = mutableListOf<Info>()
@@ -99,7 +101,9 @@ class AppUtil {
             return displayInfoList
         }
 
-
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun saveDeviceData(context: Context, displayInfoList:List<Info>, deviceInfoList:List<Info>){
             val prefs = PreferenceUtil(context)
             val tag = "Device"
@@ -114,8 +118,11 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
-    object Processor {
 
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
+    object Processor {
         @Deprecated("Support for this function will end " +
                 "as it is no longer used as the function " +
                 "has been transferred with app updates.")
@@ -255,6 +262,10 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Memory {
         fun getMemoryInfo(context: Context):List<Info>{
             val emptyValue = context.resources.getString(R.string.txt_unknown)
@@ -377,8 +388,12 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
-    object Sensor {
 
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
+    object Sensor {
         @Deprecated("Support for this function will end " +
                 "as it is no longer used as the function " +
                 "has been transferred with app updates.")
@@ -435,7 +450,15 @@ class AppUtil {
             return output.toString()
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Unit {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun parseKbUnit(data:String):String{
             val volumeUnit = data.split(" ")
             val volume = volumeUnit[0].toLong()
@@ -452,6 +475,10 @@ class AppUtil {
                 "UnKnown"
             }
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun parseByteUnit(data:Long):String{
             val mbUnit = (1024.0 * 1024.0)
             val gbUnit = (1024.0 * 1024.0 * 1024.0)

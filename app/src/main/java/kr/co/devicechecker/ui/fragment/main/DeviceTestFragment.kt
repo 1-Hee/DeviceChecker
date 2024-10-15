@@ -18,6 +18,7 @@ import kr.co.devicechecker.data.dto.IconInfo
 import kr.co.devicechecker.databinding.FragmentDeviceTestBinding
 import kr.co.devicechecker.ui.activity.DisplayTestActivity
 import kr.co.devicechecker.ui.activity.SoundTestActivity
+import kr.co.devicechecker.util.FileManager
 import timber.log.Timber
 
 
@@ -119,8 +120,7 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
                             Toast.makeText(mContext, reportArray[1], Toast.LENGTH_SHORT).show()
                         }
                         reportArray[2] -> { // TXT
-                            Toast.makeText(mContext, reportArray[2], Toast.LENGTH_SHORT).show()
-
+                            FileManager.saveTextFiles(requireActivity()) // 텍스트 저장
                         }
                     }
                 }

@@ -8,6 +8,7 @@ import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.databinding.FragmentMemoryInfoBinding
 import kr.co.devicechecker.util.AppUtil
+import kr.co.devicechecker.util.MemoryInfo
 import kr.co.devicechecker.util.PreferenceUtil
 import timber.log.Timber
 
@@ -38,23 +39,28 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         Timber.i("initView ${this.javaClass.simpleName}")
         prefs = PreferenceUtil(requireContext())
         getMemoryInfo()
-        saveMemoryInfo()
         getStorageInfo()
+
+        // saveMemoryInfo()
 
         // temp
         mBinding.pbRamStatus.progress = 70
         mBinding.notifyChange()
 
     }
+
+    /*
     private fun saveMemoryInfo(){
-        AppUtil.Memory.saveMemoryInfo(
+        MemoryInfo.saveMemoryInfo(
             requireContext(),
             memoryInfoList, internalStorageList, externalStorageList
         )
     }
+     */
+
     private fun getMemoryInfo(){
         this.memoryInfoList.clear()
-        this.memoryInfoList.addAll(AppUtil.Memory.getMemoryInfo(requireContext()))
+        this.memoryInfoList.addAll(MemoryInfo.getMemoryInfo(requireContext()))
         mBinding.memoryInfoList = memoryInfoList
         mBinding.notifyChange()
     }
@@ -76,19 +82,20 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         setExternalStorageInfo(externalPathList)
          */
 
-        val pathList = AppUtil.Memory.getStoragePathList(requireActivity())
+        val pathList = MemoryInfo.getStoragePathList(requireActivity())
         setStorageInfo(pathList)
     }
 
 
     private fun setStorageInfo(pathList:List<Info>){
         this.storageList.clear()
-        val storageInfo = AppUtil.Memory.getInternalStorageInfo(pathList.toTypedArray())
+        val storageInfo = MemoryInfo.getStorageInfo(pathList.toTypedArray())
         this.storageList.addAll(storageInfo)
         mBinding.storageList = storageList
         mBinding.notifyChange()
     }
 
+    /*
     private fun setInternalStorageInfo(pathList:List<Info>){
         this.internalStorageList.clear()
         val storageInfo = AppUtil.Memory.getInternalStorageInfo(pathList.toTypedArray())
@@ -103,4 +110,5 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         mBinding.externalStorageList = externalStorageList
         mBinding.notifyChange()
     }
+     */
 }

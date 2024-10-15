@@ -59,7 +59,6 @@ object DeviceInfo {
         return snapInfoList
     }
 
-
     // Get Device's Display Information (eg. DPI, Screen Resolution... )
     fun getDisplayInfo(context:Context):List<Info> {
         val emptyValue = context.getString(R.string.txt_unknown)
@@ -178,5 +177,21 @@ object DeviceInfo {
         val kernelInfoAll = Command.execute("uname -a")
         deviceInfoList.add(Info(hKernel, kernelInfoAll.trim()))
         return deviceInfoList
+    }
+
+
+    // 저장용 함수...
+    fun saveDeviceData(context: Context, displayInfoList:List<Info>, deviceInfoList:List<Info>){
+        val prefs = PreferenceUtil(context)
+        val tag = "Device"
+        val builder = StringBuilder()
+        builder.append(context.getString(R.string.txt_h_save_device)).append("\n")
+        displayInfoList.forEach { info ->
+            builder.append("${info.name} : ${info.value}\n")
+        }
+        deviceInfoList.forEach { info ->
+            builder.append("${info.name} : ${info.value}\n")
+        }
+        prefs.setValue(tag, builder.toString())
     }
 }
