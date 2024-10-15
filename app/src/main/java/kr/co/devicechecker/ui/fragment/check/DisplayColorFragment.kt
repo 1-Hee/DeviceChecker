@@ -15,8 +15,12 @@ import kr.co.devicechecker.BuildConfig
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.listener.ViewClickListener
+import kr.co.devicechecker.base.ui.BaseActivity
 import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.databinding.FragmentDisplayColorBinding
+import kr.co.devicechecker.ui.activity.DisplayTestActivity
+import kr.co.devicechecker.ui.activity.StartActivity
+import kr.co.devicechecker.ui.fragment.main.DeviceTestFragment
 import timber.log.Timber
 import java.util.Timer
 import java.util.TimerTask
@@ -35,6 +39,7 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
     }
     override fun initView() {
         autoHideButton()
+        (mActivity as DisplayTestActivity).toggleAppBarWithAnimation(true)
 
         // 광고 콜백 함수 세팅
         mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
@@ -140,6 +145,11 @@ class DisplayColorFragment : BaseFragment<FragmentDisplayColorBinding>(){
                 mInterstitialAd = interstitialAd
             }
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        (mActivity as DisplayTestActivity).toggleAppBarWithAnimation(false)
     }
 
 }

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -50,7 +51,6 @@ class StartActivity : BaseActivity<ActivtyStartBinding>() {
         navView.setupWithNavController(navController)
         requestPermission(this)
     }
-
 
     // 액션 바 메뉴
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

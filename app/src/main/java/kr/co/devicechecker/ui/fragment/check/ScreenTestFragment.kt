@@ -55,7 +55,7 @@ class ScreenTestFragment : BaseFragment<FragmentScreenTestBinding>() {
 
             when(view.tag) {
                 nameArray[0] -> { // 디스플레이 테스트
-                    nav().navigate(R.id.move_color_test)
+                    nav().navigate(R.id.displayColorFragment)
                 }
                 else -> {
 

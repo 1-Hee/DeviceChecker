@@ -69,9 +69,6 @@
         android:label=""
         tools:layout="@layout/fragment_screen_test"
         >
-        <action
-            android:id="@+id/move_color_test"
-            app:destination="@id/nav_color_test" />
     </fragment>
 
     <!-- Display Color Test -->

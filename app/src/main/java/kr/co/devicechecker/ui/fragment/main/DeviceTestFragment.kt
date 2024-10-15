@@ -94,9 +94,9 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
                     val mTag = view.tag?:""
                     when(mTag){
                         mContext.getString(R.string.device_display_test) -> {
-                            //val intent = Intent(mActivity, DisplayTestActivity::class.java)
-                            // launcher.launch(intent)
-                            nav().navigate(R.id.move_display_test)
+                            val intent = Intent(mActivity, DisplayTestActivity::class.java)
+                            launcher.launch(intent)
+                            // nav().navigate(R.id.move_display_test)
                         }
                         mContext.getString(R.string.sound_device_test) -> {
                             // val intent = Intent(mActivity, SoundTestActivity::class.java)

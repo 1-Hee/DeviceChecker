@@ -70,6 +70,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/iv_permission_icon"
                 app:layout_constraintBottom_toBottomOf="@id/iv_permission_icon"
+                android:clickable="false"
                 android:thumb="@drawable/switch_thumb"
                 android:track="@drawable/switch_track_selector"
                 />

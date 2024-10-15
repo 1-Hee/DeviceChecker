@@ -1,8 +1,14 @@
 package kr.co.devicechecker.ui.fragment.main
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Build
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -21,9 +27,11 @@ import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.listener.ViewClickListener
 import kr.co.devicechecker.base.ui.BaseFragment
+import kr.co.devicechecker.data.dto.IconInfo
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.Permission
 import kr.co.devicechecker.databinding.FragmentSettingBinding
+import timber.log.Timber
 
 class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
@@ -40,15 +48,20 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         permissionInfoList = mutableListOf()
         settingOptionList = mutableListOf()
 
-        // TODO user Permission
+        // set User permissions...
         val context = requireContext()
-        val iconDrawable: Drawable? = ContextCompat.getDrawable(context, R.drawable.ic_folder)
-        val permissionStorage = Permission(
-            name = "저장소 권한",
-            guideText = "앱에서 외부 저장소의 접근을 허용합니다.",
-            iconDrawable = iconDrawable
-        )
-        permissionInfoList.add(permissionStorage)
+        val nameArray:Array<String> = context.resources
+            .getStringArray(R.array.arr_user_permission); // 사용자 권한 명
+        val guideArray:Array<String> = context.resources
+            .getStringArray(R.array.arr_user_permission_desc); // 사용자 권한 설명
+        val iconArray: TypedArray = context.resources.obtainTypedArray(R.array.icon_user_permissions) // 아이콘
+
+        for(i in nameArray.indices){
+            val drawable: Drawable? = iconArray.getDrawable(i)
+            val mPermission = Permission(nameArray[i], guideArray[i], drawable, false)
+            permissionInfoList.add(mPermission)
+        }
+        iconArray.recycle()
 
         // Setting Option...
         val settingArray:Array<String> = context.resources
@@ -87,8 +100,45 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
                  */
             }
         }
+        hideSettingMenu() // 세팅 메뉴 숨김
+        checkUserPermission() // 사용자 권한 체크
+    }
 
-        // 세팅 메뉴 숨김
+    // 권한 변경 페이지로 이동
+    private fun popUpToAppSetting(){
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", requireActivity().packageName, null)
+        intent.data = uri
+        Toast.makeText(requireContext(), getString(R.string.txt_guide_modify_permission), Toast.LENGTH_SHORT).show()
+        launcher.launch(intent)
+    }
+
+    // 사용자 권한 체크 함수
+    private fun checkUserPermission() {
+        // 저장소 권한 체크
+        val isStorageAllowed = if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+            val storagePermission = arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            var flag = false;
+            storagePermission.forEach { it ->
+                flag = ContextCompat.checkSelfPermission(
+                    requireContext(), it
+                ) == PackageManager.PERMISSION_GRANTED || flag
+            }
+            flag
+        }else true
+
+        val mPermission = this.permissionInfoList[0]
+        mPermission.isAllowed = isStorageAllowed
+        this.permissionInfoList[0] = mPermission
+        mBinding.setVariable(BR.permissionInfoList, permissionInfoList)
+        mBinding.notifyChange()
+    }
+
+    // 세팅 메뉴 숨김 함수
+    private fun hideSettingMenu(){
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(@NonNull menu: Menu, @NonNull menuInflater: MenuInflater) {}
             override fun onPrepareMenu(@NonNull menu: Menu) {
@@ -107,10 +157,22 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
     // 사용자 권한 클릭 리스너
     private val permissionClickListener = object : ViewClickListener {
         override fun onViewClick(view: View) {
+            val context = view.context
+            val nameArray:Array<String> = context.resources
+                .getStringArray(R.array.arr_user_permission); // 사용자 권한 명
 
+            when(view.tag){
+                nameArray[0] -> { // 저장소 권한
+                    popUpToAppSetting()
+                }
+                else -> {
+
+                }
+            }
 
         }
     }
+
 
     // 세팅 클릭 리스너
     private val settingClickListener = object : ViewClickListener {
@@ -121,10 +183,16 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
             when(view.tag){
                 settingArray[0] -> { // 언어 설정
+                    // TODO : 언어설정 다이얼로그 디자인 및 기능 구현
                     Toast.makeText(context, "언어설정 다이얼로그...", Toast.LENGTH_SHORT).show()
                 }
-                settingArray[1] -> { // 앱 업데이트
-                    Toast.makeText(context, "앱 업데이트 이동...", Toast.LENGTH_SHORT).show()
+                settingArray[1] -> { // 앱 업데이트 이동
+                    val mPlayUrl = context.getString(R.string.app_play_store_url)
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        data = Uri.parse(mPlayUrl)
+                        setPackage("com.android.vending")
+                    }
+                    startActivity(intent)
                 }
                 settingArray[2] -> { // 오픈 소스 라이선스 ...
                     val intent = Intent(requireActivity(), OssLicensesMenuActivity::class.java)
@@ -134,8 +202,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
                 }
             }
-
         }
-
     }
 }

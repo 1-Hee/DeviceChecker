@@ -59,7 +59,6 @@ class AudioTestFragment : BaseFragment<FragmentAudioTestBinding>() {
     }
 
     override fun initView() {
-
         ringtone = RingtoneManager.getRingtone(requireContext(), ringtoneUri)
 
     }
@@ -73,12 +72,7 @@ class AudioTestFragment : BaseFragment<FragmentAudioTestBinding>() {
 
             when(view.tag) {
                 nameArray[0] -> { // 소리 테스트
-                   val flag =  playRingTone(context) // Ring Tone 재생 ...
-                    if(!flag){
-                        view.setBackgroundColor(ContextCompat.getColor(context, R.color.deep_blue500))
-                    } else {
-                        view.setBackgroundColor(ContextCompat.getColor(context, R.color.none))
-                    }
+                   playRingTone(context) // Ring Tone 재생 ...
                 }
                 else -> {
 
