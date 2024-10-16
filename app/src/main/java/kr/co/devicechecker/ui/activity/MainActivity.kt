@@ -511,6 +511,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }catch (e:Exception){
             Timber.e("[msg] %s", e.message)
         }
+
         AppUtil.File.saveData(context, allInfoObj.toString(), ".json")
     }
 

@@ -19,10 +19,9 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     private val externalStorageList = mutableListOf<StorageInfo>()
 
     private val storageList = mutableListOf<StorageInfo>()
-    // 값 저장을 위한 prefs 변수
-    private lateinit var prefs: PreferenceUtil
 
     companion object {
+        @Deprecated("This function may cause potential errors and is being deprecated.")
         fun newInstance(): MemoryInfoFragment {
             return MemoryInfoFragment()
         }
@@ -37,26 +36,14 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     }
     override fun initView() {
         Timber.i("initView ${this.javaClass.simpleName}")
-        prefs = PreferenceUtil(requireContext())
         getMemoryInfo()
         getStorageInfo()
-
-        // saveMemoryInfo()
 
         // temp
         mBinding.pbRamStatus.progress = 70
         mBinding.notifyChange()
 
     }
-
-    /*
-    private fun saveMemoryInfo(){
-        MemoryInfo.saveMemoryInfo(
-            requireContext(),
-            memoryInfoList, internalStorageList, externalStorageList
-        )
-    }
-     */
 
     private fun getMemoryInfo(){
         this.memoryInfoList.clear()
@@ -66,26 +53,9 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
     }
     // data 2. storage info (internel, externel)
     private fun getStorageInfo(){
-        /*
-        val pathList = AppUtil.Memory.getStoragePathList(requireActivity())
-        val internalPathList = mutableListOf<Info>()
-        val externalPathList = mutableListOf<Info>()
-        val internalName = requireContext().getString(R.string.txt_internal_name)
-        pathList.forEach { info ->
-            if(info.name.contains(internalName)){
-                internalPathList.add(info)
-            }else {
-                externalPathList.add(info)
-            }
-        }
-        setInternalStorageInfo(internalPathList)
-        setExternalStorageInfo(externalPathList)
-         */
-
         val pathList = MemoryInfo.getStoragePathList(requireActivity())
         setStorageInfo(pathList)
     }
-
 
     private fun setStorageInfo(pathList:List<Info>){
         this.storageList.clear()
@@ -95,20 +65,4 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         mBinding.notifyChange()
     }
 
-    /*
-    private fun setInternalStorageInfo(pathList:List<Info>){
-        this.internalStorageList.clear()
-        val storageInfo = AppUtil.Memory.getInternalStorageInfo(pathList.toTypedArray())
-        this.internalStorageList.addAll(storageInfo)
-        mBinding.internalStorageList = internalStorageList
-        mBinding.notifyChange()
-    }
-    private fun setExternalStorageInfo(pathList:List<Info>) {
-        this.externalStorageList.clear()
-        val storageInfo = AppUtil.Memory.getExternalStorageInfo(pathList.toTypedArray())
-        this.externalStorageList.addAll(storageInfo)
-        mBinding.externalStorageList = externalStorageList
-        mBinding.notifyChange()
-    }
-     */
 }

@@ -22,7 +22,6 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     private val otherInfoList = mutableListOf<Info>()
 
     companion object {
-
         @Deprecated("This function may cause potential errors and is being deprecated.")
         fun newInstance(): DeviceInfoFragment {
             return DeviceInfoFragment()
@@ -101,14 +100,5 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
         this.otherInfoList.clear()
         otherInfoList.addAll(DeviceInfo.getOtherInfo(context))
         mBinding.otherInfoList = otherInfoList
-    }
-
-    // TODO 값 저장하는 기능 이전하기...
-    private fun saveDisplayInfo(){
-        /*
-        AppUtil.Device.saveDeviceData(
-            requireContext(), this.displayInfoList, this.deviceInfoList
-        )
-         */
     }
 }

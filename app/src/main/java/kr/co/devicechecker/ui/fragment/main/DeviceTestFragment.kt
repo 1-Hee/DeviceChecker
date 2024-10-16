@@ -117,7 +117,8 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
                             Toast.makeText(mContext, reportArray[0], Toast.LENGTH_SHORT).show()
                         }
                         reportArray[1] -> { // JSON
-                            Toast.makeText(mContext, reportArray[1], Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(mContext, reportArray[1], Toast.LENGTH_SHORT).show()
+                            FileManager.saveJsonFile(requireActivity()) // JSON 저장
                         }
                         reportArray[2] -> { // TXT
                             FileManager.saveTextFiles(requireActivity()) // 텍스트 저장

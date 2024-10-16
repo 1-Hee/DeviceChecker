@@ -8,14 +8,19 @@ import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.BatteryInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.data.dto.Info
+import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.util.DeviceInfo
 import kr.co.devicechecker.util.SystemPerform
 import kr.co.devicechecker.util.MemoryInfo
 import kr.co.devicechecker.util.Sensor
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -142,6 +147,169 @@ object FileManager {
             .append("Created at : $currentDate\n")
         saveFile(context, builder.toString()) // 저장 시작!
     }
+
+    @SuppressLint("SimpleDateFormat")
+    fun saveJsonFile(mActivity: Activity) {
+        val context: Context = mActivity.baseContext
+        val resolver: ContentResolver = mActivity.contentResolver
+
+        val mJsonParent = JsonObject()
+        // Save device data via Object 'DeviceInfo'
+        val mDeviceTitle = "DeviceInfo"
+        val mDeviceInfoList = mutableListOf<Info>()
+
+        val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
+        val listModelAndOs = listOf( // first list!
+            Info("Model", arrModelAndOs[0]), // Model
+            Info("Android", arrModelAndOs[1]), // Android
+        )
+
+        val mDeviceSnapshots = DeviceInfo
+            .getDeviceSnapshotList(context, resolver)
+        val mDisplayInfoList = DeviceInfo.getDisplayInfo(context)
+        val mProcessInfoList = DeviceInfo.getProcessorInfo(context)
+        val mJavaInfoList = DeviceInfo.getJavaInformation(context)
+        val mOtherList = DeviceInfo.getOtherInfo(context)
+        // Add all Device Info!
+        mDeviceInfoList.addAll(listModelAndOs)
+        mDeviceInfoList.addAll(mDeviceSnapshots)
+        mDeviceInfoList.addAll(mDisplayInfoList)
+        mDeviceInfoList.addAll(mProcessInfoList)
+        mDeviceInfoList.addAll(mJavaInfoList)
+        mDeviceInfoList.addAll(mOtherList)
+
+        // Device Info -> Json Data!
+        try {
+            val deviceObjList = mutableListOf<JsonObject>()
+            mDeviceInfoList.forEach { info ->
+                val jsonObj = info.toJsonObject()
+                deviceObjList.add(jsonObj)
+            }
+            val deviceJsonArray:JsonArray = JsonParser.toJsonArray(deviceObjList)
+            mJsonParent.add(mDeviceTitle, deviceJsonArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // Save device data via Object 'SystemPerform'
+        val mSystemTitle = "SystemInfo"
+        val mSystemParent = JsonObject()
+
+        val arrChipAndArch = SystemPerform.getChipsetAndArchitecture(context)
+        val listChipAndArch = listOf<Info>(
+            Info("Chip Set", arrChipAndArch[0]), // chip set
+            Info("Hardware", arrChipAndArch[1]), // Hardware(=board)
+        )
+
+        // Parse Chip & Architecture
+        try {
+            val chipsObjList = mutableListOf<JsonObject>()
+            listChipAndArch.forEach { info ->
+                val jsonObj = info.toJsonObject()
+                chipsObjList.add(jsonObj)
+            }
+            val chipsJsonArray:JsonArray = JsonParser.toJsonArray(chipsObjList)
+            mSystemParent.add("ChipArch", chipsJsonArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // Add Core Info
+        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemPerform.getCPUCoreSpecs(context)
+        try {
+            val mCpuCoreObjList = mutableListOf<JsonObject>()
+            mCpuCoreSpecs.forEach { info ->
+                val mCoreSpecObj = info.toJsonObject()
+                mCpuCoreObjList.add(mCoreSpecObj)
+            }
+            val mCpuCoreObjArray:JsonArray = JsonParser.toJsonArray(mCpuCoreObjList)
+            mSystemParent.add("CpuCoreInfo", mCpuCoreObjArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // Add Battery info
+        val mBatteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+        if(mBatteryInfo != null){
+            val mBatteryJsonObj = mBatteryInfo.toJsonObject()
+            mSystemParent.add("BatteryInfo", mBatteryJsonObj)
+        }
+
+        // Add System Info to Parent Json Object
+        mJsonParent.add(mSystemTitle, mSystemParent)
+
+        // Save device data via Object 'MemoryInfo'
+        val mMemoryTitle = "MemoryInfo"
+        val mMemoryParent = JsonObject()
+
+        val mMemoryInfo = MemoryInfo.getMemoryInfo(context)
+        val pathList = MemoryInfo.getStoragePathList(mActivity)
+        val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
+
+        // Add all Memory Information!
+        // Add Memory Json Info to Memory Parent Json
+        try {
+            val mMemoryObjList = mutableListOf<JsonObject>()
+            mMemoryInfo.forEach { info->
+                val mMemoryObj = info.toJsonObject()
+                mMemoryObjList.add(mMemoryObj)
+            }
+
+            val mMemoryObjArray:JsonArray = JsonParser.toJsonArray(mMemoryObjList)
+            mMemoryParent.add("MemoryInfo", mMemoryObjArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // Add Storage Json Info to Memory Parent Json
+        try {
+            val mStorageObjList = mutableListOf<JsonObject>()
+            mStorageList.forEach { info ->
+                val mStorageObj = info.toJsonObject()
+                mStorageObjList.add(mStorageObj)
+            }
+            val mStorageObjArray:JsonArray = JsonParser.toJsonArray(mStorageObjList)
+            mMemoryParent.add("StorageInfo", mStorageObjArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // Add Memory Info to Parent Json Object
+        mJsonParent.add(mMemoryTitle, mMemoryParent)
+
+        // Save device data via Object 'Sensor'
+        val mSensorTitle = "SensorInfo"
+
+        // Add All Sensor List
+        val mSensorList = Sensor.getSensorInfo(mActivity)
+        mSensorList.forEach { it ->
+        }
+
+        // Add Sensor Json Info to Parent
+        try {
+            val mSensorObjList = mutableListOf<JsonObject>()
+            mSensorList.forEach { info ->
+                val mSensorObj = info.toJsonObject()
+                mSensorObjList.add(mSensorObj)
+            }
+            val mSensorObjArray:JsonArray = JsonParser.toJsonArray(mSensorObjList)
+            mJsonParent.add(mSensorTitle, mSensorObjArray)
+        }catch (e:Exception){
+            Timber.e("[msg] %s", e.message)
+        }
+
+        // 현재 날짜 형식 설정
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // 원하는 형식으로 변경 가능
+        val currentDate = dateFormat.format(Date())
+
+        // 날짜 데이터 추가
+        mJsonParent.addProperty("Date", currentDate)
+
+        // Json 파일로 저장
+        saveFile(context, mJsonParent.toString(), ".json")
+    }
+
+
 
     private fun saveFile(context: Context, content:String, format:String = ".txt"){
         val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath

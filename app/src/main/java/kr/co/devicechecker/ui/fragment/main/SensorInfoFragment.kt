@@ -12,11 +12,11 @@ import kr.co.devicechecker.util.Sensor
 import timber.log.Timber
 
 class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
+
     private val sensorInfoList = mutableListOf<SensorInfo>()
-    // 값 저장을 위한 prefs 변수
-    private lateinit var prefs: PreferenceUtil
     override fun initViewModel() {}
     companion object {
+        @Deprecated("This function may cause potential errors and is being deprecated.")
         fun newInstance(): SensorInfoFragment {
             return SensorInfoFragment()
         }
@@ -28,15 +28,9 @@ class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
     }
     override fun initView() {
         Timber.i("initView ${this.javaClass.simpleName}")
-        prefs = PreferenceUtil(requireContext())
         getSensorInfo()
-        saveSensorInfo()
     }
-    private fun saveSensorInfo(){
-        AppUtil.Sensor.saveSensorInfo(
-            requireContext(), this.sensorInfoList
-        )
-    }
+
     private fun getSensorInfo(){
         this.sensorInfoList.clear()
         this.sensorInfoList.addAll(

@@ -493,6 +493,10 @@ class AppUtil {
             }
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object File {
         fun saveAllHardwareInfoForText(activity:Activity){
             // display info
@@ -594,6 +598,10 @@ class AppUtil {
             }
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Json {
         private fun gsonWithoutHtmlEscaping(): Gson {
             return GsonBuilder()
