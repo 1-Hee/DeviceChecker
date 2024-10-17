@@ -114,14 +114,15 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
                     // TODO 문서 다운로드 함수 추가
                     when(mTag){
                         reportArray[0] -> { // HTML
-                            Toast.makeText(mContext, reportArray[0], Toast.LENGTH_SHORT).show()
+                            // Toast.makeText(mContext, reportArray[0], Toast.LENGTH_SHORT).show()
+                            FileManager.saveHTMLFile(requireActivity()) // HTML 저장
                         }
                         reportArray[1] -> { // JSON
                             // Toast.makeText(mContext, reportArray[1], Toast.LENGTH_SHORT).show()
                             FileManager.saveJsonFile(requireActivity()) // JSON 저장
                         }
                         reportArray[2] -> { // TXT
-                            FileManager.saveTextFiles(requireActivity()) // 텍스트 저장
+                            FileManager.saveTextFile(requireActivity()) // 텍스트 저장
                         }
                     }
                 }

@@ -400,4 +400,5 @@
     <!-- App Store 이동 기능 -->
     <string name="app_play_store_url">https://play.google.com/store/apps/details?id=kr.co.devicechecker</string>
 
+
 </resources>

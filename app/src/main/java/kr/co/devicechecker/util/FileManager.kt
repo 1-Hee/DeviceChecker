@@ -7,28 +7,25 @@ import android.content.Context
 import android.os.Build
 import android.os.Environment
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.JsonArray
-import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.BatteryInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.data.dto.Info
+import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.data.dto.StorageInfo
-import kr.co.devicechecker.util.DeviceInfo
-import kr.co.devicechecker.util.SystemPerform
-import kr.co.devicechecker.util.MemoryInfo
-import kr.co.devicechecker.util.Sensor
 import timber.log.Timber
+import java.io.BufferedReader
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStreamReader
 import java.io.OutputStreamWriter
-import java.lang.StringBuilder
 import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Date
+
 
 /**
  * This object is a separately created class.
@@ -39,7 +36,7 @@ import java.util.Date
 object FileManager {
 
     @SuppressLint("SimpleDateFormat")
-    fun saveTextFiles(mActivity: Activity) {
+    fun saveTextFile(mActivity: Activity) {
         val context: Context = mActivity.baseContext
         val resolver: ContentResolver = mActivity.contentResolver
 
@@ -50,7 +47,8 @@ object FileManager {
         val mDeviceInfoList = mutableListOf<Info>()
 
         val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
-        val listModelAndOs = listOf( // first list!
+        val listModelAndOs = listOf(
+            // first list!
             Info("Model", arrModelAndOs[0]), // Model
             Info("Android", arrModelAndOs[1]), // Android
         )
@@ -159,7 +157,8 @@ object FileManager {
         val mDeviceInfoList = mutableListOf<Info>()
 
         val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
-        val listModelAndOs = listOf( // first list!
+        val listModelAndOs = listOf(
+            // first list!
             Info("Model", arrModelAndOs[0]), // Model
             Info("Android", arrModelAndOs[1]), // Android
         )
@@ -307,6 +306,333 @@ object FileManager {
 
         // Json 파일로 저장
         saveFile(context, mJsonParent.toString(), ".json")
+    }
+
+    // save HTML File
+    fun saveHTMLFile(mActivity: Activity) {
+        val context: Context = mActivity.baseContext
+        val resolver: ContentResolver = mActivity.contentResolver
+
+        val htmlBuilder = StringBuilder()
+        // header init
+        val mHtmlHeader = readRawTextFile(context, R.raw.html_head)
+        htmlBuilder.append(mHtmlHeader)
+
+        // Device Overview = Device Snapshot!
+
+        // Load Snapshot Data...
+        val mSnapInfoList = mutableListOf<Info>()
+        val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
+        val listModelAndOs = listOf(
+            // first list!
+            Info("Model", arrModelAndOs[0]), // Model
+            Info("Android", arrModelAndOs[1]), // Android
+        )
+        val mDeviceSnapshots = DeviceInfo
+            .getDeviceSnapshotList(context, resolver)
+        mSnapInfoList.addAll(listModelAndOs)
+        mSnapInfoList.addAll(mDeviceSnapshots)
+
+        val mSnapShotHtml =  getSnapShotHtml(mSnapInfoList)
+        htmlBuilder.append(mSnapShotHtml)
+
+        // Save device data via Object 'DeviceInfo'
+        val mDeviceTitle = "Device Info"
+        val mDeviceInfoList = mutableListOf<Info>()
+        val mDisplayInfoList = DeviceInfo.getDisplayInfo(context)
+        val mProcessInfoList = DeviceInfo.getProcessorInfo(context)
+        val mJavaInfoList = DeviceInfo.getJavaInformation(context)
+        val mOtherList = DeviceInfo.getOtherInfo(context)
+
+        // Add all Device Info!
+        mDeviceInfoList.addAll(listModelAndOs)
+        mDeviceInfoList.addAll(mDeviceSnapshots)
+        mDeviceInfoList.addAll(mDisplayInfoList)
+        mDeviceInfoList.addAll(mProcessInfoList)
+        mDeviceInfoList.addAll(mJavaInfoList)
+        mDeviceInfoList.addAll(mOtherList)
+
+        val mDeviceInfoHtml = getInfoListHtml(mDeviceTitle, mDeviceInfoList)
+        htmlBuilder.append(mDeviceInfoHtml)
+
+        // Save device data via Object 'SystemPerform'
+        val mSystemTitle = "Hardware Info"
+
+        val arrChipAndArch = SystemPerform.getChipsetAndArchitecture(context)
+        val listChipAndArch = listOf<Info>(
+            Info("Chip Set", arrChipAndArch[0]), // chip set
+            Info("Hardware", arrChipAndArch[1]), // Hardware(=board)
+        )
+
+        val mHardwareInfo = getInfoListHtml(mSystemTitle, listChipAndArch)
+        htmlBuilder.append(mHardwareInfo)
+
+        val mCoreTitle = "CPU Cores"
+        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemPerform.getCPUCoreSpecs(context)
+        val mCoresHtml = getCpuCoresHtml(mCoreTitle, mCpuCoreSpecs)
+        htmlBuilder.append(mCoresHtml)
+
+        val mBatteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+
+        if(mBatteryInfo != null){
+            val mBatteryTitle = "Battery Status"
+            val mBatterInfoList = listOf<Info>(
+                Info("charging status", mBatteryInfo.isCharging.toString()),
+                Info("chargeType", mBatteryInfo.chargeType),
+                Info("level", mBatteryInfo.level.toString()),
+                Info("capacity", mBatteryInfo.capacity.toString()),
+            )
+            val mBatteryHtml = getInfoListHtml(mBatteryTitle, mBatterInfoList)
+            htmlBuilder.append(mBatteryHtml)
+        }
+
+        // Save device data via Object 'MemoryInfo'
+        val mMemoryTitle = "Memory Info"
+        val mMemoryInfo = MemoryInfo.getMemoryInfo(context)
+        val mMemoryHtml = getInfoListHtml(mMemoryTitle, mMemoryInfo)
+        htmlBuilder.append(mMemoryHtml)
+
+        val mStorageTitle = "Storage Info"
+        val pathList = MemoryInfo.getStoragePathList(mActivity)
+        val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
+        val mStorageHtml = getStorageHtml(mStorageTitle, mStorageList)
+        htmlBuilder.append(mStorageHtml)
+
+        // Save device data via Object 'Sensor'
+        val mSensorTitle = "Sensor Info"
+        val mSensorList = Sensor.getSensorInfo(mActivity)
+        val mSensorHtml = getSensorHtml(mSensorTitle, mSensorList)
+        htmlBuilder.append(mSensorHtml)
+
+        // 현재 날짜 형식 설정
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss") // 원하는 형식으로 변경 가능
+        val currentDate = dateFormat.format(Date())
+
+        val timeStampHtml =  """
+                <div class="signature">
+                    <p>발행자 : Test it Developer</p>
+                    <p>발행 일자 : ${currentDate}</p>
+                </div>
+        """.trimIndent()
+
+        val mHtmlMiddle = readRawTextFile(context, R.raw.html_middle)
+        val mHtmlTail = readRawTextFile(context, R.raw.html_tail)
+        htmlBuilder.append(mHtmlMiddle)
+        htmlBuilder.append(timeStampHtml)
+        htmlBuilder.append(mHtmlTail)
+        saveFile(context,   htmlBuilder.toString(), ".html") // 저장 시작!
+    }
+
+
+    private fun getSensorHtml(tag: String, sensorList:List<SensorInfo>) : String {
+        val sensorBuilder = StringBuilder()
+
+        val mSensorHeader = """
+               <div class="section-title">
+                    <h2>${tag}</h2>
+               </div>
+               
+               <div class="tripple-info">
+                    <table>
+                        <tr>
+                            <th>Sensor Name</th>
+                            <th>Type</th>
+                            <th>Vendor</th>
+                        </tr>            
+        """.trimIndent()
+
+        val mSensorFormat = """            
+                <tr>
+                    <td data-label="이름">%s</td>
+                    <td data-label="값 1">%s</td>
+                    <td data-label="값 2">%s</td>
+                </tr>            
+        """.trimIndent()
+
+        val mSensorTail = """
+                </table>
+            </div>
+        """.trimIndent()
+
+        sensorBuilder.append(mSensorHeader)
+
+        sensorList.forEach { it ->
+            val mSensorHtml = String
+                .format(mSensorFormat, it.sensorName, it.sensorType, it.sensorVendor)
+            sensorBuilder.append(mSensorHtml)
+        }
+        sensorBuilder.append(mSensorTail)
+
+        return sensorBuilder.toString()
+    }
+
+    private fun getStorageHtml(tag: String, storageList:List<StorageInfo>) : String {
+        val storageBuilder = StringBuilder()
+
+        val mStorageHeader = """
+               <div class="section-title">
+                    <h2>${tag}</h2>
+               </div>
+                              
+               <div class="tripple-info">
+                    <table>
+                        <tr>
+                            <th>Storage Name</th>
+                            <th>Available</th>
+                            <th>Total</th>
+                        </tr>            
+        """.trimIndent()
+
+        val mStorageFormat = """            
+                <tr>
+                    <td data-label="이름">%s</td>
+                    <td data-label="값 1">%s</td>
+                    <td data-label="값 2">%s</td>
+                </tr>            
+        """.trimIndent()
+
+        val mStorageTail = """
+                </table>
+            </div>
+        """.trimIndent()
+
+        storageBuilder.append(mStorageHeader)
+
+        storageList.forEach { it ->
+            val mStorageHtml = String
+                .format(mStorageFormat, it.name, it.available, it.total)
+            storageBuilder.append(mStorageHtml)
+        }
+
+        storageBuilder.append(mStorageTail)
+
+        return storageBuilder.toString()
+    }
+
+    private fun getCpuCoresHtml(tag: String, cpuCoreList:List<CpuCoreInfo>) : String {
+        val coreBuilder = StringBuilder()
+
+        val mCoreHeader = """
+               <div class="section-title">
+                    <h2>${tag}</h2>
+               </div>
+               
+               <div class="tripple-info">
+                    <table>
+                        <tr>
+                            <th>Core No.</th>
+                            <th>min Hz</th>
+                            <th>max Hz</th>
+                        </tr>            
+        """.trimIndent()
+
+        val mCoreFormat = """            
+                <tr>
+                    <td data-label="이름">%s</td>
+                    <td data-label="값 1">%s MHz</td>
+                    <td data-label="값 2">%s MHz</td>
+                </tr>            
+        """.trimIndent()
+
+        val mCoreTail = """
+                </table>
+            </div>
+        """.trimIndent()
+
+        coreBuilder.append(mCoreHeader)
+
+        cpuCoreList.forEach { it ->
+            val mCoreHtml = String.format(mCoreFormat, it.name, it.minHz, it.maxHz)
+            coreBuilder.append(mCoreHtml)
+        }
+        coreBuilder.append(mCoreTail)
+
+        return coreBuilder.toString()
+    }
+
+    private fun getInfoListHtml(tag:String, infoList:List<Info>) : String {
+        val mBuilder = StringBuilder()
+        val dpTagName = if(tag.isBlank()) "None" else tag
+        val mInfoTitle = """
+            <div class="section-title">
+                <h2>$dpTagName</h2>
+            </div>      
+                  
+            <div class="extra-info">
+                <table>            
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                    </tr>
+        """.trimIndent()
+        val mInfoFormat = """
+            <tr>
+                <td data-label="항목">%s</td>
+                <td data-label="내용">%s</td>
+            </tr>
+        """.trimIndent()
+
+        val mInfoTail = """
+                </table>
+            </div>
+        """.trimIndent()
+
+        mBuilder.append(mInfoTitle)
+
+        infoList.forEach { it ->
+            val mInfoHtml = String.format(mInfoFormat, it.name, it.value)
+            mBuilder.append(mInfoHtml)
+        }
+        mBuilder.append(mInfoTail)
+
+        return mBuilder.toString()
+    }
+
+    private fun getSnapShotHtml(snapInfoList:List<Info>):String {
+        val snapBuilder = StringBuilder()
+        // Device Overview = Device Snapshot!
+        val mSnapHead = """
+            <div class="details">
+            <table>            
+        """.trimIndent()
+
+        val mSnapShotFormat = """
+            <tr>
+                <th>%s</th>            
+                <td data-label="">%s</td>            
+            </tr>
+        """.trimIndent()
+
+        val mSnapTail = """
+            </table>
+        </div>
+        """.trimIndent()
+
+        snapBuilder.append(mSnapHead)
+
+        snapInfoList.forEach { it ->
+            val mSnapInfo = String.format(mSnapShotFormat, it.name, it.value)
+            snapBuilder.append(mSnapInfo)
+        }
+        snapBuilder.append(mSnapTail)
+        return snapBuilder.toString()
+    }
+
+    private fun readRawTextFile(context: Context, resId: Int): String {
+        val inputStream = context.resources.openRawResource(resId)
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        val stringBuilder = StringBuilder()
+        var line: String?
+        try {
+            while (reader.readLine().also { line = it } != null) {
+                stringBuilder.append(line)
+                stringBuilder.append("\n")
+            }
+            reader.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return stringBuilder.toString()
     }
 
 
