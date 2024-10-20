@@ -107,7 +107,7 @@ object FileManager {
         // Save device data via Object 'MemoryInfo'
         val mMemoryTitle = "[Memory Info]\n"
         builder.append("\n").append(mMemoryTitle)
-        val mMemoryInfo = MemoryInfo.getMemoryInfo(context)
+        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
 
         val pathList = MemoryInfo.getStoragePathList(mActivity)
         val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
@@ -241,7 +241,7 @@ object FileManager {
         val mMemoryTitle = "MemoryInfo"
         val mMemoryParent = JsonObject()
 
-        val mMemoryInfo = MemoryInfo.getMemoryInfo(context)
+        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
         val pathList = MemoryInfo.getStoragePathList(mActivity)
         val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
 
@@ -388,7 +388,7 @@ object FileManager {
 
         // Save device data via Object 'MemoryInfo'
         val mMemoryTitle = "Memory Info"
-        val mMemoryInfo = MemoryInfo.getMemoryInfo(context)
+        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
         val mMemoryHtml = getInfoListHtml(mMemoryTitle, mMemoryInfo)
         htmlBuilder.append(mMemoryHtml)
 

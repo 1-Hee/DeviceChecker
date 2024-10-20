@@ -4,9 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import android.os.Build
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.BatteryInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
+import java.io.BufferedReader
+import java.io.FileReader
+
 
 /**
  * This object is a separately designed class
@@ -98,11 +103,16 @@ object SystemPerform {
 
            // 4. 배터리 최대 용량 가져오기
            val batteryManager = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-           val batteryCapacity: Long =
-               batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
+           val chargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER)
+           val batteryCapacityPercentage: Long = batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
 
-           val mChargeTypeStr = if (usbCharge) "USB" else if (acCharge) "AC" else "Unknown"
-           BatteryInfo(isCharging, mChargeTypeStr, batteryPct, batteryCapacity)
+           // chargeCounter는 µAh 단위이므로 1000으로 나눠서 mAh로 변환
+           val chargeCounterInmAh = chargeCounter / 1000
+           // 잔여 배터리 용량(mAh) 계산 (현재 남은 용량을 비율로 나눔)
+           val remainBatteryCapacity = chargeCounterInmAh * 100 / batteryCapacityPercentage
+
+           val mChargeTypeStr = if (usbCharge) "USB" else if (acCharge) "AC" else "None"
+           BatteryInfo(isCharging, mChargeTypeStr, batteryPct, remainBatteryCapacity)
        } else null
     }
 }

@@ -246,12 +246,10 @@
     <string name="memory_status">메모리 상태</string>
     <string name="label_memory_usage">메모리 사용량</string>
     <string name="tv_label_battery">배터리 사용량</string>
-    <string name="label_electric_capacity">Capacity : </string>
+    <string name="label_electric_capacity">Remain:&#160;</string>
     <string name="unit_electric_capacity">mAh</string>
-
     <string name="label_temperature">Temp :</string>
-    <string name="h_charge_type">Charging Type : </string>
-
+    <string name="h_charge_type">Charging:&#160;</string>
     <string name="battery_status">배터리 상태</string>
     <string name="h_android_version">Android&#160;</string>
     <string name="other_info_title">기타 정보</string>
@@ -399,6 +397,10 @@
 
     <!-- App Store 이동 기능 -->
     <string name="app_play_store_url">https://play.google.com/store/apps/details?id=kr.co.devicechecker</string>
+
+    <string name="total_mem_format">전체 %1$s MB</string>
+    <string name="avail_ram_suffix">MB 사용 가능</string>
+    <string name="ram_unit">&#160;MB</string>
 
 
 </resources>

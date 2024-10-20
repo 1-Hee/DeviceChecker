@@ -136,6 +136,8 @@ dependencies {
     implementation("com.google.android.play:app-update:$app_update_version")
     implementation("com.google.android.play:app-update-ktx:$app_update_version") // for kotlin
 
+    // for chart Graph
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     /** firebase, 나중에 기능구현할 때 풀기 !
      *    // Import the Firebase BoM

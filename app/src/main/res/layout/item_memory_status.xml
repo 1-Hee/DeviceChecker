@@ -6,8 +6,12 @@
     xmlns:bind="http://schemas.android.com/tools"
     >
     <data>
+        <variable
+            name="memInfo"
+            type="kr.co.devicechecker.data.dto.MemInfo" />
 
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,6 +40,7 @@
             android:id="@+id/tv_mem_current_usage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(memInfo.inUseMem)}"
             android:textColor="@color/deep_blue800"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -62,6 +67,7 @@
             android:id="@+id/tv_mem_total_capacity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{String.valueOf(memInfo.totalMem)+@string/ram_unit}"
             android:textColor="@color/mono900"
             android:textStyle="bold"
             android:textSize="14sp"
@@ -71,12 +77,10 @@
             />
 
         <!-- Graph Area... -->
-        <LinearLayout
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/graph_mem_monitor"
             android:layout_width="match_parent"
-            android:layout_height="108dp"
-            android:background="@color/red400"
-            android:orientation="vertical"
+            android:layout_height="156dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

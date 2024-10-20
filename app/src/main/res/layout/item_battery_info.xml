@@ -145,11 +145,11 @@
                 android:id="@+id/tv_label_electric_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(@string/label_electric_capacity+String.valueOf(batteryInfo.capacity)+@string/unit_electric_capacity)}"
+                android:text="@{String.valueOf(String.valueOf(batteryInfo.capacity)+@string/unit_electric_capacity)}"
                 android:includeFontPadding="false"
                 android:textSize="12sp"
                 android:textColor="@color/mono900"
-                tools:text="Capacity : 1234 mAh"
+                tools:text="Remain : 1234 mAh"
                 />
 
         </LinearLayout>

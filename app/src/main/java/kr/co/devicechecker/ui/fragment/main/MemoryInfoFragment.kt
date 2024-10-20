@@ -1,5 +1,8 @@
 package kr.co.devicechecker.ui.fragment.main
 
+import android.app.Activity
+import android.app.ActivityManager
+import android.content.Context
 import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.base.bind.DataBindingConfig
@@ -7,10 +10,9 @@ import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.data.dto.StorageInfo
 import kr.co.devicechecker.databinding.FragmentMemoryInfoBinding
-import kr.co.devicechecker.util.AppUtil
 import kr.co.devicechecker.util.MemoryInfo
-import kr.co.devicechecker.util.PreferenceUtil
 import timber.log.Timber
+import kotlin.math.round
 
 
 class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
@@ -33,27 +35,31 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
             .addBindingParam(BR.memoryInfoList, memoryInfoList)
             .addBindingParam(BR.internalStorageList, internalStorageList)
             .addBindingParam(BR.externalStorageList, externalStorageList)
+            .addBindingParam(BR.availMem, "")
+            .addBindingParam(BR.totalMem, "")
+            .addBindingParam(BR.isLowMemory, false)
+            .addBindingParam(BR.memProgress, 0)
     }
     override fun initView() {
         Timber.i("initView ${this.javaClass.simpleName}")
-        getMemoryInfo()
-        getStorageInfo()
+        val context = requireContext()
+        val mActivity = requireActivity()
+        getMemoryInfo(context)
+        getStorageInfo(mActivity)
+        initMemorySize(context)
 
-        // temp
-        mBinding.pbRamStatus.progress = 70
         mBinding.notifyChange()
-
     }
 
-    private fun getMemoryInfo(){
+    private fun getMemoryInfo(context: Context){
         this.memoryInfoList.clear()
-        this.memoryInfoList.addAll(MemoryInfo.getMemoryInfo(requireContext()))
+        this.memoryInfoList.addAll(MemoryInfo.getMemoryInfoList(context))
         mBinding.memoryInfoList = memoryInfoList
         mBinding.notifyChange()
     }
     // data 2. storage info (internel, externel)
-    private fun getStorageInfo(){
-        val pathList = MemoryInfo.getStoragePathList(requireActivity())
+    private fun getStorageInfo(mActivity: Activity){
+        val pathList = MemoryInfo.getStoragePathList(mActivity)
         setStorageInfo(pathList)
     }
 
@@ -64,5 +70,18 @@ class MemoryInfoFragment : BaseFragment<FragmentMemoryInfoBinding>() {
         mBinding.storageList = storageList
         mBinding.notifyChange()
     }
+
+    // Memory Size 세팅하는 함수
+    private fun initMemorySize(context: Context) {
+        val mMemInfo = MemoryInfo.getMemoryInfo(context)
+        mBinding.setVariable(BR.availMem, mMemInfo.availMem.toString())
+        mBinding.setVariable(BR.totalMem, mMemInfo.totalMem.toString())
+        mBinding.setVariable(BR.isLowMemory, mMemInfo.isLowMemory)
+        val memPercentValue:Int = mMemInfo.getPercentInt()
+        mBinding.setVariable(BR.memProgress, memPercentValue)
+
+    }
+
+
 
 }

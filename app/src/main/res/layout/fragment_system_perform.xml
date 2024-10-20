@@ -11,6 +11,9 @@
             name="cpuCoreInfoList"
             type="java.util.List&lt;kr.co.devicechecker.data.dto.CpuCoreInfo>" />
         <variable
+            name="memInfo"
+            type="kr.co.devicechecker.data.dto.MemInfo" />
+        <variable
             name="batteryInfo"
             type="kr.co.devicechecker.data.dto.BatteryInfo" />
     </data>
@@ -247,6 +250,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
+                bind:memInfo="@{memInfo}"
                 layout="@layout/item_memory_status"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

@@ -154,7 +154,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_device_specific_report"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="326dp"
                 android:orientation="vertical"
                 app:reportList="@{reportList}"
                 app:vClick="@{click}"

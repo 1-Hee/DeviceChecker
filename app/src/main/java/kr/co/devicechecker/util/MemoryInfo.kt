@@ -1,12 +1,16 @@
 package kr.co.devicechecker.util
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.os.StatFs
+import kr.co.devicechecker.BR
 import kr.co.devicechecker.R
 import kr.co.devicechecker.data.dto.Info
+import kr.co.devicechecker.data.dto.MemInfo
 import kr.co.devicechecker.data.dto.StorageInfo
 import timber.log.Timber
+import kotlin.math.round
 
 
 /**
@@ -18,7 +22,7 @@ import timber.log.Timber
  * For detailed usage examples, please refer to the MemoryInfoFragment class.
  */
 object MemoryInfo {
-    fun getMemoryInfo(context: Context):List<Info>{
+    fun getMemoryInfoList(context: Context):List<Info>{
         val emptyValue = context.resources.getString(R.string.txt_unknown)
         val memoryInfoList = mutableListOf<Info>()
         val memoryMap = hashMapOf<String, String>()
@@ -153,4 +157,21 @@ object MemoryInfo {
         }
         prefs.setValue(tag, builder.toString())
     }
+
+    // 메모리 사이즈 가져오는 메서드
+    fun getMemoryInfo(context: Context) : MemInfo {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val memoryInfo = ActivityManager.MemoryInfo()
+        activityManager.getMemoryInfo(memoryInfo)
+
+        // Available memory (MB)
+        val availableMemory:Long = memoryInfo.availMem / 1048576L // MB 단위로 변환
+        val totalMemory:Long = memoryInfo.totalMem / 1048576L // MB 단위로 변환
+
+        // Low Memory 여부
+        val isLowMemory:Boolean = memoryInfo.lowMemory
+
+        return MemInfo(availableMemory, totalMemory, totalMemory-availableMemory, isLowMemory)
+    }
+
 }
