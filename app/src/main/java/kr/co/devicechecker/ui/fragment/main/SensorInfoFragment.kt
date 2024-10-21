@@ -6,21 +6,13 @@ import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.SensorInfo
 import kr.co.devicechecker.databinding.FragmentSensorInfoBinding
-import kr.co.devicechecker.util.AppUtil
-import kr.co.devicechecker.util.PreferenceUtil
-import kr.co.devicechecker.util.Sensor
+import kr.co.devicechecker.util.SensorFetcher
 import timber.log.Timber
 
 class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
 
     private val sensorInfoList = mutableListOf<SensorInfo>()
     override fun initViewModel() {}
-    companion object {
-        @Deprecated("This function may cause potential errors and is being deprecated.")
-        fun newInstance(): SensorInfoFragment {
-            return SensorInfoFragment()
-        }
-    }
 
     override fun getDataBindingConfig(): DataBindingConfig {
         return DataBindingConfig(R.layout.fragment_sensor_info)
@@ -34,7 +26,7 @@ class SensorInfoFragment : BaseFragment<FragmentSensorInfoBinding>() {
     private fun getSensorInfo(){
         this.sensorInfoList.clear()
         this.sensorInfoList.addAll(
-            Sensor.getSensorInfo(requireActivity())
+            SensorFetcher.getSensorInfo(requireActivity())
         )
         mBinding.sensorInfoList = sensorInfoList
         mBinding.tvSensorCnt.text = "${sensorInfoList.size}"

@@ -8,7 +8,7 @@ import kr.co.devicechecker.base.bind.DataBindingConfig
 import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.Info
 import kr.co.devicechecker.databinding.FragmentDeviceInfoBinding
-import kr.co.devicechecker.util.DeviceInfo
+import kr.co.devicechecker.util.DeviceFetcher
 import timber.log.Timber
 
 
@@ -21,12 +21,6 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     private val javaInfoList = mutableListOf<Info>()
     private val otherInfoList = mutableListOf<Info>()
 
-    companion object {
-        @Deprecated("This function may cause potential errors and is being deprecated.")
-        fun newInstance(): DeviceInfoFragment {
-            return DeviceInfoFragment()
-        }
-    }
     override fun initViewModel() {
 
     }
@@ -56,7 +50,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
 
     // task 1. Get Device Model Name & Android Version
     private fun initModelAndOsVersion(context:Context) {
-        val strArr = DeviceInfo.getModelAndOsVersion(context)
+        val strArr = DeviceFetcher.getModelAndOsVersion(context)
         if(strArr.size < 2) return
         // ui init
         mBinding.tvDeviceModel.text = strArr[0]
@@ -66,7 +60,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     // task 2. Get Device Snapshot Info
     private fun initDeviceSnapshot(context: Context, resolver: ContentResolver){
         this.snapShotList.clear()
-        val snapInfoList = DeviceInfo.getDeviceSnapshotList(context, resolver)
+        val snapInfoList = DeviceFetcher.getDeviceSnapshotList(context, resolver)
         this.snapShotList.addAll(snapInfoList)
         mBinding.setVariable(BR.snapShotList, snapShotList)
     }
@@ -75,14 +69,14 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     // task 3. Get Display Info
     private fun initDisplayInfo(context: Context){
         this.displayInfoList.clear()
-        displayInfoList.addAll(DeviceInfo.getDisplayInfo(context))
+        displayInfoList.addAll(DeviceFetcher.getDisplayInfo(context))
         mBinding.displayInfoList = displayInfoList
     }
 
     // task 4. Get Processor Info ( Common )
     private fun initProcessorInfo(context: Context){
         this.processorInfoList.clear()
-        this.processorInfoList.addAll(DeviceInfo.getProcessorInfo(context))
+        this.processorInfoList.addAll(DeviceFetcher.getProcessorInfo(context))
         mBinding.processorInfoList = processorInfoList
     }
 
@@ -90,7 +84,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     // task 5. Get Java & JVM Info
     private fun initJavaInformation(context: Context){
         this.javaInfoList.clear()
-        this.javaInfoList.addAll(DeviceInfo.getJavaInformation(context))
+        this.javaInfoList.addAll(DeviceFetcher.getJavaInformation(context))
         mBinding.javaInfoList = javaInfoList
         mBinding.notifyChange()
     }
@@ -98,7 +92,7 @@ class DeviceInfoFragment : BaseFragment<FragmentDeviceInfoBinding>() {
     // task 6. Other Information
     private fun initOtherInfo(context: Context){
         this.otherInfoList.clear()
-        otherInfoList.addAll(DeviceInfo.getOtherInfo(context))
+        otherInfoList.addAll(DeviceFetcher.getOtherInfo(context))
         mBinding.otherInfoList = otherInfoList
     }
 }

@@ -2,9 +2,12 @@ package kr.co.devicechecker.ui.fragment.main
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.google.android.gms.ads.AdRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -18,11 +21,9 @@ import kr.co.devicechecker.base.ui.BaseFragment
 import kr.co.devicechecker.data.dto.BatteryInfo
 import kr.co.devicechecker.data.dto.CpuCoreInfo
 import kr.co.devicechecker.databinding.FragmentSystemPerformBinding
-import kr.co.devicechecker.util.MemoryInfo
-import kr.co.devicechecker.util.SystemPerform
-import timber.log.Timber
+import kr.co.devicechecker.util.MemoryFetcher
+import kr.co.devicechecker.util.SystemFetcher
 import java.util.ArrayDeque
-import java.util.LinkedList
 import java.util.Queue
 
 
@@ -37,18 +38,25 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
     }
 
     override fun getDataBindingConfig(): DataBindingConfig {
-        mUsageQueue= ArrayDeque()
+        mUsageQueue = ArrayDeque()
 
         return DataBindingConfig(R.layout.fragment_system_perform)
             .addBindingParam(BR.cpuCoreInfoList, cpuCoreInfoList)
+            .addBindingParam(BR.onRefreshListener, onRefreshListener)
     }
 
     override fun initView() {
+        mUsageQueue.clear()
         val context = requireContext()
         initChipsetAndArchitecture(context) // task 1.
         initCPUCoreSpecs(context) // task 2.
         setMemInfo(context) // task 3.
         initBatteryStatus(requireContext()) // task 4.
+        mBinding.notifyChange()
+
+        // 배너 광고 로드
+        val adRequest = AdRequest.Builder().build()
+        mBinding.avSystemPerform.loadAd(adRequest)
         mBinding.notifyChange()
 
     }
@@ -60,7 +68,7 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
         // Coroutine을 사용한 반복 작업 시작
         job = CoroutineScope(Dispatchers.Main).launch {
             while (isActive) {
-                val mMemInfo = MemoryInfo.getMemoryInfo(context)
+                val mMemInfo = MemoryFetcher.getMemoryInfo(context)
                 // Timber.i("[MemInfo] => %s", mMemInfo.toString())
                 setMemInfo(context)
                 // 1초 대기
@@ -77,7 +85,7 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
 
     // task 1. get CPU Architecture & Chipset Brand
     private fun initChipsetAndArchitecture(context: Context){
-        val mCpuTagInfo = SystemPerform.getChipsetAndArchitecture(context)
+        val mCpuTagInfo = SystemFetcher.getChipsetAndArchitecture(context)
         if(mCpuTagInfo.size < 2) return
         mBinding.tvCpuManufacture.text = mCpuTagInfo[0]
         mBinding.tvCpuArchitecture.text = mCpuTagInfo[1]
@@ -85,7 +93,8 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
 
     // task 2. get CPU Core Specific information
     private fun initCPUCoreSpecs(context: Context){
-        val mCpuCoreInfoList = SystemPerform.getCPUCoreSpecs(context)
+        this.cpuCoreInfoList.clear()
+        val mCpuCoreInfoList = SystemFetcher.getCPUCoreSpecs(context)
         cpuCoreInfoList.addAll(mCpuCoreInfoList)
         mBinding.cpuCoreInfoList = cpuCoreInfoList
         mBinding.tvCoreCnt.text = cpuCoreInfoList.size.toString()
@@ -93,7 +102,7 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
 
     // task 3. Tracking Memory Usage...
     private fun setMemInfo(context: Context){
-        val mMemInfo = MemoryInfo.getMemoryInfo(context)
+        val mMemInfo = MemoryFetcher.getMemoryInfo(context)
         mBinding.setVariable(BR.memInfo, mMemInfo)
 
         // 최대 데이터 포인트 개수 설정
@@ -132,10 +141,17 @@ class SystemPerformFragment : BaseFragment<FragmentSystemPerformBinding>() {
 
     // task 4. Get Battery Info
     private fun initBatteryStatus(context: Context){
-        val batteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+        val batteryInfo:BatteryInfo? = SystemFetcher.getBatteryStatus(context)
         mBinding.setVariable(BR.batteryInfo, batteryInfo)
 
     }
 
-
+    // 리프레쉬 리스너
+    private val onRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        lifecycleScope.launch {
+            initView()
+            delay(800)
+            mBinding.swiperSystemPerform.isRefreshing = false
+        }
+    }
 }

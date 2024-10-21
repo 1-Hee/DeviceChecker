@@ -93,7 +93,7 @@
                 android:id="@+id/tv_display_info_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_header_display_info"
+                android:text="@string/txt_header_display_test"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="14sp"

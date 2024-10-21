@@ -11,10 +11,27 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 7,
-      "versionName": "1.1.5",
-      "outputFile": "test_it_release_2024_02_13_1.1.5.apk"
+      "versionCode": 15,
+      "versionName": "1.2.0",
+      "outputFile": "test_it_release_2024_10_20_1.2.0.apk"
     }
   ],
-  "elementType": "File"
+  "elementType": "File",
+  "baselineProfiles": [
+    {
+      "minApi": 28,
+      "maxApi": 30,
+      "baselineProfiles": [
+        "baselineProfiles/1/test_it_release_2024_10_20_1.2.0.dm"
+      ]
+    },
+    {
+      "minApi": 31,
+      "maxApi": 2147483647,
+      "baselineProfiles": [
+        "baselineProfiles/0/test_it_release_2024_10_20_1.2.0.dm"
+      ]
+    }
+  ],
+  "minSdkVersionForDexing": 24
 }

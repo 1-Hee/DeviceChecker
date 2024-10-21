@@ -186,7 +186,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_display_info_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="156dp"
                 app:infoList="@{displayInfoList}"
                 android:orientation="vertical"
                 android:layout_marginVertical="8dp"

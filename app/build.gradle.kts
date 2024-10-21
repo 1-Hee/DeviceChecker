@@ -21,8 +21,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 15
-        versionName = "1.2.0"
+        versionCode = 17
+        versionName = "1.2.2"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["ADMOB_APP_KEY"] = getPropertiesValue("ADMOB_APP_KEY")
@@ -148,26 +148,6 @@ dependencies {
      *     implementation("com.google.firebase:firebase-analytics")
      */
 
-    // room implements
-    val room_version = "2.5.0"
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version") // Room의 Kotlin 확장 (선택 사항)
-    kapt("androidx.room:room-compiler:$room_version") // Room 애노테이션 프로세서 (kapt 구성)
-    implementation("androidx.room:room-paging:$room_version") // 페이징 의존성
-
-    // for paging
-    val paging_version ="3.3.0"
-    implementation("androidx.paging:paging-runtime:$paging_version")
-
-    // rxjava, rxkotlin implements
-    val rx_java_version = "3.1.8"
-    val rx_kotlin_version = "3.0.1"
-    implementation("io.reactivex.rxjava3:rxjava:$rx_java_version")
-    implementation("io.reactivex.rxjava3:rxkotlin:$rx_kotlin_version") // rx kotlin
-    val rx_android_version = "3.0.2";
-    implementation("io.reactivex.rxjava3:rxandroid:$rx_android_version")
-
     // ViewModel implements
     val lifeCycleVersion = "2.5.1"
     // ViewModel
@@ -189,9 +169,7 @@ dependencies {
     implementation("com.google.android.flexbox:flexbox:$flexVersion")
 
     // swiper
-    val swiperefresh_version = "0.24.7-alpha"
-    implementation("com.google.accompanist:accompanist-swiperefresh:$swiperefresh_version")
-
-
+    val swiper_version = "1.2.0-alpha01"
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swiper_version")
 
 }

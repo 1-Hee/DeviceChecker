@@ -46,19 +46,19 @@ object FileManager {
         builder.append(mDeviceTitle)
         val mDeviceInfoList = mutableListOf<Info>()
 
-        val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
+        val arrModelAndOs = DeviceFetcher.getModelAndOsVersion(context)
         val listModelAndOs = listOf(
             // first list!
             Info("Model", arrModelAndOs[0]), // Model
             Info("Android", arrModelAndOs[1]), // Android
         )
 
-        val mDeviceSnapshots = DeviceInfo
+        val mDeviceSnapshots = DeviceFetcher
             .getDeviceSnapshotList(context, resolver)
-        val mDisplayInfoList = DeviceInfo.getDisplayInfo(context)
-        val mProcessInfoList = DeviceInfo.getProcessorInfo(context)
-        val mJavaInfoList = DeviceInfo.getJavaInformation(context)
-        val mOtherList = DeviceInfo.getOtherInfo(context)
+        val mDisplayInfoList = DeviceFetcher.getDisplayInfo(context)
+        val mProcessInfoList = DeviceFetcher.getProcessorInfo(context)
+        val mJavaInfoList = DeviceFetcher.getJavaInformation(context)
+        val mOtherList = DeviceFetcher.getOtherInfo(context)
         // Add all Device Info!
         mDeviceInfoList.addAll(listModelAndOs)
         mDeviceInfoList.addAll(mDeviceSnapshots)
@@ -75,14 +75,14 @@ object FileManager {
         val mSystemTitle = "[System Info]\n"
         builder.append("\n").append(mSystemTitle)
 
-        val arrChipAndArch = SystemPerform.getChipsetAndArchitecture(context)
+        val arrChipAndArch = SystemFetcher.getChipsetAndArchitecture(context)
         val listChipAndArch = listOf<Info>(
             Info("Chip Set", arrChipAndArch[0]), // chip set
             Info("Hardware", arrChipAndArch[1]), // Hardware(=board)
         )
 
-        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemPerform.getCPUCoreSpecs(context)
-        val mBatteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemFetcher.getCPUCoreSpecs(context)
+        val mBatteryInfo:BatteryInfo? = SystemFetcher.getBatteryStatus(context)
 
         // Add all System Perform Information!
         listChipAndArch.forEach { it ->
@@ -107,10 +107,10 @@ object FileManager {
         // Save device data via Object 'MemoryInfo'
         val mMemoryTitle = "[Memory Info]\n"
         builder.append("\n").append(mMemoryTitle)
-        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
+        val mMemoryInfo = MemoryFetcher.getMemoryInfoList(context)
 
-        val pathList = MemoryInfo.getStoragePathList(mActivity)
-        val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
+        val pathList = MemoryFetcher.getStoragePathList(mActivity)
+        val mStorageList = MemoryFetcher.getStorageInfo(pathList.toTypedArray())
 
         // Add all Memory Information!
         mMemoryInfo.forEach { it ->
@@ -129,7 +129,7 @@ object FileManager {
         builder.append("\n").append(mSensorTitle)
 
         // Add All Sensor List
-        val mSensorList = Sensor.getSensorInfo(mActivity)
+        val mSensorList = SensorFetcher.getSensorInfo(mActivity)
         mSensorList.forEach { it ->
             builder.append("#${it.sensorName}\n")
                 .append("- type :\t${it.sensorType}\n")
@@ -156,19 +156,19 @@ object FileManager {
         val mDeviceTitle = "DeviceInfo"
         val mDeviceInfoList = mutableListOf<Info>()
 
-        val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
+        val arrModelAndOs = DeviceFetcher.getModelAndOsVersion(context)
         val listModelAndOs = listOf(
             // first list!
             Info("Model", arrModelAndOs[0]), // Model
             Info("Android", arrModelAndOs[1]), // Android
         )
 
-        val mDeviceSnapshots = DeviceInfo
+        val mDeviceSnapshots = DeviceFetcher
             .getDeviceSnapshotList(context, resolver)
-        val mDisplayInfoList = DeviceInfo.getDisplayInfo(context)
-        val mProcessInfoList = DeviceInfo.getProcessorInfo(context)
-        val mJavaInfoList = DeviceInfo.getJavaInformation(context)
-        val mOtherList = DeviceInfo.getOtherInfo(context)
+        val mDisplayInfoList = DeviceFetcher.getDisplayInfo(context)
+        val mProcessInfoList = DeviceFetcher.getProcessorInfo(context)
+        val mJavaInfoList = DeviceFetcher.getJavaInformation(context)
+        val mOtherList = DeviceFetcher.getOtherInfo(context)
         // Add all Device Info!
         mDeviceInfoList.addAll(listModelAndOs)
         mDeviceInfoList.addAll(mDeviceSnapshots)
@@ -194,7 +194,7 @@ object FileManager {
         val mSystemTitle = "SystemInfo"
         val mSystemParent = JsonObject()
 
-        val arrChipAndArch = SystemPerform.getChipsetAndArchitecture(context)
+        val arrChipAndArch = SystemFetcher.getChipsetAndArchitecture(context)
         val listChipAndArch = listOf<Info>(
             Info("Chip Set", arrChipAndArch[0]), // chip set
             Info("Hardware", arrChipAndArch[1]), // Hardware(=board)
@@ -214,7 +214,7 @@ object FileManager {
         }
 
         // Add Core Info
-        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemPerform.getCPUCoreSpecs(context)
+        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemFetcher.getCPUCoreSpecs(context)
         try {
             val mCpuCoreObjList = mutableListOf<JsonObject>()
             mCpuCoreSpecs.forEach { info ->
@@ -228,7 +228,7 @@ object FileManager {
         }
 
         // Add Battery info
-        val mBatteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+        val mBatteryInfo:BatteryInfo? = SystemFetcher.getBatteryStatus(context)
         if(mBatteryInfo != null){
             val mBatteryJsonObj = mBatteryInfo.toJsonObject()
             mSystemParent.add("BatteryInfo", mBatteryJsonObj)
@@ -241,9 +241,9 @@ object FileManager {
         val mMemoryTitle = "MemoryInfo"
         val mMemoryParent = JsonObject()
 
-        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
-        val pathList = MemoryInfo.getStoragePathList(mActivity)
-        val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
+        val mMemoryInfo = MemoryFetcher.getMemoryInfoList(context)
+        val pathList = MemoryFetcher.getStoragePathList(mActivity)
+        val mStorageList = MemoryFetcher.getStorageInfo(pathList.toTypedArray())
 
         // Add all Memory Information!
         // Add Memory Json Info to Memory Parent Json
@@ -280,7 +280,7 @@ object FileManager {
         val mSensorTitle = "SensorInfo"
 
         // Add All Sensor List
-        val mSensorList = Sensor.getSensorInfo(mActivity)
+        val mSensorList = SensorFetcher.getSensorInfo(mActivity)
         mSensorList.forEach { it ->
         }
 
@@ -322,13 +322,13 @@ object FileManager {
 
         // Load Snapshot Data...
         val mSnapInfoList = mutableListOf<Info>()
-        val arrModelAndOs = DeviceInfo.getModelAndOsVersion(context)
+        val arrModelAndOs = DeviceFetcher.getModelAndOsVersion(context)
         val listModelAndOs = listOf(
             // first list!
             Info("Model", arrModelAndOs[0]), // Model
             Info("Android", arrModelAndOs[1]), // Android
         )
-        val mDeviceSnapshots = DeviceInfo
+        val mDeviceSnapshots = DeviceFetcher
             .getDeviceSnapshotList(context, resolver)
         mSnapInfoList.addAll(listModelAndOs)
         mSnapInfoList.addAll(mDeviceSnapshots)
@@ -339,10 +339,10 @@ object FileManager {
         // Save device data via Object 'DeviceInfo'
         val mDeviceTitle = "Device Info"
         val mDeviceInfoList = mutableListOf<Info>()
-        val mDisplayInfoList = DeviceInfo.getDisplayInfo(context)
-        val mProcessInfoList = DeviceInfo.getProcessorInfo(context)
-        val mJavaInfoList = DeviceInfo.getJavaInformation(context)
-        val mOtherList = DeviceInfo.getOtherInfo(context)
+        val mDisplayInfoList = DeviceFetcher.getDisplayInfo(context)
+        val mProcessInfoList = DeviceFetcher.getProcessorInfo(context)
+        val mJavaInfoList = DeviceFetcher.getJavaInformation(context)
+        val mOtherList = DeviceFetcher.getOtherInfo(context)
 
         // Add all Device Info!
         mDeviceInfoList.addAll(listModelAndOs)
@@ -358,7 +358,7 @@ object FileManager {
         // Save device data via Object 'SystemPerform'
         val mSystemTitle = "Hardware Info"
 
-        val arrChipAndArch = SystemPerform.getChipsetAndArchitecture(context)
+        val arrChipAndArch = SystemFetcher.getChipsetAndArchitecture(context)
         val listChipAndArch = listOf<Info>(
             Info("Chip Set", arrChipAndArch[0]), // chip set
             Info("Hardware", arrChipAndArch[1]), // Hardware(=board)
@@ -368,11 +368,11 @@ object FileManager {
         htmlBuilder.append(mHardwareInfo)
 
         val mCoreTitle = "CPU Cores"
-        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemPerform.getCPUCoreSpecs(context)
+        val mCpuCoreSpecs:List<CpuCoreInfo> = SystemFetcher.getCPUCoreSpecs(context)
         val mCoresHtml = getCpuCoresHtml(mCoreTitle, mCpuCoreSpecs)
         htmlBuilder.append(mCoresHtml)
 
-        val mBatteryInfo:BatteryInfo? = SystemPerform.getBatteryStatus(context)
+        val mBatteryInfo:BatteryInfo? = SystemFetcher.getBatteryStatus(context)
 
         if(mBatteryInfo != null){
             val mBatteryTitle = "Battery Status"
@@ -388,19 +388,19 @@ object FileManager {
 
         // Save device data via Object 'MemoryInfo'
         val mMemoryTitle = "Memory Info"
-        val mMemoryInfo = MemoryInfo.getMemoryInfoList(context)
+        val mMemoryInfo = MemoryFetcher.getMemoryInfoList(context)
         val mMemoryHtml = getInfoListHtml(mMemoryTitle, mMemoryInfo)
         htmlBuilder.append(mMemoryHtml)
 
         val mStorageTitle = "Storage Info"
-        val pathList = MemoryInfo.getStoragePathList(mActivity)
-        val mStorageList = MemoryInfo.getStorageInfo(pathList.toTypedArray())
+        val pathList = MemoryFetcher.getStoragePathList(mActivity)
+        val mStorageList = MemoryFetcher.getStorageInfo(pathList.toTypedArray())
         val mStorageHtml = getStorageHtml(mStorageTitle, mStorageList)
         htmlBuilder.append(mStorageHtml)
 
         // Save device data via Object 'Sensor'
         val mSensorTitle = "Sensor Info"
-        val mSensorList = Sensor.getSensorInfo(mActivity)
+        val mSensorList = SensorFetcher.getSensorInfo(mActivity)
         val mSensorHtml = getSensorHtml(mSensorTitle, mSensorList)
         htmlBuilder.append(mSensorHtml)
 

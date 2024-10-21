@@ -9,12 +9,12 @@
 
     <fragment
         android:id="@+id/screenTestFragment"
-        android:name="kr.co.devicechecker.ui.fragment.check.ScreenTestFragment"
+        android:name="kr.co.devicechecker.ui.fragment.test.ScreenTestFragment"
         android:label="screenTestFragmentt"/>
 
     <fragment
         android:id="@+id/displayColorFragment"
-        android:name="kr.co.devicechecker.ui.fragment.check.DisplayColorFragment"
+        android:name="kr.co.devicechecker.ui.fragment.test.DisplayColorFragment"
         android:label="displayColorFragment"/>
 
 

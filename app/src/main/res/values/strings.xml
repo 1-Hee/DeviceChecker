@@ -1,37 +1,17 @@
 <resources>
     <string name="app_name">Test It!</string>
-    <!-- 탭메뉴 -->
-    <string name="txt_tab_device">디바이스</string>
-    <string name="txt_tab_processor">프로세서</string>
-    <string name="txt_tab_memory">메모리</string>
-    <string name="txt_tab_sensor">센서</string>
-    <string name="txt_tab_test">테스트</string>
 
     <!-- 디바이스 & 디스플레이 -->
     <string name="txt_header_display_info">디스플레이 정보</string>
-    <string name="txt_header_device_info">기기 정보</string>
 
     <!-- 프로세서 -->
     <string name="txt_header_processor_info">프로세서 정보</string>
-    <string name="txt_header_cpu_core_info">CPU 코어 세부 정보</string>
     <string name="txt_header_java_info">자바 &amp; 자바 가상 머신</string>
 
-    <!-- 메모리 -->
-    <string name="txt_header_main_memory">주기억장치</string>
-    <string name="txt_header_internal_storage">내부 저장소</string>
-    <string name="txt_header_external_storage">외부 저장소</string>
     <!-- 센서 -->
     <string name="txt_header_sensor_info">센서 정보</string>
 
-    <!-- 디바이스 테스팅 -->
-    <string name="txt_guide_hardware_test">아래의 하드웨어 장치를 테스트합니다.</string>
-
-    <string name="txt_go_back">돌아가기</string>
-    <string name="txt_btn_color_test">색상 테스트</string>
-    <string name="txt_guide_color_test">디스플레이 화소를 테스트 합니다.</string>
     <string name="txt_btn_exit_color_test">색상 테스트 종료</string>
-    <string name="txt_btn_sound_test">소리 테스트</string>
-    <string name="txt_guide_sound_test">기기의 음향 장치를 테스트 합니다.</string>
 
     <string name="txt_unknown">알 수 없음</string>
     <!-- cpu core -->
@@ -60,16 +40,10 @@
     <string name="txt_h_save_sensor">####### 센서 정보 #######</string>
 
     <string name="ts_guide_full_screen">디스플레이 테스트를 위하여 전체화면으로 전환합니다.</string>
-    <string name="txt_d_save_title">기기 정보 저장</string>
-    <string name="txt_d_save_content">저장할 파일의 형식을 선택해주세요.\n[저장]을 누르시면 선택한 형식으로 기기 정보를 저장합니다.\n저장 경로 : %1$s</string>
-    <string name="txt_cancel">취소</string>
-    <string name="txt_save">저장</string>
-    <string name="ts_guide_save_info">하드웨어 정보를 저장합니다..</string>
+
     <string name="txt_h_save_file">파일 저장 완료 :</string>
     <string name="txt_h_fail_save">텍스트 파일 생성 중 오류가 발생하였습니다.</string>
-    <string name="txt_save_info_type1">텍스트 파일(.txt)</string>
-    <string name="txt_save_info_type2">HTML</string>
-    <string name="txt_save_info_type3">JSON</string>
+
 
     <!-- Device -->
     <!-- Device Info -->
@@ -401,6 +375,7 @@
     <string name="total_mem_format">전체 %1$s MB</string>
     <string name="avail_ram_suffix">MB 사용 가능</string>
     <string name="ram_unit">&#160;MB</string>
+    <string name="txt_header_display_test">디스플레이 테스트</string>
 
 
 </resources>

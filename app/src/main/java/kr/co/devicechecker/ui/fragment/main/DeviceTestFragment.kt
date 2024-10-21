@@ -3,7 +3,6 @@ package kr.co.devicechecker.ui.fragment.main
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -17,7 +16,6 @@ import kr.co.devicechecker.data.dto.ColorInfo
 import kr.co.devicechecker.data.dto.IconInfo
 import kr.co.devicechecker.databinding.FragmentDeviceTestBinding
 import kr.co.devicechecker.ui.activity.DisplayTestActivity
-import kr.co.devicechecker.ui.activity.SoundTestActivity
 import kr.co.devicechecker.util.FileManager
 import timber.log.Timber
 
@@ -26,11 +24,6 @@ class DeviceTestFragment : BaseFragment<FragmentDeviceTestBinding>() {
 
     // 다른 액티비티 이동후 결과 값을 받아 핸들링할 런쳐
     private lateinit var launcher: ActivityResultLauncher<Intent>;
-    companion object {
-        fun newInstance(): DeviceTestFragment {
-            return DeviceTestFragment()
-        }
-    }
     override fun initViewModel() {}
 
     override fun getDataBindingConfig(): DataBindingConfig {

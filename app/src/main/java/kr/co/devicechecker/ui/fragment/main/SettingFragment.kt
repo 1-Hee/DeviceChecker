@@ -67,7 +67,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         val settingArray:Array<String> = context.resources
             .getStringArray(R.array.arr_setting_option); // 메뉴 명
         // Option 1. 언어 설정
-        val langInfo = Info(settingArray[0], "한국어") // TODO : 실제 설정 다이얼로그와 연계하여 기능 구현...
+        // val langInfo = Info(settingArray[0], "한국어") // TODO : 실제 설정 다이얼로그와 연계하여 기능 구현...
 
         // Option 2. 앱 업데이트
         val versionInfo = Info(settingArray[1], BuildConfig.VERSION_NAME)
@@ -75,7 +75,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         // Option 3. 오픈소스 라이선스
         val ossInfo = Info(settingArray[2], "")
 
-        settingOptionList.add(langInfo)
+        // settingOptionList.add(langInfo)
         settingOptionList.add(versionInfo)
         settingOptionList.add(ossInfo)
 
@@ -173,7 +173,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
         }
     }
 
-
     // 세팅 클릭 리스너
     private val settingClickListener = object : ViewClickListener {
         override fun onViewClick(view: View) {
@@ -184,7 +183,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
             when(view.tag){
                 settingArray[0] -> { // 언어 설정
                     // TODO : 언어설정 다이얼로그 디자인 및 기능 구현
-                    Toast.makeText(context, "언어설정 다이얼로그...", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(context, "언어설정 다이얼로그...", Toast.LENGTH_SHORT).show()
                 }
                 settingArray[1] -> { // 앱 업데이트 이동
                     val mPlayUrl = context.getString(R.string.app_play_store_url)
