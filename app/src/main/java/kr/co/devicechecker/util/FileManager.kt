@@ -529,8 +529,8 @@ object FileManager {
         val mCoreFormat = """            
                 <tr>
                     <td data-label="이름">%s</td>
-                    <td data-label="값 1">%s MHz</td>
-                    <td data-label="값 2">%s MHz</td>
+                    <td data-label="값 1">%s</td>
+                    <td data-label="값 2">%s</td>
                 </tr>            
         """.trimIndent()
 

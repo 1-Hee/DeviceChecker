@@ -99,7 +99,7 @@
                 border-radius: 8px;
             }
             table {
-                table-layout: auto; /* 테이블 레이아웃 자동 조정 */
+                table-layout: fixed; /* 테이블 레이아웃 자동 조정 */
                 width: 100%; /* 전체 폭 활용 */
             }
             th, td {
