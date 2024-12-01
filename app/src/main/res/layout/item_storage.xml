@@ -9,7 +9,103 @@
             name="storageInfo"
             type="kr.co.devicechecker.data.dto.StorageInfo" />
     </data>
-    <androidx.cardview.widget.CardView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_item_info"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:layout_marginVertical="6dp"
+        >
+
+        <!-- Icon -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_storage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_drive"
+            android:tint="@color/mono800"
+            android:scaleType="fitCenter"
+            android:padding="8dp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.2"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/md_vertical"
+            android:layout_width="1.5dp"
+            android:layout_height="16dp"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <!-- 저장소 명  -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_storage_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{storageInfo.name}"
+            android:textSize="14sp"
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:includeFontPadding="false"
+            tools:text="저장소 명"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_storage_avail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/txt_h_storage_avail+`\t`+storageInfo.available}"
+            android:textSize="12sp"
+            android:textColor="@color/mono600"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_storage_name"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:includeFontPadding="false"
+            tools:text="사용 가능한 용량"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_storage_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/txt_h_storage_total+`\t`+storageInfo.total}"
+            android:textSize="12sp"
+            android:textColor="@color/mono600"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_storage_avail"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:includeFontPadding="false"
+            tools:text="전체 용량"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="4dp"
@@ -41,7 +137,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintGuide_percent="0.3"
                 />
-            <!-- 저장소 아이콘 -->
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
@@ -109,4 +204,5 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+-->
 </layout>

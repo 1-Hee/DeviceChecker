@@ -1,39 +1,17 @@
 <resources>
     <string name="app_name">Test It!</string>
-    <!-- 탭메뉴 -->
-    <string name="txt_tab_device">디바이스</string>
-    <string name="txt_tab_processor">프로세서</string>
-    <string name="txt_tab_memory">메모리</string>
-    <string name="txt_tab_sensor">센서</string>
-    <string name="txt_tab_test">테스트</string>
 
     <!-- 디바이스 & 디스플레이 -->
     <string name="txt_header_display_info">디스플레이 정보</string>
-    <string name="txt_header_device_info">기기 정보</string>
 
     <!-- 프로세서 -->
     <string name="txt_header_processor_info">프로세서 정보</string>
-    <string name="txt_header_cpu_core_info">CPU 코어 세부 정보</string>
     <string name="txt_header_java_info">자바 &amp; 자바 가상 머신</string>
 
-    <!-- 메모리 -->
-    <string name="txt_header_main_memory">주기억장치</string>
-    <string name="txt_header_internal_storage">내부 저장소</string>
-    <string name="txt_header_external_storage">외부 저장소</string>
     <!-- 센서 -->
     <string name="txt_header_sensor_info">센서 정보</string>
 
-    <!-- 디바이스 테스팅 -->
-    <string name="txt_guide_hardware_test">아래의 하드웨어 장치를 테스트합니다.</string>
-    <string name="txt_btn_display_test">디스플레이 테스트</string>
-    <string name="txt_btn_sound_device">음향 장치 테스트</string>
-
-    <string name="txt_go_back">돌아가기</string>
-    <string name="txt_btn_color_test">색상 테스트</string>
-    <string name="txt_guide_color_test">디스플레이 화소를 테스트 합니다.</string>
     <string name="txt_btn_exit_color_test">색상 테스트 종료</string>
-    <string name="txt_btn_sound_test">소리 테스트</string>
-    <string name="txt_guide_sound_test">기기의 음향 장치를 테스트 합니다.</string>
 
     <string name="txt_unknown">알 수 없음</string>
     <!-- cpu core -->
@@ -62,16 +40,10 @@
     <string name="txt_h_save_sensor">####### 센서 정보 #######</string>
 
     <string name="ts_guide_full_screen">디스플레이 테스트를 위하여 전체화면으로 전환합니다.</string>
-    <string name="txt_d_save_title">기기 정보 저장</string>
-    <string name="txt_d_save_content">저장할 파일의 형식을 선택해주세요.\n[저장]을 누르시면 선택한 형식으로 기기 정보를 저장합니다.\n저장 경로 : %1$s</string>
-    <string name="txt_cancel">취소</string>
-    <string name="txt_save">저장</string>
-    <string name="ts_guide_save_info">하드웨어 정보를 저장합니다..</string>
+
     <string name="txt_h_save_file">파일 저장 완료 :</string>
     <string name="txt_h_fail_save">텍스트 파일 생성 중 오류가 발생하였습니다.</string>
-    <string name="txt_save_info_type1">텍스트 파일(.txt)</string>
-    <string name="txt_save_info_type2">HTML</string>
-    <string name="txt_save_info_type3">JSON</string>
+
 
     <!-- Device -->
     <!-- Device Info -->
@@ -109,15 +81,6 @@
         <item>getprop ro.telephony.default_network</item>
         <item>getprop ro.debuggable</item>
     </string-array>
-    <!-- Display Info -->
-    <string-array name="display_headers">
-        <item>DPI(Dot Per Inch)</item>
-        <item>해상도</item>
-        <item>화면 주사율</item>
-    </string-array>
-    <string-array name="display_command">
-        <item>getprop ro.sf.lcd_density</item>
-    </string-array>
 
     <!-- Processor -->
     <!-- 프로세서 정보 -->
@@ -135,22 +98,6 @@
         <item>getprop ro.product.cpu.abilist</item>
         <item>getprop ro.product.board</item>
         <item>getprop ro.hardware</item>
-    </string-array>
-
-    <!-- 자바 정보 -->
-    <string-array name="java_headers">
-        <item>자바 버전</item>
-        <item>자바 VM 버전</item>
-        <item>자바 VM 공급자</item>
-        <item>자바 VM 명</item>
-        <item>JAVA_MIN_HEAP</item>
-        <item>JAVA_MAX_HEAP</item>
-        <item>JAVA_APPLICATION_HEAP</item>
-    </string-array>
-    <string-array name="java_command">
-        <item>getprop dalvik.vm.dex2oat-Xms</item>
-        <item>getprop dalvik.vm.dex2oat-Xmx</item>
-        <item>getprop dalvik.vm.heapsize</item>
     </string-array>
 
     <!-- Memory -->
@@ -233,6 +180,202 @@
     <string name="txt_error_log_result">%1$s\nError details saved in %2$s</string>
     <string name="txt_error_log_create">%1$s\nFailed to save error details</string>
     <string name="admob_banner_sdk_key"></string>
+
+    <!-- new -->
+    <string name="nav_device_information">기기 정보</string>
+    <string name="nav_system_performance">시스템 성능</string>
+    <string name="nav_memory_information">메모리 정보</string>
+    <string name="nav_sensor_information">센서 정보</string>
+    <string name="nav_device_testing">장치 테스트</string>
+    <string name="nav_header_description">Check Device Solution.</string>
+    <string name="title_sensor_info">센서 정보</string>
+    <string name="title_sensor_info_s">Sensor Information</string>
+    <string name="sensor_info_guide">현재 기기에서 사용 가능한 센서 정보를 표시합니다.</string>
+    <string name="sensor_cnt_prefix">전체 센서 개수 :</string>
+    <string name="sensor_unit">개</string>
+    <string name="device_info_title">기기 정보</string>
+    <string name="device_info_title_s">Device Information</string>
+    <string name="device_test_title">장치 테스트</string>
+    <string name="device_test_title_s">Device Testing</string>
+    <string name="guide_device_test">현재 기기에 아래와 같은 테스트를 수행합니다.</string>
+    <string name="display_specific_title">기기 사양 보고서</string>
+    <string name="display_specific_title_eng">Device Specification Report</string>
+
+    <string name="device_display_test">디스플레이 테스트</string>
+    <string name="device_display_test_desc">현재 장치의 화면을 테스트합니다.</string>
+    <string name="sound_device_test">음향 장치 테스트</string>
+    <string name="sound_device_test_desc">현재 장치의 음향장치를 테스트합니다.</string>
+    <string name="memory_info_title">메모리 정보</string>
+    <string name="memory_info_title_s">Memory Information</string>
+    <string name="ram_info_title">메모리 상세 정보</string>
+    <string name="storage_info_title">기기 저장 장치</string>
+    <string name="ram_status_title">메모리 사용량</string>
+    <string name="system_perform_title">시스템 성능</string>
+    <string name="system_perform_title_s">System Performance</string>
+    <string name="tv_system_perform_guide">현재 기기의 시스템 성능을 모니터링합니다.</string>
+    <string name="cpu_core_status">CPU 상태</string>
+    <string name="label_core_cnt">CPU 전체 코어 수</string>
+    <string name="core_unit">core</string>
+    <string name="tag_cpu">CPU</string>
+    <string name="memory_status">메모리 상태</string>
+    <string name="label_memory_usage">메모리 사용량</string>
+    <string name="tv_label_battery">배터리 사용량</string>
+    <string name="label_electric_capacity">Remain:&#160;</string>
+    <string name="unit_electric_capacity">mAh</string>
+    <string name="label_temperature">Temp :</string>
+    <string name="h_charge_type">Charging:&#160;</string>
+    <string name="battery_status">배터리 상태</string>
+    <string name="h_android_version">Android&#160;</string>
+    <string name="other_info_title">기타 정보</string>
+
+    <string-array name="device_report_list">
+        <item>HTML 문서로 내보내기</item>
+        <item>JSON 문서로 내보내기</item>
+        <item>텍스트 파일(.txt)로 내보내기</item>
+    </string-array>
+
+    <!-- new commands -->
+    <string-array name="snapshot_header_list">
+        <item>제조사</item>
+        <item>모뎀</item>
+        <item>모뎀 버전</item>
+        <item>보안 패치 수준</item>
+    </string-array>
+
+    <string-array name="snapshot_cmd_list">
+        <item>getprop ro.product.manufacturer</item>
+        <item>getprop ro.baseband</item>
+        <item>getprop gsm.version.baseband</item>
+        <item>getprop ro.build.version.security_patch</item>
+    </string-array>
+
+    <!-- Display Info -->
+    <string-array name="display_headers">
+        <item>DPI(Dot Per Inch)</item>
+        <item>해상도</item>
+        <item>화면 주사율</item>
+    </string-array>
+    <string-array name="display_command">
+        <item>getprop ro.sf.lcd_density</item>
+    </string-array>
+
+    <!-- 자바 정보 -->
+    <string-array name="java_headers">
+        <item>자바 버전</item>
+        <item>자바 VM 버전</item>
+        <item>자바 VM 공급자</item>
+        <item>자바 VM 명</item>
+        <item>JAVA_MIN_HEAP</item>
+        <item>JAVA_MAX_HEAP</item>
+        <item>JAVA_APPLICATION_HEAP</item>
+    </string-array>
+    <string-array name="java_command">
+        <item>getprop dalvik.vm.dex2oat-Xms</item>
+        <item>getprop dalvik.vm.dex2oat-Xmx</item>
+        <item>getprop dalvik.vm.heapsize</item>
+    </string-array>
+
+    <!-- Device Info -->
+    <string-array name="other_info_headers">
+        <item>Build ID</item>
+        <item>펌웨어 버전</item>
+        <item>부트 로더</item>
+        <item>Build Key</item>
+        <item>SDK INT</item>
+        <item>SUPPORT_MIN_SDK</item>
+        <item>하드웨어 플랫폼</item>
+        <item>기본 통신 네트워크</item>
+        <item>디버깅 모드</item>
+    </string-array>
+    <string-array name="other_info_command">
+        <item>getprop ro.build.display.id</item>
+        <item>getprop ro.bootimage.build.fingerprint</item>
+        <item>getprop ro.bootloader</item>
+        <item>getprop ro.build.id</item>
+        <item>getprop ro.build.version.sdk</item>
+        <item>getprop ro.build.version.min_supported_target_sdk</item>
+        <item>getprop ro.hardware</item>
+        <item>getprop ro.telephony.default_network</item>
+        <item>getprop ro.debuggable</item>
+    </string-array>
+
+    <string name="h_kernel_info">커널</string>
+    <string name="h_serial_no">Serial No.</string>
+    <string name="charging">충전중</string>
+    <string name="not_charging">충전 안함</string>
+    <string name="permission_guide">앱 사용에 필요한 권한을 허용합니다.</string>
+    <string name="tv_display_test">디스플레이 테스트</string>
+    <string name="display_test_s">Display Testing</string>
+    <string name="device_pixel_test">화소 테스트</string>
+    <string name="display_test_guide">현재 기기에 아래와 같은 디스플레이 테스트를 진행합니다.</string>
+    <string name="audio_test">음향 장치 테스트</string>
+    <string name="audio_test_s">Audio Testing</string>
+    <string name="audio_test_guide">현재 기기에 아래와 같은 음향 장치 테스트를 수행합니다.</string>
+    <string name="media_test">미디어 테스트</string>
+
+    <string-array name="arr_setting_option">
+        <item>언어 설정</item>
+        <item>앱 업데이트</item>
+        <item>오픈 소스 라이선스</item>
+    </string-array>
+
+    <string-array name="arr_lang_type">
+        <item>한국어</item>
+        <item>영어</item>
+    </string-array>
+
+    <!-- 디스플레이 테스트 -->
+    <string-array name="test_display_name">
+        <item>색상 테스트</item>
+    </string-array>
+
+    <string-array name="test_display_guide">
+        <item>디스플레이 화소를 테스트 합니다.</item>
+    </string-array>
+
+    <array name="icon_test_display">
+        <item>@drawable/ic_rgb</item>
+    </array>
+
+    <!-- 오디오 테스트 -->
+    <string-array name="test_audio_name">
+        <item>소리 테스트</item>
+    </string-array>
+
+    <string-array name="test_audio_guide">
+        <item>기기의 음향 장치를 테스트 합니다.</item>
+    </string-array>
+
+    <array name="icon_test_audio">
+        <item>@drawable/ic_bell</item>
+    </array>
+
+    <array name="arr_test_ringtone_msg">
+        <item>벨소리를 재생을 시작합니다...</item>
+        <item>벨소리 재생을 종료합니다...</item>
+        <item>현재 벨소리를 재생할 수 없습니다. 기기를 [소리 모드]로 변경해주세요. </item>
+    </array>
+
+    <!-- 사용자 권한 -->
+    <array name="arr_user_permission">
+        <item>저장소 권한</item>
+    </array>
+
+    <array name="arr_user_permission_desc">
+        <item>앱에서 외부 저장소의 접근을 허용합니다.</item>
+    </array>
+
+    <array name="icon_user_permissions">
+        <item>@drawable/ic_folder</item>
+    </array>
+
+    <!-- App Store 이동 기능 -->
+    <string name="app_play_store_url">https://play.google.com/store/apps/details?id=kr.co.devicechecker</string>
+
+    <string name="total_mem_format">전체 %1$s MB</string>
+    <string name="avail_ram_suffix">MB 사용 가능</string>
+    <string name="ram_unit">&#160;MB</string>
+    <string name="txt_header_display_test">디스플레이 테스트</string>
 
 
 </resources>

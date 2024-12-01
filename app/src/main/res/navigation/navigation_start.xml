@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_start"
+    app:startDestination="@+id/nav_device_info"
+    >
+
+    <!-- Device Info -->
+    <fragment
+        android:id="@+id/nav_device_info"
+        android:name="kr.co.devicechecker.ui.fragment.main.DeviceInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_device_info"
+        />
+
+    <!-- System Performance -->
+    <fragment
+        android:id="@+id/nav_system_perform"
+        android:name="kr.co.devicechecker.ui.fragment.main.SystemPerformFragment"
+        android:label=""
+        tools:layout="@layout/fragment_system_perform"
+        />
+
+    <!-- Memory Information -->
+    <fragment
+        android:id="@+id/nav_memory_info"
+        android:name="kr.co.devicechecker.ui.fragment.main.MemoryInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_memory_info"
+        />
+
+    <!-- Sensor Information -->
+    <fragment
+        android:id="@+id/nav_sensor_info"
+        android:name="kr.co.devicechecker.ui.fragment.main.SensorInfoFragment"
+        android:label=""
+        tools:layout="@layout/fragment_sensor_info"
+        />
+
+    <!-- Device Testing -->
+    <fragment
+        android:id="@+id/nav_device_test"
+        android:name="kr.co.devicechecker.ui.fragment.main.DeviceTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_device_test"
+        >
+        <action
+            android:id="@+id/move_display_test"
+            app:destination="@id/nav_screen_test" />
+        <action
+            android:id="@+id/move_audio_test"
+            app:destination="@id/nav_audio_test" />
+    </fragment>
+
+    <!-- Setting Fragment -->
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="kr.co.devicechecker.ui.fragment.main.SettingFragment"
+        android:label=""
+        tools:layout="@layout/fragment_setting"
+        />
+
+    <!-- Display Test Fragment -->
+    <fragment
+        android:id="@+id/nav_screen_test"
+        android:name="kr.co.devicechecker.ui.fragment.test.ScreenTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_screen_test"
+        >
+    </fragment>
+
+    <!-- Display Color Test -->
+    <fragment
+        android:id="@+id/nav_color_test"
+        android:name="kr.co.devicechecker.ui.fragment.test.DisplayColorFragment"
+        android:label=""
+        tools:layout="@layout/fragment_display_color"
+        />
+
+    <!-- Display Audio Fragment -->
+    <fragment
+        android:id="@+id/nav_audio_test"
+        android:name="kr.co.devicechecker.ui.fragment.test.AudioTestFragment"
+        android:label=""
+        tools:layout="@layout/fragment_audio_test"
+        />
+
+</navigation>

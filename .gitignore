@@ -14,3 +14,7 @@
 .cxx
 local.properties
 api_key.xml
+/app/release
+/app/full
+*.der
+*.pepk

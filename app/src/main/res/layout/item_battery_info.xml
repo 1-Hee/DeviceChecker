@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="batteryInfo"
+            type="kr.co.devicechecker.data.dto.BatteryInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_battery_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/full_item_info"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        >
+
+        <!-- Icon -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_battery"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_battery"
+            android:tint="@color/mono800"
+            android:scaleType="fitCenter"
+            android:padding="8dp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.20"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/md_vertical"
+            android:layout_width="1.5dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <!-- Label Battery  -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_label_battery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintBottom_toTopOf="@id/pb_battery_status"
+            android:layout_marginStart="24dp"
+            android:text="@string/tv_label_battery"
+            android:includeFontPadding="false"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/green800"
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mcv_charge_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/none"
+            app:cardBackgroundColor="@{batteryInfo.charging?@color/orange400:@color/mono400}"
+            android:layout_marginVertical="12dp"
+            app:layout_constraintStart_toEndOf="@id/tv_label_battery"
+            app:layout_constraintTop_toTopOf="@id/tv_label_battery"
+            app:layout_constraintBottom_toBottomOf="@id/tv_label_battery"
+            android:layout_marginStart="12dp"
+            tools:cardBackgroundColor="@color/mono400"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_charge_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@{batteryInfo.charging?@string/charging:@string/not_charging}"
+                android:textSize="10sp"
+                android:textColor="@color/white"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                tools:text="@string/not_charging"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Battery Usage -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_battery_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{String.format("%.2f", batteryInfo.level) + " %"}'
+            android:textColor="@color/mono900"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/tv_label_battery"
+            app:layout_constraintBottom_toBottomOf="@id/tv_label_battery"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="78 %"
+            />
+
+        <!-- Battery Progress Bar -->
+        <ProgressBar
+            android:id="@+id/pb_battery_status"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:progress="@{Math.round(batteryInfo.level)}"
+            android:progressDrawable="@drawable/bg_battery_progressbar"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_battery"
+            app:layout_constraintBottom_toTopOf="@id/l_battery_capacity"
+            app:layout_constraintStart_toStartOf="@id/tv_label_battery"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:progress="70"
+            />
+
+        <!-- Capacity Info -->
+        <LinearLayout
+            android:id="@+id/l_battery_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/pb_battery_status"
+            app:layout_constraintTop_toBottomOf="@id/pb_battery_status"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="2dp"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_label_electric_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(String.valueOf(batteryInfo.capacity)+@string/unit_electric_capacity)}"
+                android:includeFontPadding="false"
+                android:textSize="12sp"
+                android:textColor="@color/mono900"
+                tools:text="Remain : 1234 mAh"
+                />
+
+        </LinearLayout>
+
+        <!-- Temperature Info -->
+        <LinearLayout
+            android:id="@+id/l_charge_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/l_battery_capacity"
+            app:layout_constraintBottom_toBottomOf="@id/l_battery_capacity"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_label_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/h_charge_type+batteryInfo.chargeType}"
+                android:includeFontPadding="false"
+                android:textSize="12sp"
+                android:textColor="@color/mono900"
+                tools:text="Charge Type :  AC"
+                />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

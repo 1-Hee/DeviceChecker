@@ -1,11 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.DeviceChecker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
-        <item name="colorPrimary">@color/mono600</item>
-        <item name="colorSecondary">@color/mono900</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/navy500</item>
+        <item name="colorSecondaryVariant">@color/navy700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/mono900</item>
     </style>
+
+    <style name="Theme.DeviceChecker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.DeviceChecker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="Theme.DeviceChecker" parent="Base.Theme.DeviceChecker" >
 <!--        <item name="colorPrimaryDark">@color/mono700</item> &lt;!&ndash; 액션바 그림자 등에 사용 &ndash;&gt;-->
 <!--        <item name="colorAccent">@color/orange300</item> &lt;!&ndash; 액센트 색상 &ndash;&gt;-->

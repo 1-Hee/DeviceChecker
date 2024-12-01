@@ -33,6 +33,9 @@ import kotlin.math.round
 import kotlin.math.roundToInt
 
 class AppUtil {
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Device { // about Device Info
         // 모든 기기 정보 불러오는 메서드
         fun getAllDeviceInfo(context:Context):List<Info>{
@@ -44,6 +47,9 @@ class AppUtil {
             return allDeviceInfoList
         }
 
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getDeviceInfo(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val deviceInfoList = mutableListOf<Info>()
@@ -57,7 +63,11 @@ class AppUtil {
             }
             return deviceInfoList
         }
-        fun getDisplayInfo(context:Context):List<Info>{
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
+        fun getDisplayInfo(context:Context):List<Info> {
             val emptyValue = context.getString(R.string.txt_unknown)
             val displayInfoList = mutableListOf<Info>()
             val displayHeaderList = context.resources.getStringArray(R.array.display_headers)
@@ -90,6 +100,10 @@ class AppUtil {
             displayInfoList.add(Info(displayHeaderList[2], "$refreshRate Hz"))
             return displayInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun saveDeviceData(context: Context, displayInfoList:List<Info>, deviceInfoList:List<Info>){
             val prefs = PreferenceUtil(context)
             val tag = "Device"
@@ -104,7 +118,14 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Processor {
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getProcessorInfo(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val processorInfoList = mutableListOf<Info>()
@@ -136,12 +157,19 @@ class AppUtil {
                 "$clockMinMHz MHz ~ $clockMaxMHz MHz"
             }
             processorInfoList.add(Info(processorHeaderList[5], clockSpeed))
+
+            /*
             // 커널
             val kernelInfoAll = Command
                 .executeAdbCommand("uname -a")
             processorInfoList.add(Info(processorHeaderList[6], kernelInfoAll.trim()))
+             */
             return processorInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getCpuCoreInfo(corNumber:Int, context: Context):List<CpuCoreInfo>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val cpuCoreInfoList = mutableListOf<CpuCoreInfo>()
@@ -175,6 +203,10 @@ class AppUtil {
             }
             return cpuCoreInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getJavaInformation(context: Context):List<Info>{
             val emptyValue = context.getString(R.string.txt_unknown)
             val javaInfoList = mutableListOf<Info>()
@@ -230,6 +262,10 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Memory {
         fun getMemoryInfo(context: Context):List<Info>{
             val emptyValue = context.resources.getString(R.string.txt_unknown)
@@ -352,7 +388,15 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Sensor {
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun getSensorInfo(activity: Activity):List<SensorInfo>{
             val sensorInfoList = mutableListOf<SensorInfo>()
             // 센서 매니저 가져오기
@@ -366,6 +410,10 @@ class AppUtil {
             }
             return sensorInfoList
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun saveSensorInfo(
             context: Context,
             sensorInfoList:List<SensorInfo>
@@ -382,7 +430,15 @@ class AppUtil {
             prefs.setValue(tag, builder.toString())
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Command {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun executeAdbCommand(command: String): String {
             val process = Runtime.getRuntime().exec(command)
             val reader = BufferedReader(InputStreamReader(process.inputStream))
@@ -394,7 +450,15 @@ class AppUtil {
             return output.toString()
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Unit {
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun parseKbUnit(data:String):String{
             val volumeUnit = data.split(" ")
             val volume = volumeUnit[0].toLong()
@@ -411,6 +475,10 @@ class AppUtil {
                 "UnKnown"
             }
         }
+
+        @Deprecated("Support for this function will end " +
+                "as it is no longer used as the function " +
+                "has been transferred with app updates.")
         fun parseByteUnit(data:Long):String{
             val mbUnit = (1024.0 * 1024.0)
             val gbUnit = (1024.0 * 1024.0 * 1024.0)
@@ -425,6 +493,10 @@ class AppUtil {
             }
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object File {
         fun saveAllHardwareInfoForText(activity:Activity){
             // display info
@@ -526,6 +598,10 @@ class AppUtil {
             }
         }
     }
+
+    @Deprecated("This object is scheduled to end support " +
+            "as its functionality has been transferred " +
+            "with app updates and is no longer used.")
     object Json {
         private fun gsonWithoutHtmlEscaping(): Gson {
             return GsonBuilder()

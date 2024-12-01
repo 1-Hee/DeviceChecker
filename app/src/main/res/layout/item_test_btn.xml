@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
+        <variable
+            name="iconInfo"
+            type="kr.co.devicechecker.data.dto.IconInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_test_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/full_item_info"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:layout_marginVertical="12dp"
+        android:onClick="@{(v)->click.onViewClick(v)}"
+        android:tag="@{iconInfo.name}"
+        >
+
+        <!-- Icon -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_test"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            tools:src="@drawable/ic_headset_mic"
+            android:tint="@color/mono800"
+            android:scaleType="fitCenter"
+            android:padding="8dp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vertical"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintGuide_percent="0.20"
+            />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/md_vertical"
+            android:layout_width="1.5dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            app:layout_constraintEnd_toEndOf="@id/gl_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <!-- Test Name -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_test_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_test_description"
+            app:layout_constraintStart_toStartOf="@id/gl_vertical"
+            android:layout_marginStart="24dp"
+            android:text="@{iconInfo.name}"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            tools:text="Test Name"
+            />
+
+        <!-- Test Description -->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_test_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_test_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_test_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{iconInfo.value}"
+            android:textColor="@color/mono900"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
+            tools:text="Test Description...."
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

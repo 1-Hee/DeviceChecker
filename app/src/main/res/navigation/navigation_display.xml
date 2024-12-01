@@ -2,18 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/display_nav_graph"
-    app:startDestination="@id/displayStartFragment"
+    app:startDestination="@id/screenTestFragment"
     >
 
     <!-- 디스플레이 테스트 프래그먼트 -->
+
     <fragment
-        android:id="@+id/displayStartFragment"
-        android:name="kr.co.devicechecker.ui.fragment.display.DisplayStartFragment"
-        android:label="displayStartFragment"/>
+        android:id="@+id/screenTestFragment"
+        android:name="kr.co.devicechecker.ui.fragment.test.ScreenTestFragment"
+        android:label="screenTestFragmentt"/>
 
     <fragment
         android:id="@+id/displayColorFragment"
-        android:name="kr.co.devicechecker.ui.fragment.display.DisplayColorFragment"
+        android:name="kr.co.devicechecker.ui.fragment.test.DisplayColorFragment"
         android:label="displayColorFragment"/>
 
 

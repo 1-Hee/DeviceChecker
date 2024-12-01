@@ -9,8 +9,8 @@
             <corners
                 android:radius="16dp" />
             <size
-                android:width="56dp"
-                android:height="29dp" />
+                android:width="64dp"
+                android:height="24dp" />
             <solid
                 android:color="@color/mono300" />
         </shape>
@@ -26,7 +26,7 @@
                 android:width="64dp"
                 android:height="24dp" />
             <solid
-                android:color="@color/teal500" />
+                android:color="@color/navy400" />
         </shape>
     </item>
 </selector>

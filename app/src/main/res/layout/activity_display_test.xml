@@ -6,20 +6,36 @@
     tools:context=".ui.activity.DisplayTestActivity"
     >
     <data>
+        <variable
+            name="click"
+            type="kr.co.devicechecker.base.listener.ViewClickListener" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Background.DeviceChecker"
         >
+        <!-- Toolbar (AppBar) -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/s_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/none"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/display_fragment_host"
+            app:navigationIcon="@drawable/ic_arrow_back_b"
+            android:onClick="@{(v)->click.onViewClick(v)}"
+            />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/display_fragment_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:fitsSystemWindows="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/s_appbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation_display" />

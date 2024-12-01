@@ -1,0 +1,9 @@
+        <div class="terms">
+            <h2 style="text-align: start;">Note!</h2>
+            <ul>
+                <li>본 검사지는 안드로이드 제품군의  <span class="under-effect">기본적인 하드웨어 성능 및 스펙을 점검</span>하기 위한 목적으로 발행된 검사지입니다.</li>
+                <li>해당 검사지의 결과는 어떠한 법적 효력이나 구속력이 존재하지 않으며, <span class="under-effect">단순 참고용으로만 사용 가능함</span>을 확인하시길 바랍니다.</li>
+                <li>위 검사지는 검사 기기를 공급한 <span class="under-effect">제조사의 규격과 차이점이 존재할 수 었습니다.</span></li>
+                <li>기기에 대한 더 정확하고 자세한 정보의 확인을 원하시면 제조사의 공식 사이트 및 문서를 확인하시길 바랍니다.</li>
+            </ul>
+        </div>
