@@ -21,8 +21,8 @@ android {
         applicationId = "kr.co.devicechecker"
         minSdk = 24
         targetSdk = 34
-        versionCode = 18
-        versionName = "1.2.3"
+        versionCode = 19
+        versionName = "1.2.4"
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["ADMOB_APP_KEY"] = getPropertiesValue("ADMOB_APP_KEY")
