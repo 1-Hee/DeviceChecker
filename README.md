@@ -4,7 +4,6 @@
  
 `플레이 스토어 URL` : https://play.google.com/store/apps/details?id=kr.co.devicechecker
 
----
 
 ## 📂 프로젝트 개요
 
@@ -31,7 +30,6 @@ Kotlin, Timber, Gson, Play In-App Update, Google AD mob, OSS Licenses Plugin, Te
 ![](./image/screen_001.png)
 
 
-
 ## 🖼️ 앱 구현 화면
 
 | 앱 화면 | 캡쳐 이미지 | 앱 화면 | 캡쳐 이미지 |
@@ -39,7 +37,6 @@ Kotlin, Timber, Gson, Play In-App Update, Google AD mob, OSS Licenses Plugin, Te
 | 홈 메뉴 화면 | ![홈 메뉴 화면](./image/app_001.jpg) | 기기 정보 화면 | ![기기 정보 화면](./image/app_001.jpg) |
 | 시스템 성능 화면 | ![시스템 성능 화면](./image/app_001.jpg) | 메모리 정보 화면 | ![시스템 성능 화면](./image/app_001.jpg) |
 | 센서 정보 화면 | ![센서 정보 화면](./image/app_001.jpg) | 장치 테스트 화면 | ![장치 테스트 화면](./image/app_001.jpg) |
-
 
 
 ## ⚙️ 기술적 배경 및 개선 방향 (AS-IS / TO-BE)
