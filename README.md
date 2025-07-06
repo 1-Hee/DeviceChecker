@@ -13,9 +13,15 @@
 
 ## 🛠️ 기술 스택
 
-```
-Kotlin, Timber, Gson, Play In-App Update, Google AD mob, OSS Licenses Plugin, Tedpermission(ParkSangGwon)
-```
+<ul>
+ <li>Kotlin</li>
+ <li>Gson</li>
+ <li>Timber</li>
+ <li>Play In-App Update</li>
+ <li>Google AD mob</li>
+ <li> OSS Licenses Plugin</li>
+ <li>Tedpermission(ParkSangGwon)</li> 
+</ul>
 
 ## ✨ 주요 기능
 
