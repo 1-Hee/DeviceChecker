@@ -42,29 +42,29 @@
   <tr>
     <td align="center">
       <strong>홈 메뉴 화면</strong><br>
-      <img src="./image/app_001.jpg" width="200">
+      <img src="./image/app_001.jpg" width="">
     </td>
     <td align="center">
       <strong>기기 정보 화면</strong><br>
-      <img src="./image/app_002.jpg" width="200">
+      <img src="./image/app_002.jpg" width="">
     </td>
     <td align="center">
       <strong>시스템 성능 화면</strong><br>
-      <img src="./image/app_003.jpg" width="200">
+      <img src="./image/app_003.jpg" width="">
     </td>
   </tr>
   <tr>
     <td align="center">
       <strong>메모리 정보 화면</strong><br>
-      <img src="./image/app_004.jpg" width="200">
+      <img src="./image/app_004.jpg" width="">
     </td>
     <td align="center">
       <strong>센서 정보 화면</strong><br>
-      <img src="./image/app_005.jpg" width="200">
+      <img src="./image/app_005.jpg" width="">
     </td>
     <td align="center">
       <strong>장치 테스트 화면</strong><br>
-      <img src="./image/app_006.jpg" width="200">
+      <img src="./image/app_006.jpg" width="">
     </td>
   </tr>
 </table>
