@@ -33,42 +33,10 @@
 | 센서 정보 확인       | 장착된 센서의 종류, 개수, 공급자 등 센서 관련 정보 조회 |
 | 장치 테스트 및 리포트 | 디스플레이, 음향 장치 등 주요 하드웨어 테스트 및 결과 보고서 내보내기 기능 지원 |
 
-![](./image/screen_001.png)
-
 
 ## 🖼️ 앱 구현 화면
 
-<table>
-  <tr>
-    <td align="center">
-      <strong>홈 메뉴 화면</strong><br>
-      <img src="./image/app_001.jpg" width="">
-    </td>
-    <td align="center">
-      <strong>기기 정보 화면</strong><br>
-      <img src="./image/app_002.jpg" width="">
-    </td>
-    <td align="center">
-      <strong>시스템 성능 화면</strong><br>
-      <img src="./image/app_003.jpg" width="">
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <strong>메모리 정보 화면</strong><br>
-      <img src="./image/app_004.jpg" width="">
-    </td>
-    <td align="center">
-      <strong>센서 정보 화면</strong><br>
-      <img src="./image/app_005.jpg" width="">
-    </td>
-    <td align="center">
-      <strong>장치 테스트 화면</strong><br>
-      <img src="./image/app_006.jpg" width="">
-    </td>
-  </tr>
-</table>
-
+![](./image/screen_001.png)
 
 
 ## ⚙️ 기술적 배경 및 개선 방향 (AS-IS / TO-BE)
