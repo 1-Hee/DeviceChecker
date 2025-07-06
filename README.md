@@ -38,11 +38,37 @@
 
 ## 🖼️ 앱 구현 화면
 
-| 앱 화면 | 캡쳐 이미지 | 앱 화면 | 캡쳐 이미지 |
-|------------|-------------|-------------|-------------|
-| 홈 메뉴 화면 | ![홈 메뉴 화면](./image/app_001.jpg) | 기기 정보 화면 | ![기기 정보 화면](./image/app_001.jpg) |
-| 시스템 성능 화면 | ![시스템 성능 화면](./image/app_001.jpg) | 메모리 정보 화면 | ![시스템 성능 화면](./image/app_001.jpg) |
-| 센서 정보 화면 | ![센서 정보 화면](./image/app_001.jpg) | 장치 테스트 화면 | ![장치 테스트 화면](./image/app_001.jpg) |
+<table>
+  <tr>
+    <td align="center">
+      <strong>홈 메뉴 화면</strong><br>
+      <img src="./image/app_001.jpg" width="200">
+    </td>
+    <td align="center">
+      <strong>기기 정보 화면</strong><br>
+      <img src="./image/app_002.jpg" width="200">
+    </td>
+    <td align="center">
+      <strong>시스템 성능 화면</strong><br>
+      <img src="./image/app_003.jpg" width="200">
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <strong>메모리 정보 화면</strong><br>
+      <img src="./image/app_004.jpg" width="200">
+    </td>
+    <td align="center">
+      <strong>센서 정보 화면</strong><br>
+      <img src="./image/app_005.jpg" width="200">
+    </td>
+    <td align="center">
+      <strong>장치 테스트 화면</strong><br>
+      <img src="./image/app_006.jpg" width="200">
+    </td>
+  </tr>
+</table>
+
 
 
 ## ⚙️ 기술적 배경 및 개선 방향 (AS-IS / TO-BE)
@@ -57,4 +83,3 @@
 - 앱 내 정보를 다양한 포맷(TXT, HTML, JSON)으로 저장할 수 있도록 구현 → 외부 호환성과 확장성 확보.
 - HTML 출력 문서는 자동차 진단용 리포트 스타일을 참고하여 시각적으로 간결하고 읽기 쉽게 구성.
 - 구글 플레이 스토어에 실제 배포하여 설치 가능 → 사용자 피드백 및 실사용 경험 확보 준비 완료.
-
